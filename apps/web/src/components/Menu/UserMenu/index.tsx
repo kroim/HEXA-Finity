@@ -1,5 +1,6 @@
 import { useTranslation } from '@pancakeswap/localization'
 import { ChainId } from '@pancakeswap/sdk'
+import Image from 'next/image'
 import {
   Box,
   Flex,
@@ -10,6 +11,7 @@ import {
   UserMenuDivider,
   UserMenuItem,
   UserMenuVariant,
+  Text,
 } from '@pancakeswap/uikit'
 import ConnectWalletButton from 'components/ConnectWalletButton'
 import Trans from 'components/Trans'
@@ -106,10 +108,20 @@ const UserMenu = () => {
   return (
     <ConnectWalletButton scale="sm">
       <Box display={['none', , , 'block']}>
-        <Trans>Connect Wallet</Trans>
+        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+          <Image src="/images/walletButton.png" alt="wallet Image" width={20} height={18} />
+          <Text color="invertedContrast" bold fontSize="16px" ml="10px">
+            <Trans>Connect Wallet</Trans>
+          </Text>
+        </div>
       </Box>
       <Box display={['block', , , 'none']}>
-        <Trans>Connect</Trans>
+        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+          <Image src="/images/walletButton.png" alt="wallet Image" width={20} height={18} />
+          <Text color="invertedContrast" bold fontSize="16px" ml="10px">
+            <Trans>Connect</Trans>
+          </Text>
+        </div>
       </Box>
     </ConnectWalletButton>
   )
