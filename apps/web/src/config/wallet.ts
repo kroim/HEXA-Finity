@@ -45,27 +45,6 @@ const walletsConfig = ({
       downloadLink: 'https://metamask.app.link/dapp/pancakeswap.finance/',
     },
     {
-      id: 'binance',
-      title: 'Binance Wallet',
-      icon: '/images/wallets/binance.png',
-      installed: typeof window !== 'undefined' && Boolean(window.BinanceChain),
-      connectorId: ConnectorNames.BSC,
-      guide: {
-        desktop: 'https://www.bnbchain.org/en/binance-wallet',
-      },
-      downloadLink: {
-        desktop: isFirefox
-          ? 'https://addons.mozilla.org/en-US/firefox/addon/binance-chain/?src=search'
-          : 'https://chrome.google.com/webstore/detail/binance-wallet/fhbohimaelbohpjbbldcngcnapndodjp',
-      },
-    },
-    {
-      id: 'coinbase',
-      title: 'Coinbase Wallet',
-      icon: '/images/wallets/coinbase.png',
-      connectorId: ConnectorNames.WalletLink,
-    },
-    {
       id: 'trust',
       title: 'Trust Wallet',
       icon: '/images/wallets/trust.png',
@@ -87,30 +66,6 @@ const walletsConfig = ({
       connectorId: ConnectorNames.WalletConnect,
     },
     {
-      id: 'opera',
-      title: 'Opera Wallet',
-      icon: '/images/wallets/opera.png',
-      connectorId: ConnectorNames.Injected,
-      installed: typeof window !== 'undefined' && Boolean(window.ethereum?.isOpera),
-      downloadLink: 'https://www.opera.com/crypto/next',
-    },
-    {
-      id: 'brave',
-      title: 'Brave Wallet',
-      icon: '/images/wallets/brave.png',
-      connectorId: ConnectorNames.Injected,
-      installed: typeof window !== 'undefined' && Boolean(window.ethereum?.isBraveWallet),
-      downloadLink: 'https://brave.com/wallet/',
-    },
-    {
-      id: 'math',
-      title: 'MathWallet',
-      icon: '/images/wallets/mathwallet.png',
-      connectorId: ConnectorNames.Injected,
-      installed: typeof window !== 'undefined' && Boolean(window.ethereum?.isMathWallet),
-      qrCode,
-    },
-    {
       id: 'tokenpocket',
       title: 'TokenPocket',
       icon: '/images/wallets/tokenpocket.png',
@@ -119,11 +74,11 @@ const walletsConfig = ({
       qrCode,
     },
     {
-      id: 'safepal',
-      title: 'SafePal',
-      icon: '/images/wallets/safepal.png',
+      id: 'math',
+      title: 'MathWallet',
+      icon: '/images/wallets/mathwallet.png',
       connectorId: ConnectorNames.Injected,
-      installed: typeof window !== 'undefined' && Boolean((window.ethereum as ExtendEthereum)?.isSafePal),
+      installed: typeof window !== 'undefined' && Boolean(window.ethereum?.isMathWallet),
       qrCode,
     },
     {
@@ -135,6 +90,35 @@ const walletsConfig = ({
         typeof window !== 'undefined' &&
         (Boolean((window.ethereum as ExtendEthereum)?.isCoin98) || Boolean(window.coin98)),
       qrCode,
+    },
+    {
+      id: 'binance',
+      title: 'Binance Wallet',
+      icon: '/images/wallets/binance.png',
+      installed: typeof window !== 'undefined' && Boolean(window.BinanceChain),
+      connectorId: ConnectorNames.BSC,
+      guide: {
+        desktop: 'https://www.bnbchain.org/en/binance-wallet',
+      },
+      downloadLink: {
+        desktop: isFirefox
+          ? 'https://addons.mozilla.org/en-US/firefox/addon/binance-chain/?src=search'
+          : 'https://chrome.google.com/webstore/detail/binance-wallet/fhbohimaelbohpjbbldcngcnapndodjp',
+      },
+    },
+    {
+      id: 'safepal',
+      title: 'SafePal Wallet',
+      icon: '/images/wallets/safepal.png',
+      connectorId: ConnectorNames.Injected,
+      installed: typeof window !== 'undefined' && Boolean((window.ethereum as ExtendEthereum)?.isSafePal),
+      qrCode,
+    },
+    {
+      id: 'coinbase',
+      title: 'Coinbase Wallet',
+      icon: '/images/wallets/coinbase.png',
+      connectorId: ConnectorNames.WalletLink,
     },
     {
       id: 'blocto',
@@ -157,13 +141,13 @@ export const createWallets = (chainId: number, connect: any) => {
     ? config // add injected icon if none of injected type wallets installed
     : [
         ...config,
-        {
-          id: 'injected',
-          title: 'Injected',
-          icon: WalletFilledIcon,
-          connectorId: ConnectorNames.Injected,
-          installed: typeof window !== 'undefined' && Boolean(window.ethereum),
-        },
+        // {
+        //   id: 'injected',
+        //   title: 'Injected',
+        //   icon: WalletFilledIcon,
+        //   connectorId: ConnectorNames.Injected,
+        //   installed: typeof window !== 'undefined' && Boolean(window.ethereum),
+        // },
       ]
 }
 
