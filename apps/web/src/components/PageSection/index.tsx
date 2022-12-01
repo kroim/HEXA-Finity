@@ -41,8 +41,8 @@ const ChildrenWrapper = styled(Container)`
   }
 
   ${({ theme }) => theme.mediaQueries.lg} {
-    padding-top: 48px;
-    padding-bottom: 48px;
+    padding-top: 0px;
+    padding-bottom: 0px;
   }
 `
 
@@ -63,19 +63,19 @@ const PageSection: React.FC<React.PropsWithChildren<PageSectionProps>> = ({
   const padding = useMemo(() => {
     // No curved divider
     if (!hasCurvedDivider) {
-      return '48px 0'
+      return '16px 0'
     }
     // Bottom curved divider
     // Less bottom padding, as the divider is present there
     if (dividerPosition === 'bottom') {
-      return '48px 0 14px'
+      return '16px 0 14px'
     }
     // Top curved divider
     // Less top padding, as the divider is present there
     if (dividerPosition === 'top') {
-      return '14px 0 48px'
+      return '14px 0 16px'
     }
-    return '48px 0'
+    return '16px 0'
   }, [dividerPosition, hasCurvedDivider])
 
   return (

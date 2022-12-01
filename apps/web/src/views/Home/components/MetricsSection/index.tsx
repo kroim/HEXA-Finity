@@ -6,6 +6,118 @@ import useSWRImmutable from 'swr/immutable'
 import IconCard, { IconCardData } from '../IconCard'
 import StatCardContent from './StatCardContent'
 import GradientLogo from '../GradientLogoSvg'
+import styled from 'styled-components'
+
+const MainArea = styled.div`
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 100%;
+  @media screen and (max-width: 1070px) {
+    flex-direction: column;
+  }
+`
+const ItemArea = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  height: 134px;
+  border-radius: 12px;
+  background-color: #041647;
+  width: 49.5%;
+  padding: 20px;
+  @media screen and (max-width: 1070px) {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+`
+const LeftIteam = styled.div`
+  display: flex;
+  flex: 1;
+  align-items: center;
+  flex-direction: row;
+  width: 100%;
+  div {
+    display: flex;
+    flex-direction: column;
+    max-width: 190px;
+    font-weight: 300;
+    line-height: 1.3;
+    margin-left: 10px;
+  }
+  img {
+    width: 50px;
+  }
+  p {
+    font-size: 16px;
+    color: white;
+  }
+  h2 {
+    font-size: 24px;
+    color: #f3ba2f;
+    font-weight: 400;
+  }
+  @media screen and (max-width: 560px) {
+    img {
+      width: 40px;
+    }
+    p {
+      font-size: 12px;
+      color: white;
+    }
+    h2 {
+      font-size: 16px;
+      color: #f3ba2f;
+      font-weight: 400;
+    }
+  }
+`
+const RightIteam = styled.div`
+  display: flex;
+  flex: 1;
+  align-items: center;
+  flex-direction: row;
+  width: 100%;
+  img {
+    width: 50px;
+  }
+  div {
+    display: flex;
+    flex-direction: column;
+    font-weight: 300;
+    line-height: 1.3;
+    margin-left: 10px;
+  }
+  p {
+    font-size: 16px;
+    color: white;
+    margin-bottom: 5px;
+    max-width: 190px;
+  }
+  h2 {
+    font-size: 26px;
+    color: white;
+    font-weight: 500;
+    letter-spacing: 0px;
+  }
+  @media screen and (max-width: 560px) {
+    img {
+      width: 35px;
+    }
+    p {
+      font-size: 12px;
+      color: white;
+    }
+    h2 {
+      font-size: 16px;
+      color: #f3ba2f;
+      font-weight: 400;
+    }
+  }
+`
 
 const Stats = () => {
   const { t } = useTranslation()
@@ -34,31 +146,40 @@ const Stats = () => {
   }
 
   return (
-    <Flex justifyContent="center" alignItems="center" flexDirection="column">
-      <GradientLogo height="48px" width="48px" mb="24px" />
-      <Heading textAlign="center" scale="xl">
-        {t('Used by millions.')}
-      </Heading>
-      <Heading textAlign="center" scale="xl" mb="32px">
-        {t('Trusted with billions.')}
-      </Heading>
-      <Text textAlign="center" color="textSubtle">
-        {t('PancakeSwap has the most users of any decentralized platform, ever.')}
-      </Text>
-      <Flex flexWrap="wrap">
-        <Text display="inline" textAlign="center" color="textSubtle" mb="20px">
-          {entrusting}
-          <>{tvl ? <>{tvlString}</> : <Skeleton display="inline-block" height={16} width={70} mt="2px" />}</>
-          {inFunds}
-        </Text>
-      </Flex>
-
-      <Text textAlign="center" color="textSubtle" bold mb="32px">
-        {t('Will you join them?')}
-      </Text>
-
-      <Flex flexDirection={['column', null, null, 'row']}>
-        <IconCard {...UsersCardData} mr={[null, null, null, '16px']} mb={['16px', null, null, '0']}>
+    <Flex justifyContent="center" alignItems="center" flexDirection="column" padding="0px">
+      <MainArea>
+        <ItemArea>
+          <LeftIteam>
+            <img src="/images/lastesFeeImage.png" alt="lastesFeeImage" />
+            <div>
+              <p>The Lowest Trade Fee in the DeFi Space</p>
+              <h2>0.1%</h2>
+            </div>
+          </LeftIteam>
+          <LeftIteam>
+            <img src="/images/feeReimImag.png" alt="lastesFeeImage" />
+            <div>
+              <p>Exchange Fee Reimbursement</p>
+              <h2>up to 70%</h2>
+            </div>
+          </LeftIteam>
+        </ItemArea>
+        <ItemArea style={{ backgroundColor: '#2F4DA0' }}>
+          <RightIteam>
+            <img src="/images/binanceImage.png" alt="lastesFeeImage" />
+            <div>
+              <p>Total Value Locked</p>
+              <h2>$948 561 357</h2>
+            </div>
+          </RightIteam>
+          <RightIteam>
+            <div>
+              <p>Total Trading Volume</p>
+              <h2>$47721756347</h2>
+            </div>
+          </RightIteam>
+        </ItemArea>
+        {/* <IconCard {...UsersCardData} mr={[null, null, null, '16px']} mb={['16px', null, null, '0']}>
           <StatCardContent
             headingText={t('%users% users', { users })}
             bodyText={t('in the last 30 days')}
@@ -78,8 +199,8 @@ const Stats = () => {
             bodyText={t('Total Value Locked')}
             highlightColor={theme.colors.failure}
           />
-        </IconCard>
-      </Flex>
+        </IconCard> */}
+      </MainArea>
     </Flex>
   )
 }

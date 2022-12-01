@@ -1,6 +1,8 @@
 import styled from 'styled-components'
+import { ArrowForwardIcon, Button, Text, Link, useMatchBreakpoints } from '@pancakeswap/uikit'
 import PageSection from 'components/PageSection'
 import { useAccount } from 'wagmi'
+import { useMemo, useEffect } from 'react'
 import useTheme from 'hooks/useTheme'
 import Container from 'components/Layout/Container'
 import { PageMeta } from 'components/Layout/Page'
@@ -18,12 +20,14 @@ import CakeDataRow from './components/CakeDataRow'
 import { WedgeTopLeft, InnerWedgeWrapper, OuterWedgeWrapper, WedgeTopRight } from './components/WedgeSvgs'
 import UserBanner from './components/UserBanner'
 import MultipleBanner from './components/Banners/MultipleBanner'
+import { perpLangMap } from 'utils/getPerpetualLanguageCode'
+import { perpTheme } from 'utils/getPerpetualTheme'
+import RotateSection from './components/RotateSection'
 
 const StyledHeroSection = styled(PageSection)`
   padding-top: 16px;
-
   ${({ theme }) => theme.mediaQueries.md} {
-    padding-top: 48px;
+    padding-top: 30px;
   }
 `
 
@@ -43,59 +47,154 @@ const UserBannerWrapper = styled(Container)`
   }
 `
 
+const TradeView = styled.div`
+  width: 100%;
+  height: 250px;
+  border-top-left-radius: 32px;
+  border-top-right-radius: 32px;
+  background: #001244;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  ${({ theme }) => theme.mediaQueries.sm} {
+    height: 400px;
+  }
+`
+
+const TradeLeftArea = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  flex: 1;
+  line-height: 1.2;
+  h2 {
+    font-size: 24px;
+    font-family: Poppins;
+    font-weight: 400;
+    color: white;
+  }
+  p {
+    font-size: 10px;
+    font-family: Poppins;
+    font-weight: 400;
+    margin-top: 10px;
+    color: white;
+    opacity: 0.7;
+    margin-bottom: 25px;
+  }
+  img {
+    display: flex;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    opacity: 0.4;
+  }
+  ${({ theme }) => theme.mediaQueries.sm} {
+    h2 {
+      font-size: 34px;
+    }
+    p {
+      font-size: 13px;
+    }
+    img {
+      display: none;
+      width: 50px;
+    }
+  }
+`
+const TradeRightArea = styled.div`
+  flex-direction: column;
+  flex: 1;
+  display: none;
+  ${({ theme }) => theme.mediaQueries.sm} {
+    display: flex;
+  }
+`
+
 const Home: React.FC<React.PropsWithChildren> = () => {
   const { theme } = useTheme()
   const { address: account } = useAccount()
   const { chainId } = useActiveChainId()
+  const {
+    t,
+    currentLanguage: { code },
+  } = useTranslation()
+  const { isDesktop, isMobile } = useMatchBreakpoints()
+  const { isDark } = useTheme()
 
   const HomeSectionContainerStyles = { margin: '0', width: '100%', maxWidth: '968px' }
 
-  const { t } = useTranslation()
+  const perpetualUrl = useMemo(
+    () => `https://perp.pancakeswap.finance/${perpLangMap(code)}/futures/BTCUSDT?theme=${perpTheme(isDark)}`,
+    [code, isDark],
+  )
 
   return (
     <>
       <PageMeta />
       <style jsx global>{`
         #home-1 .page-bg {
-          background: linear-gradient(139.73deg, #e6fdff 0%, #f3efff 100%);
+          /* background: linear-gradient(139.73deg, #e6fdff 0%, #f3efff 100%); */
         }
         [data-theme='dark'] #home-1 .page-bg {
-          background: radial-gradient(103.12% 50% at 50% 50%, #21193a 0%, #191326 100%);
+          /* background: radial-gradient(103.12% 50% at 50% 50%, #21193a 0%, #191326 100%); */
         }
         #home-2 .page-bg {
-          background: linear-gradient(180deg, #ffffff 22%, #d7caec 100%);
+          /* background: linear-gradient(180deg, #ffffff 22%, #d7caec 100%); */
         }
         [data-theme='dark'] #home-2 .page-bg {
-          background: linear-gradient(180deg, #09070c 22%, #201335 100%);
+          /* background: linear-gradient(180deg, #09070c 22%, #201335 100%); */
         }
         #home-3 .page-bg {
-          background: linear-gradient(180deg, #6fb6f1 0%, #eaf2f6 100%);
+          /* background: linear-gradient(180deg, #6fb6f1 0%, #eaf2f6 100%); */
         }
         [data-theme='dark'] #home-3 .page-bg {
-          background: linear-gradient(180deg, #0b4576 0%, #091115 100%);
+          /* background: linear-gradient(180deg, #0b4576 0%, #091115 100%); */
         }
-        #home-4 .inner-wedge svg {
+        /* #home-4 .inner-wedge svg {
           fill: #d8cbed;
         }
         [data-theme='dark'] #home-4 .inner-wedge svg {
           fill: #201335;
-        }
+        } */
       `}</style>
       <StyledHeroSection
-        innerProps={{ style: { margin: '0', width: '100%' } }}
+        innerProps={{ style: { margin: '0', width: '100%', paddingBottom: 0 } }}
         containerProps={{
           id: 'home-1',
         }}
         index={2}
         hasCurvedDivider={false}
       >
-        {account && chainId === ChainId.BSC && (
+        {/* {account && chainId === ChainId.BSC && (
           <UserBannerWrapper>
             <UserBanner />
           </UserBannerWrapper>
-        )}
-        <MultipleBanner />
-        <Hero />
+        )} */}
+        <TradeView>
+          <TradeLeftArea>
+            <img src="/images/perpetual.png" width="300" alt="perpetual" />
+            <h2>
+              The <span style={{ color: '#F7931A' }}>First DEX</span> on{' '}
+              <span style={{ color: '#F7931A' }}>BNB Chain</span> with a Three-Type Referral System
+            </h2>
+            <p>Enjoy profitable yield farming and exchanging with the lowest fees in DeFi space!</p>
+            <Link href={perpetualUrl} external>
+              <Button>
+                <Text color="invertedContrast" bold fontSize="16px" mr="4px">
+                  {t('Trade Now')}
+                </Text>
+                <ArrowForwardIcon color="invertedContrast" />
+              </Button>
+            </Link>
+          </TradeLeftArea>
+          <TradeRightArea>
+            <img src="/images/perpetual.png" alt="perpetual" />
+          </TradeRightArea>
+        </TradeView>
+        {/* <Hero /> */}
       </StyledHeroSection>
       <PageSection
         innerProps={{ style: { margin: '0', width: '100%' } }}
@@ -106,22 +205,8 @@ const Home: React.FC<React.PropsWithChildren> = () => {
         hasCurvedDivider={false}
       >
         <MetricsSection />
-      </PageSection>
-      <PageSection
-        innerProps={{ style: HomeSectionContainerStyles }}
-        background={theme.colors.background}
-        containerProps={{
-          id: 'home-4',
-        }}
-        index={2}
-        hasCurvedDivider={false}
-      >
-        <OuterWedgeWrapper>
-          <InnerWedgeWrapper top>
-            <WedgeTopLeft />
-          </InnerWedgeWrapper>
-        </OuterWedgeWrapper>
-        <SalesSection {...swapSectionData(t)} />
+        <RotateSection />
+        <MultipleBanner />
       </PageSection>
       <PageSection
         innerProps={{ style: HomeSectionContainerStyles }}

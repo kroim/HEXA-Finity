@@ -2,7 +2,7 @@ import { Flex, Heading } from '@pancakeswap/uikit'
 import styled from 'styled-components'
 
 export const StyledSubheading = styled(Heading)`
-  background: -webkit-linear-gradient(#ffd800, #eb8c00);
+  background: white;
   font-size: 20px;
   background-clip: text;
   -webkit-background-clip: text;
@@ -31,7 +31,7 @@ export const StyledHeading = styled(Heading)`
   }
 `
 export const Wrapper = styled.div`
-  border-radius: 32px;
+  border-radius: 10px;
   width: 100%;
   max-height: max-content;
   overflow: visible;
@@ -45,27 +45,28 @@ export const Inner = styled(Flex)`
   padding: 24px;
   flex-direction: row;
   justify-content: space-between;
-  max-height: 192px;
+  align-items: center;
+  height: 100%
 `
 
 export const LeftWrapper = styled(Flex)`
   z-index: 1;
-  width: 100%;
+  width: 80%;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
   ${({ theme }) => theme.mediaQueries.md} {
+    width: 80%;
     padding-top: 40px;
     padding-bottom: 40px;
+  }
+  ${({ theme }) => theme.mediaQueries.lg} {
+    width: 50%;
   }
 `
 
 export const RightWrapper = styled.div`
-  position: absolute;
-  right: -17px;
-  opacity: 0.9;
-  transform: translate(0, -50%);
-  top: 50%;
+  width: 50%;
 
   img {
     height: 100%;
