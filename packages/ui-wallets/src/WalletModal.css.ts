@@ -42,16 +42,21 @@ export const modalWrapperClass = style([
   }),
 ])
 
+export const AskArea = style({ display: 'flex', flexDirection: 'row', alignItems: 'center', marginLeft: 32, marginTop:20 })
+
 export const desktopWalletSelectionClass = style(
   responsiveStyle({
     xs: {
       maxWidth: '100%',
+      width:'100%'
     },
     sm: {
-      maxWidth: '360px',
+      maxWidth: '100%',
+      width:'100%'
     },
     lg: {
-      maxWidth: '408px',
+      maxWidth: '600px',
+      width:'500px'
     },
   }),
 )
@@ -59,23 +64,24 @@ export const desktopWalletSelectionClass = style(
 export const walletSelectWrapperClass = style(
   responsiveStyle({
     xs: {
-      gridTemplateColumns: '1fr 1fr 1fr 1fr',
+      gridTemplateColumns: '1fr 1fr',
       rowGap: '10px',
       columnGap: '8px',
     },
     sm: {
-      rowGap: '24px',
+      rowGap: '16px',
       columnGap: '16px',
       gridTemplateColumns: '1fr 1fr',
     },
     lg: {
-      gridTemplateColumns: '1fr 1fr 1fr',
+      gridTemplateColumns: '1fr 1fr',
     },
   }),
 )
 
 export const walletIconClass = style({
-  width: '50px',
-  height: '50px',
+  width: '150px',
+  height: '60px',
   borderRadius: '12px',
+  backgroundColor:'#E9F7FF'
 })

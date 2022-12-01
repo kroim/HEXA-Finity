@@ -26,6 +26,7 @@ import {
   walletIconClass,
   promotedGradientClass,
   walletSelectWrapperClass,
+  AskArea,
 } from './WalletModal.css'
 
 const Qrcode = lazy(() => import('./components/QRCode'))
@@ -187,7 +188,7 @@ function WalletSelect<T>({
       display="grid"
       overflowY="auto"
       overflowX="hidden"
-      px={{ xs: '16px', sm: '48px' }}
+      px={{ xs: '16px', sm: '32px' }}
       pb="12px"
       className={walletSelectWrapperClass}
     >
@@ -203,7 +204,7 @@ function WalletSelect<T>({
             as={AtomBox}
             display="flex"
             alignItems="center"
-            style={{ justifyContent: 'flex-start', letterSpacing: 'normal', padding: '0' }}
+            style={{ justifyContent: 'flex-start', letterSpacing: 'normal', padding: '0', backgroundColor: '#E9F7FF' }}
             flexDirection="column"
             onClick={() => onClick(wallet)}
           >
@@ -215,10 +216,9 @@ function WalletSelect<T>({
                 justifyContent="center"
                 alignItems="center"
                 className={walletIconClass}
-                style={{ borderRadius: '13px' }}
               >
                 {isImage ? (
-                  <Image src={Icon as string} width={50} height={50} />
+                  <Image src={Icon as string} width={40} height={40} />
                 ) : (
                   <Icon width={24} height={24} color="textSubtle" />
                 )}
@@ -227,7 +227,7 @@ function WalletSelect<T>({
                 )}
               </AtomBox>
             </AtomBox>
-            <Text fontSize="12px" color="#11A9FF" textAlign="center">
+            <Text fontSize="12px" color="#11A9FF" textAlign="center" mb="10px">
               {wallet.title}
             </Text>
           </Button>
@@ -329,9 +329,13 @@ function DesktopModal<T>({
             }
           }}
         />
-        <Button as={LinkExternal} color="backgroundAlt" variant="subtle" href={docLink}>
+        {/* <Button as={LinkExternal} color="backgroundAlt" variant="subtle" href={docLink}>
           {docText}
-        </Button>
+        </Button> */}
+        <div className={AskArea}>
+          <p style={{ marginRight: 5 }}>{docText}</p>
+          <img src="/images/quesImage.png" alt="" />
+        </div>
       </AtomBox>
       {/* <AtomBox
         flex={1}
