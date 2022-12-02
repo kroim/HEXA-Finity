@@ -42,7 +42,15 @@ export const modalWrapperClass = style([
   }),
 ])
 
-export const AskArea = style({ display: 'flex', flexDirection: 'row', alignItems: 'center', marginLeft: 32, marginTop:20 })
+export const AskArea = style(
+  { 
+    display: 'flex', 
+    flexDirection: 'row', 
+    alignItems: 'center', 
+    marginLeft: 32, 
+    marginTop:20,
+  }
+)
 
 export const desktopWalletSelectionClass = style(
   responsiveStyle({
