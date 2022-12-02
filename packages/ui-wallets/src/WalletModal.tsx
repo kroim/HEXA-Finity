@@ -26,6 +26,7 @@ import {
   walletIconClass,
   promotedGradientClass,
   walletSelectWrapperClass,
+  AskArea,
 } from './WalletModal.css'
 
 const Qrcode = lazy(() => import('./components/QRCode'))
@@ -77,7 +78,7 @@ const TabContainer = ({ children, docLink, docText }: PropsWithChildren<{ docLin
   const { t } = useTranslation()
 
   return (
-    <AtomBox position="relative" zIndex="modal" className={modalWrapperClass}>
+    <AtomBox position="relative" zIndex="modal">
       <AtomBox
         display="flex"
         position="relative"
@@ -179,7 +180,7 @@ function WalletSelect<T>({
   displayCount?: number
 }) {
   const { t } = useTranslation()
-  const [showMore, setShowMore] = useState(false)
+  const [showMore, setShowMore] = useState(true)
   const walletsToShow = showMore ? wallets : wallets.slice(0, displayCount)
   const [selected] = useSelectedWallet()
   return (
@@ -187,7 +188,7 @@ function WalletSelect<T>({
       display="grid"
       overflowY="auto"
       overflowX="hidden"
-      px={{ xs: '16px', sm: '48px' }}
+      px={{ xs: '16px', sm: '32px' }}
       pb="12px"
       className={walletSelectWrapperClass}
     >
@@ -203,7 +204,7 @@ function WalletSelect<T>({
             as={AtomBox}
             display="flex"
             alignItems="center"
-            style={{ justifyContent: 'flex-start', letterSpacing: 'normal', padding: '0' }}
+            style={{ justifyContent: 'flex-start', letterSpacing: 'normal', padding: '0', backgroundColor: '#E9F7FF' }}
             flexDirection="column"
             onClick={() => onClick(wallet)}
           >
@@ -215,10 +216,9 @@ function WalletSelect<T>({
                 justifyContent="center"
                 alignItems="center"
                 className={walletIconClass}
-                style={{ borderRadius: '13px' }}
               >
                 {isImage ? (
-                  <Image src={Icon as string} width={50} height={50} />
+                  <Image src={Icon as string} width={40} height={40} />
                 ) : (
                   <Icon width={24} height={24} color="textSubtle" />
                 )}
@@ -227,7 +227,7 @@ function WalletSelect<T>({
                 )}
               </AtomBox>
             </AtomBox>
-            <Text fontSize="12px" textAlign="center">
+            <Text fontSize="12px" color="#11A9FF" textAlign="center" mb="10px">
               {wallet.title}
             </Text>
           </Button>
@@ -312,15 +312,10 @@ function DesktopModal<T>({
         borderRadius="card"
         className={desktopWalletSelectionClass}
       >
-        <AtomBox px="48px">
+        <AtomBox px="48px" pb="32px">
           <Heading color="color" as="h4">
             {t('Connect Wallet')}
           </Heading>
-          <Text color="textSubtle" small pt="24px" pb="32px">
-            {t(
-              'Start by connecting with one of the wallets below. Be sure to store your private keys or seed phrase securely. Never share them with anyone.',
-            )}
-          </Text>
         </AtomBox>
         <WalletSelect
           wallets={wallets}
@@ -334,8 +329,15 @@ function DesktopModal<T>({
             }
           }}
         />
+        {/* <Button as={LinkExternal} color="backgroundAlt" variant="subtle" href={docLink}>
+          {docText}
+        </Button> */}
+        <div className={AskArea}>
+          <p style={{ marginRight: 5 }}>{docText}</p>
+          <img src="/images/quesImage.png" alt="" />
+        </div>
       </AtomBox>
-      <AtomBox
+      {/* <AtomBox
         flex={1}
         mx="24px"
         display={{
@@ -363,7 +365,7 @@ function DesktopModal<T>({
           )}
           {selected && selected.installed === false && <NotInstalled qrCode={qrCode} wallet={selected} />}
         </AtomBox>
-      </AtomBox>
+      </AtomBox> */}
     </>
   )
 }
@@ -417,7 +419,7 @@ export function WalletModalV2<T = unknown>(props: WalletModalV2Props<T>) {
         <AtomBox position="relative">
           <TabContainer docLink={docLink} docText={docText}>
             {isMobile ? (
-              <MobileModal connectWallet={connectWallet} wallets={wallets} docLink={docLink} docText={docText} />
+              <DesktopModal connectWallet={connectWallet} wallets={wallets} docLink={docLink} docText={docText} />
             ) : (
               <DesktopModal connectWallet={connectWallet} wallets={wallets} docLink={docLink} docText={docText} />
             )}
