@@ -15,7 +15,8 @@ import {
 } from './pageSectionStyles'
 import useGetNextLotteryEvent from './hooks/useGetNextLotteryEvent'
 import useStatusTransitions from './hooks/useStatusTransitions'
-import Hero from './components/Hero'
+// import Hero from './components/Hero';
+import HeroSection from './components/HeroSection'
 import NextDrawCard from './components/NextDrawCard'
 import Countdown from './components/Countdown'
 import HistoryTabMenu from './components/HistoryTabMenu'
@@ -47,15 +48,15 @@ const Lottery = () => {
     <>
       <PageMeta />
       <LotteryPage>
-        <PageSection background={TITLE_BG} index={1} hasCurvedDivider={false}>
-          <Hero />
+        <PageSection background={TITLE_BG} index={1} hasCurvedDivider={false} innerProps={{width: '100%'}}>
+          <HeroSection />
         </PageSection>
         <PageSection
           containerProps={{ style: { marginTop: '-30px' } }}
-          background={GET_TICKETS_BG}
-          concaveDivider
-          clipFill={{ light: '#7645D9' }}
-          dividerPosition="top"
+          // background={GET_TICKETS_BG}
+          // concaveDivider
+          // clipFill={{ light: '#7645D9' }}
+          // dividerPosition="top"
           index={2}
         >
           <Flex alignItems="center" justifyContent="center" flexDirection="column" pt="24px">
