@@ -235,12 +235,12 @@ export function SmartSwapForm() {
   return (
     <>
       <CurrencyInputHeader
-        title={t('Swap')}
+        title={t('Exchange')}
         subtitle={t('Trade tokens in an instant')}
         hasAmount={hasAmount}
         onRefreshPrice={onRefreshPrice}
       />
-      <Wrapper id="swap-page" style={{ minHeight: '412px' }}>
+      <Wrapper id="swap-page">
         <AutoColumn gap="sm">
           <CurrencyInputPanel
             label={independentField === Field.OUTPUT && !showWrap && tradeInfo ? t('From (estimated)') : t('From')}
@@ -291,11 +291,11 @@ export function SmartSwapForm() {
             commonBasesType={CommonBasesType.SWAP_LIMITORDER}
           />
 
-          {isAccessTokenSupported && (
+          {/* {isAccessTokenSupported && (
             <Box>
               <AccessRisk inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
             </Box>
-          )}
+          )} */}
 
           {isSmartRouterBetter && (
             <AutoColumn>
@@ -333,7 +333,7 @@ export function SmartSwapForm() {
             </>
           ) : null}
 
-          {showWrap ? null : (
+          {/* {showWrap ? null : (
             <SwapUI.Info
               price={
                 Boolean(tradeInfo) && (
@@ -349,10 +349,10 @@ export function SmartSwapForm() {
               }
               allowedSlippage={allowedSlippage}
             />
-          )}
+          )} */}
         </AutoColumn>
 
-        <Box mt="0.25rem">
+        <Box mt="1rem">
           {tradeInfo?.fallbackV2 ? (
             <SwapCommitButton
               swapIsUnsupported={swapIsUnsupported}

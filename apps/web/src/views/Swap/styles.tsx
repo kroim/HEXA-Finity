@@ -16,5 +16,73 @@ export const StyledSwapContainer = styled(Flex)<{ $isChartExpanded: boolean }>`
 `
 
 export const StyledInputCurrencyWrapper = styled(Box)`
-  width: 328px;
+  width: 674px;
+  margin-top: 30px;
+`
+
+export const StyledHeaderTitle = styled.div`
+  text-align: center;
+  margin-bottom: 30px;
+  h1 {
+    font-size: 44px;
+    font-weight: 600;
+  }
+  p {
+    font-size: 18px;
+    font-weight: 200;
+    max-width: 662px;
+    line-height: 1.4;
+    margin-top: 15px;
+  }
+`
+export const WithDrawArea = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 674px;
+  height: 134px;
+  padding: 30px;
+  background: linear-gradient(to right, #ff022f 0%, #03175f 40%, #14a2f1 105%);
+  border-radius: 20px;
+`
+
+export const ContentIteamArea = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  .leftArea {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(170, 190, 240, 0.3);
+    padding: 12px 20px;
+    border-radius: 5px;
+    margin-left: 30px;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+  }
+`
+
+export const RightSideArea = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    p {
+      color: white;
+      font-size: 16px;
+      margin-right: 10px;
+    }
+  }
+  h3 {
+    font-size: 18px;
+    color: white;
+    margin-top: 5px;
+  }
 `
