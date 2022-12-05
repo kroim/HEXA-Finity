@@ -63,14 +63,9 @@ const Lottery = () => {
             <NextDrawCard  nextEventTime={nextEventTime} />
           </Flex>
         </PageSection>
-        
-        <PageSection background={CHECK_PRIZES_BG} hasCurvedDivider={false} index={2}>
-          <CheckPrizesSection />
-        </PageSection>
+
         <PageSection
           innerProps={{ style: { margin: '0', width: '100%' } }}
-          background={isDark ? FINISHED_ROUNDS_BG_DARK : FINISHED_ROUNDS_BG}
-          hasCurvedDivider={false}
           index={2}
         >
           <Flex width="100%" flexDirection="column" alignItems="center" justifyContent="center">
@@ -93,12 +88,7 @@ const Lottery = () => {
             )}
           </Flex>
         </PageSection>
-        <PageSection
-          dividerPosition="top"
-          dividerFill={{ light: theme.colors.background }}
-          clipFill={{ light: '#9A9FD0', dark: '#66578D' }}
-          index={2}
-        >
+        <PageSection index={2} >
           <HowToPlay />
         </PageSection>
       </LotteryPage>
