@@ -329,43 +329,11 @@ function DesktopModal<T>({
             }
           }}
         />
-        {/* <Button as={LinkExternal} color="backgroundAlt" variant="subtle" href={docLink}>
-          {docText}
-        </Button> */}
         <div className={AskArea}>
           <p style={{ marginRight: 5 }}>{docText}</p>
           <img src="/images/quesImage.png" alt="" />
         </div>
       </AtomBox>
-      {/* <AtomBox
-        flex={1}
-        mx="24px"
-        display={{
-          xs: 'none',
-          sm: 'flex',
-        }}
-        justifyContent="center"
-        flexDirection="column"
-        alignItems="center"
-      >
-        <AtomBox display="flex" flexDirection="column" alignItems="center" style={{ gap: '24px' }} textAlign="center">
-          {!selected && <Intro docLink={docLink} docText={docText} />}
-          {selected && selected.installed !== false && (
-            <>
-              {typeof selected.icon === 'string' && <Image src={selected.icon} width={108} height={108} />}
-              <Heading as="h1" fontSize="20px" color="secondary">
-                {t('Opening')} {selected.title}
-              </Heading>
-              {error ? (
-                <ErrorContent message={error} onRetry={() => connectToWallet(selected)} />
-              ) : (
-                <Text>{t('Please confirm in %wallet%', { wallet: selected.title })}</Text>
-              )}
-            </>
-          )}
-          {selected && selected.installed === false && <NotInstalled qrCode={qrCode} wallet={selected} />}
-        </AtomBox>
-      </AtomBox> */}
     </>
   )
 }

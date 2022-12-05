@@ -4,8 +4,9 @@ import { SvgProps } from "../types";
 
 const Icon: React.FC<React.PropsWithChildren<SvgProps>> = (props) => {
   return (
-    <Svg viewBox="0 0 24 24" {...props}>
-      <path d="M16 17.01V11c0-.55-.45-1-1-1s-1 .45-1 1v6.01h-1.79c-.45 0-.67.54-.35.85l2.79 2.78c.2.19.51.19.71 0l2.79-2.78c.32-.31.09-.85-.35-.85H16zM8.65 3.35L5.86 6.14c-.32.31-.1.85.35.85H8V13c0 .55.45 1 1 1s1-.45 1-1V6.99h1.79c.45 0 .67-.54.35-.85L9.35 3.35a.501.501 0 00-.7 0z" />
+    <Svg width="13" height="14" viewBox="0 0 13 14" {...props}>
+      <path xmlns="http://www.w3.org/2000/svg" d="M3 11.6667L3 1M3 1L1 3M3 1L5 3" stroke="#29ABE2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path xmlns="http://www.w3.org/2000/svg" d="M9.66675 12.9997L7.66675 10.9997M9.66675 2.33301L9.66675 12.9997L9.66675 2.33301ZM9.66675 12.9997L11.6667 10.9997L9.66675 12.9997Z" stroke="#29ABE2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
     </Svg>
   );
 };

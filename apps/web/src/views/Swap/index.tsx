@@ -8,12 +8,18 @@ import { useCurrency } from '../../hooks/Tokens'
 import { Field } from '../../state/swap/actions'
 import { useSingleTokenSwapInfo, useSwapState } from '../../state/swap/hooks'
 import Page from '../Page'
-import PriceChartContainer from './components/Chart/PriceChartContainer'
 import SwapForm from './components/SwapForm'
 import SwapTab, { SwapType } from './components/SwapTab'
 import { SmartSwapForm } from './SmartSwap'
 import StableSwapFormContainer from './StableSwap'
-import { StyledInputCurrencyWrapper, StyledSwapContainer } from './styles'
+import {
+  StyledInputCurrencyWrapper,
+  StyledSwapContainer,
+  StyledHeaderTitle,
+  WithDrawArea,
+  ContentIteamArea,
+  RightSideArea,
+} from './styles'
 import { SwapFeaturesContext } from './SwapFeaturesContext'
 
 export default function Swap() {
@@ -40,55 +46,55 @@ export default function Swap() {
 
   return (
     <Page removePadding={isChartExpanded} hideFooterOnDesktop={isChartExpanded}>
-      <Flex width={['328px', , '100%']} height="100%" justifyContent="center" position="relative">
-        {!isMobile && isChartSupported && (
-          <PriceChartContainer
-            inputCurrencyId={inputCurrencyId}
-            inputCurrency={currencies[Field.INPUT]}
-            outputCurrencyId={outputCurrencyId}
-            outputCurrency={currencies[Field.OUTPUT]}
-            isChartExpanded={isChartExpanded}
-            setIsChartExpanded={setIsChartExpanded}
-            isChartDisplayed={isChartDisplayed}
-            currentSwapPrice={singleTokenPrice}
-          />
-        )}
-        {isChartSupported && (
-          <BottomDrawer
-            content={
-              <PriceChartContainer
-                inputCurrencyId={inputCurrencyId}
-                inputCurrency={currencies[Field.INPUT]}
-                outputCurrencyId={outputCurrencyId}
-                outputCurrency={currencies[Field.OUTPUT]}
-                isChartExpanded={isChartExpanded}
-                setIsChartExpanded={setIsChartExpanded}
-                isChartDisplayed={isChartDisplayed}
-                currentSwapPrice={singleTokenPrice}
-                isMobile
-              />
-            }
-            isOpen={isChartDisplayed}
-            setIsOpen={setIsChartDisplayed}
-          />
-        )}
-        <Flex flexDirection="column">
-          <StyledSwapContainer $isChartExpanded={isChartExpanded}>
-            <StyledInputCurrencyWrapper mt={isChartExpanded ? '24px' : '0'}>
-              <AppBody>
-                {smartSwap ? (
-                  <SmartSwapForm />
-                ) : (
-                  <SwapTab>
-                    {(swapTypeState) =>
-                      swapTypeState === SwapType.STABLE_SWAP ? <StableSwapFormContainer /> : <SwapForm />
-                    }
-                  </SwapTab>
-                )}
-              </AppBody>
-            </StyledInputCurrencyWrapper>
-          </StyledSwapContainer>
-        </Flex>
+      <StyledHeaderTitle>
+        <h1>Make a Swap at No Cost</h1>
+        <p>
+          Fee reimbursement of up to 70% in HEXA tokens, 10% is credited to your Robi Boost & Squid Energy. You can
+          change the percentage.
+        </p>
+      </StyledHeaderTitle>
+      <WithDrawArea>
+        <ContentIteamArea>
+          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+            <RightSideArea>
+              <div>
+                <p>Fee Return: </p>
+                <img src="/images/circleQuestion.png" alt="" />
+              </div>
+              <h3>0.00000 HEXA</h3>
+            </RightSideArea>
+            <div className="leftArea">Withdraw</div>
+          </div>
+        </ContentIteamArea>
+        <ContentIteamArea>
+          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+            <RightSideArea>
+              <div>
+                <p>Robi Boost: </p>
+                <img src="/images/circleQuestion.png" alt="" />
+              </div>
+              <h3>0.00000 RB</h3>
+            </RightSideArea>
+            <div className="leftArea">Use</div>
+          </div>
+        </ContentIteamArea>
+      </WithDrawArea>
+      <Flex flexDirection="column">
+        <StyledSwapContainer $isChartExpanded={isChartExpanded}>
+          <StyledInputCurrencyWrapper mt={isChartExpanded ? '24px' : '0'}>
+            <AppBody>
+              {smartSwap ? (
+                <SmartSwapForm />
+              ) : (
+                <SwapTab>
+                  {(swapTypeState) =>
+                    swapTypeState === SwapType.STABLE_SWAP ? <StableSwapFormContainer /> : <SwapForm />
+                  }
+                </SwapTab>
+              )}
+            </AppBody>
+          </StyledInputCurrencyWrapper>
+        </StyledSwapContainer>
       </Flex>
     </Page>
   )

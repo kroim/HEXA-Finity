@@ -34,7 +34,7 @@ const Page: React.FC<
         noMinHeight={noMinHeight}
         hideFooterOnDesktop={hideFooterOnDesktop}
         helpUrl={helpUrl}
-        externalText={externalText}
+        // externalText={externalText}
         externalLinkUrl={externalLinkUrl}
         {...props}
       >

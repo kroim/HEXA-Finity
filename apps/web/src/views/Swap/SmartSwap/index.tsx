@@ -13,6 +13,7 @@ import {
   MessageText,
 } from '@pancakeswap/uikit'
 import UnsupportedCurrencyFooter from 'components/UnsupportedCurrencyFooter'
+import SwapTab from 'components/SwapTab'
 import { useIsTransactionUnsupported } from 'hooks/Trades'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react'
@@ -233,14 +234,15 @@ export function SmartSwapForm() {
   const allowRecipient = isExpertMode && !showWrap && !smartRouterOn
 
   return (
-    <>
+    <div style={{padding:"0 1rem"}}>
+      <SwapTab />
       <CurrencyInputHeader
-        title={t('Swap')}
+        title={t('Exchange')}
         subtitle={t('Trade tokens in an instant')}
         hasAmount={hasAmount}
         onRefreshPrice={onRefreshPrice}
       />
-      <Wrapper id="swap-page" style={{ minHeight: '412px' }}>
+      <Wrapper id="swap-page">
         <AutoColumn gap="sm">
           <CurrencyInputPanel
             label={independentField === Field.OUTPUT && !showWrap && tradeInfo ? t('From (estimated)') : t('From')}
@@ -258,7 +260,6 @@ export function SmartSwapForm() {
             showBUSD={!!tokenMap[chainId]?.[inputCurrencyId] || inputCurrencyId === NATIVE[chainId]?.symbol}
             commonBasesType={CommonBasesType.SWAP_LIMITORDER}
           />
-
           <AutoColumn justify="space-between">
             <AutoRow justify={isExpertMode ? 'space-between' : 'center'} style={{ padding: '0 1rem' }}>
               <SwapUI.SwitchButton
@@ -291,11 +292,11 @@ export function SmartSwapForm() {
             commonBasesType={CommonBasesType.SWAP_LIMITORDER}
           />
 
-          {isAccessTokenSupported && (
+          {/* {isAccessTokenSupported && (
             <Box>
               <AccessRisk inputCurrency={currencies[Field.INPUT]} outputCurrency={currencies[Field.OUTPUT]} />
             </Box>
-          )}
+          )} */}
 
           {isSmartRouterBetter && (
             <AutoColumn>
@@ -333,7 +334,7 @@ export function SmartSwapForm() {
             </>
           ) : null}
 
-          {showWrap ? null : (
+          {/* {showWrap ? null : (
             <SwapUI.Info
               price={
                 Boolean(tradeInfo) && (
@@ -349,10 +350,10 @@ export function SmartSwapForm() {
               }
               allowedSlippage={allowedSlippage}
             />
-          )}
+          )} */}
         </AutoColumn>
 
-        <Box mt="0.25rem">
+        <Box mt="1rem">
           {tradeInfo?.fallbackV2 ? (
             <SwapCommitButton
               swapIsUnsupported={swapIsUnsupported}
@@ -414,6 +415,6 @@ export function SmartSwapForm() {
       ) : (
         <UnsupportedCurrencyFooter currencies={[currencies.INPUT, currencies.OUTPUT]} />
       )}
-    </>
+    </div>
   )
 }
