@@ -10,7 +10,6 @@ import { getDisplayApr } from '../getDisplayApr'
 
 import Row, { RowProps } from './Row'
 import { DesktopColumnSchema, FarmWithStakedValue } from '../types'
-import ProxyFarmContainer from '../YieldBooster/components/ProxyFarmContainer'
 
 export interface ITableProps {
   farms: FarmWithStakedValue[]
@@ -23,7 +22,6 @@ const Container = styled.div`
   width: 100%;
   background: ${({ theme }) => theme.card.background};
   border-radius: 16px;
-  margin: 16px 0px;
   border: 1px solid ${({ theme }) => theme.colors.cardBorder};
 `
 
@@ -175,13 +173,9 @@ const FarmTable: React.FC<React.PropsWithChildren<ITableProps>> = ({ farms, cake
           <StyledTable>
             <TableBody>
               {sortedRows.map((row) => {
-                return row?.details?.boosted ? (
-                  <ProxyFarmContainer key={`table-row-${row.farm.pid}`} farm={row.details}>
-                    <Row {...row} userDataReady={userDataReady} />
-                  </ProxyFarmContainer>
-                ) : (
+                return  (
                   <Row {...row} userDataReady={userDataReady} key={`table-row-${row.farm.pid}`} />
-                )
+                ) 
               })}
             </TableBody>
           </StyledTable>

@@ -1,25 +1,14 @@
 import { useEffect, useCallback, useState, useMemo, useRef, createContext } from 'react'
 import BigNumber from 'bignumber.js'
-import { ChainId } from '@pancakeswap/sdk'
 import { useAccount } from 'wagmi'
 import {
   Image,
   Heading,
-  Toggle,
   Text,
-  Button,
-  ArrowForwardIcon,
   Flex,
   Link,
-  Box,
   Farm as FarmUI,
-  Loading,
-  SearchInput,
-  Select,
-  OptionProps,
   FlexLayout,
-  PageHeader,
-  NextLinkFromReactRouter,
 } from '@pancakeswap/uikit'
 import styled from 'styled-components'
 import Page from 'components/Layout/Page'
@@ -29,16 +18,13 @@ import useIntersectionObserver from 'hooks/useIntersectionObserver'
 import { DeserializedFarm } from '@pancakeswap/farms'
 import { useTranslation } from '@pancakeswap/localization'
 import { getFarmApr } from 'utils/apr'
-import orderBy from 'lodash/orderBy'
 import { latinise } from 'utils/latinise'
 import { useUserFarmStakedOnly, useUserFarmsViewMode } from 'state/user/hooks'
 import { ViewMode } from 'state/user/actions'
 import { useRouter } from 'next/router'
-import ToggleView from 'components/ToggleView/ToggleView'
 import { useActiveChainId } from 'hooks/useActiveChainId'
 import Table from './components/FarmTable/FarmTable'
 import { FarmWithStakedValue } from './components/types'
-import { BCakeBoosterCard } from './components/BCakeBoosterCard'
 
 const ControlContainer = styled.div`
   display: flex;
@@ -164,7 +150,6 @@ const Farms: React.FC<React.PropsWithChildren> = ({ children }) => {
 
   const [viewMode, setViewMode] = useUserFarmsViewMode()
   const { address: account } = useAccount()
-  const [sortOption, setSortOption] = useState('hot')
   const { observerRef, isIntersecting } = useIntersectionObserver()
   const chosenFarmsLength = useRef(0)
 
@@ -181,7 +166,7 @@ const Farms: React.FC<React.PropsWithChildren> = ({ children }) => {
   const userDataReady = !account || (!!account && userDataLoaded)
 
   const [stakedOnly, setStakedOnly] = useUserFarmStakedOnly(isActive)
-  const [boostedOnly, setBoostedOnly] = useState(false)
+  const [boostedOnly, setBoostedOnly] = useState(true)
 
   const activeFarms = farmsLP.filter(
     (farm) => farm.pid !== 0 && farm.multiplier !== '0X' && (!poolLength || poolLength > farm.pid),
@@ -244,10 +229,6 @@ const Farms: React.FC<React.PropsWithChildren> = ({ children }) => {
     [query, isActive, chainId, cakePrice, regularCakePerBlock],
   )
 
-  const handleChangeQuery = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setQuery(event.target.value)
-  }
-
   const [numberOfFarmsVisible, setNumberOfFarmsVisible] = useState(NUMBER_OF_FARMS_VISIBLE)
 
   const chosenFarms = useMemo(() => {
@@ -261,7 +242,6 @@ const Farms: React.FC<React.PropsWithChildren> = ({ children }) => {
     if (isArchived) {
       chosenFs = stakedOnly ? farmsList(stakedArchivedFarms) : farmsList(archivedFarms)
     }
-
     if (boostedOnly) {
       chosenFs = chosenFs.filter((f) => f.boosted)
     }
@@ -282,36 +262,7 @@ const Farms: React.FC<React.PropsWithChildren> = ({ children }) => {
     boostedOnly,
   ])
 
-  const chosenFarmsMemoized = useMemo(() => {
-    const sortFarms = (farms: FarmWithStakedValue[]): FarmWithStakedValue[] => {
-      switch (sortOption) {
-        case 'apr':
-          return orderBy(farms, (farm: FarmWithStakedValue) => farm.apr + farm.lpRewardsApr, 'desc')
-        case 'multiplier':
-          return orderBy(
-            farms,
-            (farm: FarmWithStakedValue) => (farm.multiplier ? Number(farm.multiplier.slice(0, -1)) : 0),
-            'desc',
-          )
-        case 'earned':
-          return orderBy(
-            farms,
-            (farm: FarmWithStakedValue) => (farm.userData ? Number(farm.userData.earnings) : 0),
-            'desc',
-          )
-        case 'liquidity':
-          return orderBy(farms, (farm: FarmWithStakedValue) => Number(farm.liquidity), 'desc')
-        case 'latest':
-          return orderBy(farms, (farm: FarmWithStakedValue) => Number(farm.pid), 'desc')
-        default:
-          return farms
-      }
-    }
-
-    return sortFarms(chosenFarms).slice(0, numberOfFarmsVisible)
-  }, [chosenFarms, sortOption, numberOfFarmsVisible])
-
-  chosenFarmsLength.current = chosenFarmsMemoized.length
+  chosenFarmsLength.current = chosenFarms.length
 
   useEffect(() => {
     if (isIntersecting) {
@@ -324,77 +275,15 @@ const Farms: React.FC<React.PropsWithChildren> = ({ children }) => {
     }
   }, [isIntersecting])
 
-  const handleSortOptionChange = (option: OptionProps): void => {
-    setSortOption(option.value)
-  }
-
   return (
-    <FarmsContext.Provider value={{ chosenFarmsMemoized }}>
-      <Page>
-        {/* <ControlContainer>
-          <ViewControls>
-            <ToggleView idPrefix="clickFarm" viewMode={viewMode} onToggle={setViewMode} />
-            <ToggleWrapper>
-              <Toggle
-                id="staked-only-farms"
-                checked={stakedOnly}
-                onChange={() => setStakedOnly(!stakedOnly)}
-                scale="sm"
-              />
-              <Text> {t('Staked only')}</Text>
-            </ToggleWrapper>
-            <ToggleWrapper>
-              <Toggle
-                id="staked-only-farms"
-                checked={boostedOnly}
-                onChange={() => setBoostedOnly((prev) => !prev)}
-                scale="sm"
-              />
-              <Text> {t('Booster Available')}</Text>
-            </ToggleWrapper>
-            <FarmUI.FarmTabButtons hasStakeInFinishedFarms={stakedInactiveFarms.length > 0} />
-          </ViewControls>
-        </ControlContainer> */}
-        {/* {isInactive && (
-          <FinishedTextContainer>
-            <Text fontSize={['16px', null, '20px']} color="failure" pr="4px">
-              {t("Don't see the farm you are staking?")}
-            </Text>
-            <Flex>
-              <FinishedTextLink href="/migration" fontSize={['16px', null, '20px']} color="failure">
-                {t('Go to migration page')}
-              </FinishedTextLink>
-              <Text fontSize={['16px', null, '20px']} color="failure" padding="0px 4px">
-                or
-              </Text>
-              <FinishedTextLink
-                external
-                color="failure"
-                fontSize={['16px', null, '20px']}
-                href="https://v1-farms.pancakeswap.finance/farms/history"
-              >
-                {t('check out v1 farms')}.
-              </FinishedTextLink>
-            </Flex>
-          </FinishedTextContainer>
-        )} */}
-        {viewMode === ViewMode.TABLE ? (
-          <Table farms={chosenFarmsMemoized} cakePrice={cakePrice} userDataReady={userDataReady} />
-        ) : (
-          <FlexLayout>{children}</FlexLayout>
-        )}
-        {account && !userDataLoaded && stakedOnly && (
-          <Flex justifyContent="center">
-            <Loading />
-          </Flex>
-        )}
-        {poolLength && <div ref={observerRef} />}
-        <StyledImage src="/images/decorations/3dpan.png" alt="Pancake illustration" width={120} height={103} />
-      </Page>
+    <FarmsContext.Provider value={{ chosenFarms }}>
+      
+        <Table farms={chosenFarms} cakePrice={cakePrice} userDataReady={userDataReady} />
+
     </FarmsContext.Provider>
   )
 }
 
-export const FarmsContext = createContext({ chosenFarmsMemoized: [] })
+export const FarmsContext = createContext({ chosenFarms: [] })
 
 export default Farms
