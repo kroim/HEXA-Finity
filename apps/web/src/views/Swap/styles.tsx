@@ -64,6 +64,9 @@ export const ContentIteamArea = styled.div`
     font-size: 16px;
     font-weight: 500;
   }
+  .leftArea:hover{
+    cursor:pointer
+  }
 `
 
 export const RightSideArea = styled.div`

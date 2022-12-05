@@ -1,0 +1,64 @@
+import React, { useState } from 'react'
+import styled from 'styled-components'
+import { Link } from '@pancakeswap/uikit'
+const TabContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  justify-content: space-around;
+  padding: 20px;
+  padding-bottom: 0px;
+`
+const TabItem = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 7px 30px;
+  border-radius: 10px;
+  color: white;
+  font-size: 18px;
+  align-items: center;
+  background-color: ${({ theme }) => theme.colors.primary};
+  &:hover {
+    cursor: pointer;
+  }
+`
+const DeActivedTabItem = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10px 30px;
+  border-radius: 10px;
+  color: black;
+  font-size: 18px;
+  align-items: center;
+  background-color: white;
+  &:hover {
+    cursor: pointer;
+  }
+`
+
+export default function SwapTab() {
+  const [tapIndex, setTapIndex] = useState(0)
+
+  return (
+    <TabContainer>
+      {['Swap', 'Liquidity', 'Transactions'].map((item, index) => {
+        return (
+          <Link href={index == 0 ? '/swap' : index == 1 ? '/liquidity' : '/liquidity'} small>
+            {tapIndex == index ? (
+              <TabItem onClick={() => setTapIndex(index)} key={item}>
+                {item}
+              </TabItem>
+            ) : (
+              <DeActivedTabItem onClick={() => setTapIndex(index)} key={item}>
+                {item}
+              </DeActivedTabItem>
+            )}
+          </Link>
+        )
+      })}
+    </TabContainer>
+  )
+}

@@ -13,6 +13,7 @@ import {
   MessageText,
 } from '@pancakeswap/uikit'
 import UnsupportedCurrencyFooter from 'components/UnsupportedCurrencyFooter'
+import SwapTab from 'components/SwapTab'
 import { useIsTransactionUnsupported } from 'hooks/Trades'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react'
@@ -233,7 +234,8 @@ export function SmartSwapForm() {
   const allowRecipient = isExpertMode && !showWrap && !smartRouterOn
 
   return (
-    <>
+    <div style={{padding:"0 1rem"}}>
+      <SwapTab />
       <CurrencyInputHeader
         title={t('Exchange')}
         subtitle={t('Trade tokens in an instant')}
@@ -258,7 +260,6 @@ export function SmartSwapForm() {
             showBUSD={!!tokenMap[chainId]?.[inputCurrencyId] || inputCurrencyId === NATIVE[chainId]?.symbol}
             commonBasesType={CommonBasesType.SWAP_LIMITORDER}
           />
-
           <AutoColumn justify="space-between">
             <AutoRow justify={isExpertMode ? 'space-between' : 'center'} style={{ padding: '0 1rem' }}>
               <SwapUI.SwitchButton
@@ -414,6 +415,6 @@ export function SmartSwapForm() {
       ) : (
         <UnsupportedCurrencyFooter currencies={[currencies.INPUT, currencies.OUTPUT]} />
       )}
-    </>
+    </div>
   )
 }

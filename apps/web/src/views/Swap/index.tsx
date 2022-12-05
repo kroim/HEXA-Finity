@@ -63,7 +63,7 @@ export default function Swap() {
               </div>
               <h3>0.00000 HEXA</h3>
             </RightSideArea>
-            <div className="leftArea">Widthdraw</div>
+            <div className="leftArea">Withdraw</div>
           </div>
         </ContentIteamArea>
         <ContentIteamArea>
