@@ -28,6 +28,13 @@ import LotteryBalance from './components/LotteryBalance'
 import useShowMoreUserHistory from './hooks/useShowMoreUserRounds'
 import { PageMeta } from '../../components/Layout/Page'
 
+const TextStyle = {
+  fontFamily: 'Poppins',
+  fontStyle: 'normal',
+  fontWeight: 600,
+  color: '#000207',
+}
+
 const LotteryPage = styled.div`
   min-height: calc(100vh - 64px);
 `
@@ -60,24 +67,20 @@ const Lottery = () => {
           index={2} innerProps={{ width: '100%' }}
         >
           <Flex alignItems="center" justifyContent="center" flexDirection="column" pt="24px">
-            <NextDrawCard  nextEventTime={nextEventTime} />
+            <NextDrawCard nextEventTime={nextEventTime} />
           </Flex>
         </PageSection>
-
-        <PageSection
-          innerProps={{ style: { margin: '0', width: '100%' } }}
-          index={2}
-        >
+        <PageSection innerProps={{ margin: '0', width: '100%' }} index={2} >
           <Flex width="100%" flexDirection="column" alignItems="center" justifyContent="center">
-            <Heading mb="24px" scale="xl">
-              {t('Finished Rounds')}
-            </Heading>
-            <Box mb="24px">
+            <Flex width="100%" flexDirection="row" justifyContent="space-between" mb={12}>
+              <Heading style={{ ...TextStyle, fontSize: 22 }}>
+                {t('Finished Rounds')}
+              </Heading>
               <HistoryTabMenu
                 activeIndex={historyTabMenuIndex}
                 setActiveIndex={(index) => setHistoryTabMenuIndex(index)}
               />
-            </Box>
+            </Flex>
             {historyTabMenuIndex === 0 ? (
               <AllHistoryCard />
             ) : (
@@ -88,6 +91,7 @@ const Lottery = () => {
             )}
           </Flex>
         </PageSection>
+
         <PageSection index={2} >
           <HowToPlay />
         </PageSection>
