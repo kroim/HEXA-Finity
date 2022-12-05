@@ -23,6 +23,7 @@ import MultipleBanner from './components/Banners/MultipleBanner'
 import { perpLangMap } from 'utils/getPerpetualLanguageCode'
 import { perpTheme } from 'utils/getPerpetualTheme'
 import RotateSection from './components/RotateSection'
+import FarmsPoolsTables from './components/FarmsPoolsTables'
 
 const StyledHeroSection = styled(PageSection)`
   padding-top: 16px;
@@ -208,7 +209,20 @@ const Home: React.FC<React.PropsWithChildren> = () => {
         <RotateSection />
         <MultipleBanner />
       </PageSection>
+
+{/* ----------- Frams list work part ------------------- */}
       <PageSection
+        innerProps={{ style: { margin: '0', width: '100%' } }}
+        containerProps={{
+          id: 'home-3',
+        }}
+        index={2}
+        hasCurvedDivider={false}
+      >
+        <FarmsPoolsTables />
+      </PageSection>
+
+      {/* <PageSection
         innerProps={{ style: HomeSectionContainerStyles }}
         background={theme.colors.gradientCardHeader}
         index={2}
@@ -220,13 +234,12 @@ const Home: React.FC<React.PropsWithChildren> = () => {
           </InnerWedgeWrapper>
         </OuterWedgeWrapper>
         <SalesSection {...earnSectionData(t)} />
-        {/* TODO: until we are enable fetch multi-chain farms */}
         {chainId === ChainId.BSC && <FarmsPoolsRow />}
-      </PageSection>
-      <PageSection
+      </PageSection> */}
+      {/* <PageSection
         innerProps={{ style: HomeSectionContainerStyles }}
         containerProps={{
-          id: 'home-3',
+          id: 'home-4',
         }}
         index={2}
         hasCurvedDivider={false}
@@ -249,7 +262,7 @@ const Home: React.FC<React.PropsWithChildren> = () => {
         hasCurvedDivider={false}
       >
         <Footer />
-      </PageSection>
+      </PageSection> */}
     </>
   )
 }
