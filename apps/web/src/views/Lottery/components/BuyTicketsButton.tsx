@@ -8,11 +8,13 @@ import BuyTicketsModal from './BuyTicketsModal/BuyTicketsModal'
 interface BuyTicketsButtonProps extends ButtonProps {
   disabled?: boolean
   themeMode?: string
+  icon?: boolean
 }
 
 const BuyTicketsButton: React.FC<React.PropsWithChildren<BuyTicketsButtonProps>> = ({
   disabled,
   themeMode,
+  icon,
   ...props
 }) => {
   const { t } = useTranslation()
@@ -38,6 +40,8 @@ const BuyTicketsButton: React.FC<React.PropsWithChildren<BuyTicketsButtonProps>>
   return (
     <Button data-theme={themeStr} {...props} disabled={disabled} onClick={onPresentBuyTicketsModal}>
       {getBuyButtonText()}
+      {icon && <div style={{ paddingLeft: 5}}>
+        <img src='/img/lottery/ticket-btn-icon.svg' style={{ width: 17, height: 17 }} /></div>}
     </Button>
   )
 }
