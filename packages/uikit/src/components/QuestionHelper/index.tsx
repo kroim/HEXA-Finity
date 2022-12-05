@@ -5,6 +5,7 @@ interface Props extends BoxProps {
   text: string | React.ReactNode;
   placement?: Placement;
   size?: string;
+  color?: string;
 }
 
 const QuestionWrapper = styled.div`
@@ -18,6 +19,7 @@ export const QuestionHelper: React.FC<React.PropsWithChildren<Props>> = ({
   text,
   placement = "right-end",
   size = "16px",
+  color = "textSubtitle",
   ...props
 }) => {
   const { targetRef, tooltip, tooltipVisible } = useTooltip(text, { placement });
@@ -26,7 +28,7 @@ export const QuestionHelper: React.FC<React.PropsWithChildren<Props>> = ({
     <Box {...props}>
       {tooltipVisible && tooltip}
       <QuestionWrapper ref={targetRef}>
-        <HelpIcon color="textSubtle" width={size} />
+        <HelpIcon color={color} width={size} />
       </QuestionWrapper>
     </Box>
   );

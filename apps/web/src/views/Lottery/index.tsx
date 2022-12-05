@@ -24,6 +24,7 @@ import YourHistoryCard from './components/YourHistoryCard'
 import AllHistoryCard from './components/AllHistoryCard'
 import CheckPrizesSection from './components/CheckPrizesSection'
 import HowToPlay from './components/HowToPlay'
+import LotteryBalance from './components/LotteryBalance'
 import useShowMoreUserHistory from './hooks/useShowMoreUserRounds'
 import { PageMeta } from '../../components/Layout/Page'
 
@@ -48,37 +49,21 @@ const Lottery = () => {
     <>
       <PageMeta />
       <LotteryPage>
-        <PageSection background={TITLE_BG} index={1} hasCurvedDivider={false} innerProps={{width: '100%'}}>
-          <HeroSection />
+        <PageSection background={TITLE_BG} index={1} hasCurvedDivider={false} innerProps={{ width: '100%' }}>
+          <HeroSection nextEventTime={nextEventTime} postCountdownText={postCountdownText} preCountdownText={preCountdownText} />
+        </PageSection>
+        <PageSection index={2} innerProps={{ width: '100%' }}>
+          <LotteryBalance />
         </PageSection>
         <PageSection
           containerProps={{ style: { marginTop: '-30px' } }}
-          // background={GET_TICKETS_BG}
-          // concaveDivider
-          // clipFill={{ light: '#7645D9' }}
-          // dividerPosition="top"
-          index={2}
+          index={2} innerProps={{ width: '100%' }}
         >
           <Flex alignItems="center" justifyContent="center" flexDirection="column" pt="24px">
-            {status === LotteryStatus.OPEN && (
-              <Heading scale="xl" color="#ffffff" mb="24px" textAlign="center">
-                {t('Get your tickets now!')}
-              </Heading>
-            )}
-            <Flex alignItems="center" justifyContent="center" mb="48px">
-              {nextEventTime && (postCountdownText || preCountdownText) ? (
-                <Countdown
-                  nextEventTime={nextEventTime}
-                  postCountdownText={postCountdownText}
-                  preCountdownText={preCountdownText}
-                />
-              ) : (
-                <Skeleton height="41px" width="250px" />
-              )}
-            </Flex>
-            <NextDrawCard />
+            <NextDrawCard  nextEventTime={nextEventTime} />
           </Flex>
         </PageSection>
+        
         <PageSection background={CHECK_PRIZES_BG} hasCurvedDivider={false} index={2}>
           <CheckPrizesSection />
         </PageSection>

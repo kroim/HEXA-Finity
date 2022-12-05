@@ -11,6 +11,8 @@ import Trans from 'components/Trans'
 import Image from 'next/image'
 import { useAccount } from 'wagmi'
 import { useActiveChainId } from 'hooks/useActiveChainId'
+import getTimePeriods from 'utils/getTimePeriods'
+import useNextEventCountdown from '../hooks/useNextEventCountdown'
 
 const floatingStarsLeft = keyframes`
   from {
@@ -23,7 +25,6 @@ const floatingStarsLeft = keyframes`
     transform: translate(0, -0px);
   }
 `
-
 const floatingStarsRight = keyframes`
   from {
     transform: translate(0,  0px);
@@ -35,7 +36,6 @@ const floatingStarsRight = keyframes`
     transform: translate(0, -0px);
   }
 `
-
 const floatingTicketLeft = keyframes`
   from {
     transform: translate(0,  0px);
@@ -47,7 +47,6 @@ const floatingTicketLeft = keyframes`
     transform: translate(0, -0px);
   }
 `
-
 const floatingTicketRight = keyframes`
   from {
     transform: translate(0,  0px);
@@ -103,47 +102,53 @@ const StarsDecorations = styled(Box)`
 
   ${({ theme }) => theme.mediaQueries.sm} {
     & :nth-child(1) {
-      left: 25%;
-      top: 12%;
+      left: 0%;
+      top: 5%;
     }
     & :nth-child(2) {
-      left: 28%;
+      left: 7%;
       top: 72%;
     }
     & :nth-child(3) {
-      right: 24%;
+      right: 0%;
       top: 24%;
     }
   }
 
   ${({ theme }) => theme.mediaQueries.md} {
     & :nth-child(1) {
-      left: 25%;
-      top: 12%;
+      left: 0%;
+      top: 5%;
     }
     & :nth-child(2) {
-      left: 28%;
+      left: 7%;
       top: 72%;
     }
     & :nth-child(3) {
-      right: 24%;
+      right: 0%;
       top: 24%;
     }
   }
 
   ${({ theme }) => theme.mediaQueries.xl} {
     & :nth-child(1) {
-      left: 30%;
-      top: 12%;
+      left: 0%;
+      top: 5%;
     }
     & :nth-child(2) {
-      left: 32%;
+      left: 7%;
       top: 72%;
     }
     & :nth-child(3) {
-      right: 28%;
+      right: 0%;
       top: 24%;
     }
+  }
+`
+const HeroWrapper = styled(Flex)`
+  flex-direction: column;
+  ${({ theme }) => theme.mediaQueries.md} {
+    flex-direction: row;
   }
 `
 const LeftSection = styled.div`
@@ -164,15 +169,13 @@ const LeftSection = styled.div`
   }
 `
 const RightSection = styled.div`
-  display: none;
+  display: flex;
+  position: relative;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 5% 0;
   background: radial-gradient(circle, rgba(249, 59, 93, 0.7) 1%, rgba(11, 36, 106, 0.17) 77%);
-  ${({ theme }) => theme.mediaQueries.sm} {
-    display: flex;
-  }
 `
 const CountWrapper = styled.div`
   display: flex;
@@ -202,9 +205,13 @@ const CountWrapper = styled.div`
     text-align: center;
   }
   .count-spliter {
-    font-size: 48px;
+    font-size: 21px;
     padding: 0 5px;
     color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 27px;
   }
 `
 const HeroTicketWrap = styled.div`
@@ -242,10 +249,13 @@ const HeroTicketWrap = styled.div`
   }
 `
 
-const HeroSection = () => {
+const HeroSection = (props) => {
   const { t } = useTranslation()
   const { address: account } = useAccount()
   const { chainId, isWrongNetwork } = useActiveChainId()
+  const {nextEventTime, postCountdownText, preCountdownText} = props
+  const secondsRemaining = useNextEventCountdown(nextEventTime)
+  const { days, hours, minutes } = getTimePeriods(secondsRemaining)
 
   const {
     currentRound: { amountCollectedInCake, status },
@@ -280,7 +290,7 @@ const HeroSection = () => {
   }
 
   return (
-    <Flex flexDirection="row" id='lottery-section-1'>
+    <HeroWrapper>
       <LeftSection style={{ flex: 1 }}>
         <div className='lottery-header-title'>The &nbsp; <b> HexaFinity Lottery</b></div>
         {getHeroHeading()}
@@ -291,6 +301,14 @@ const HeroSection = () => {
                 <Image src="/images/walletButton.png" alt="wallet Image" width={20} height={18} />
                 <Text color="invertedContrast" bold fontSize="16px" ml="10px">
                   <Trans>Connect Wallet</Trans>
+                </Text>
+              </div>
+            </Box>
+            <Box display={['block', , , 'none']}>
+              <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                <Image src="/images/walletButton.png" alt="wallet Image" width={20} height={18} />
+                <Text color="invertedContrast" bold fontSize="16px" ml="10px">
+                  <Trans>Connect</Trans>
                 </Text>
               </div>
             </Box>
@@ -309,18 +327,18 @@ const HeroSection = () => {
         </Heading>
         <CountWrapper>
           <div className='count-number'>
-            <div className='count'>12</div>
+            <div className='count'>{days}</div>
+            <div className='text'>Days</div>
+          </div>
+          <div className='count-spliter'>:</div>
+          <div className='count-number'>
+            <div className='count'>{hours}</div>
             <div className='text'>Hours</div>
           </div>
           <div className='count-spliter'>:</div>
           <div className='count-number'>
-            <div className='count'>12</div>
+            <div className='count'>{minutes}</div>
             <div className='text'>Minutes</div>
-          </div>
-          <div className='count-spliter'>:</div>
-          <div className='count-number'>
-            <div className='count'>12</div>
-            <div className='text'>Seconds</div>
           </div>
         </CountWrapper>
         <HeroTicketWrap>
@@ -332,9 +350,7 @@ const HeroSection = () => {
         </HeroTicketWrap>
         <BuyTicketsButton disabled={ticketBuyIsDisabled} icon={true} />
       </RightSection>
-
-
-    </Flex>
+    </HeroWrapper>
   )
 }
 
