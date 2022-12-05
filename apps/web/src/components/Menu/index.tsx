@@ -18,11 +18,11 @@ const Menu = (props) => {
   const { isDark, setTheme } = useTheme()
   const cakePriceUsd = useCakeBusdPrice({ forceMainnet: true })
   const { currentLanguage, setLanguage, t } = useTranslation()
-  const { pathname } = useRouter()
+  let { pathname } = useRouter()
   const [showPhishingWarningBanner] = usePhishingBannerManager()
 
   const menuItems = useMenuItems()
-
+  if (pathname === "/") pathname = "/swap?chainId=97"
   const activeMenuItem = getActiveMenuItem({ menuConfig: menuItems, pathname })
   const activeSubMenuItem = getActiveSubMenuItem({ menuItem: activeMenuItem, pathname })
 
