@@ -37,8 +37,8 @@ export const VaultPoolRow: React.FC<
       <AutoAprCell pool={pool} />
       <CellInner>
         {/* <Link href={} external> */}
-          <Button>
-            <Text color="invertedContrast" bold fontSize="16px" mr="4px">
+          <Button variant="primarySub" external>
+            <Text color="primary" bold fontSize="16px" mr="4px">
               {t('Stake HEXA')}
             </Text>
           </Button>
@@ -63,8 +63,8 @@ const PoolRow: React.FC<React.PropsWithChildren<{ sousId: number; account: strin
       <AutoAprCell pool={pool} />
       <CellInner>
         {/* <Link href={} external> */}
-          <Button>
-            <Text color="invertedContrast" bold fontSize="16px" mr="4px">
+          <Button variant="primary" external>
+            <Text color="primary" bold fontSize="16px" mr="4px">
               {t('Stake HEXA')}
             </Text>
           </Button>

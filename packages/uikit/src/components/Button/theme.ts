@@ -21,6 +21,10 @@ export const styleVariants = {
     backgroundColor: "primary",
     color: "invertedContrast",
   },
+  [variants.PRIMARYSUB]: {
+    backgroundColor: "primarySub",
+    color: "primary",
+  },
   [variants.SECONDARY]: {
     backgroundColor: "transparent",
     border: "2px solid",
