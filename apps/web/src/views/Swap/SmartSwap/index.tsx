@@ -234,7 +234,7 @@ export function SmartSwapForm() {
   const allowRecipient = isExpertMode && !showWrap && !smartRouterOn
 
   return (
-    <div style={{padding:"0 1rem"}}>
+    <div style={{padding:"0 1rem", paddingBottom:20}}>
       <SwapTab />
       <CurrencyInputHeader
         title={t('Exchange')}

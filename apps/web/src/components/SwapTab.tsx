@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import { Link } from '@pancakeswap/uikit'
+import { useRouter } from 'next/router'
+
 const TabContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -23,6 +24,10 @@ const TabItem = styled.div`
   &:hover {
     cursor: pointer;
   }
+  @media (max-width: 674px) {
+    padding: 7px 10px;
+    font-size: 14px;
+  }
 `
 const DeActivedTabItem = styled.div`
   display: flex;
@@ -37,16 +42,40 @@ const DeActivedTabItem = styled.div`
   &:hover {
     cursor: pointer;
   }
+  @media (max-width: 674px) {
+    padding: 7px 10px;
+    font-size: 14px;
+  }
 `
 
 export default function SwapTab() {
+
+  
+  const router = useRouter()
+  
   const [tapIndex, setTapIndex] = useState(0)
+
+  useEffect(() => {
+    console.log(router.pathname)
+    if(router.pathname == "/swap"){
+      setTapIndex(0)
+    } else if(router.pathname == "/liquidity"){
+      setTapIndex(1)
+    } else if(router.pathname == "/transactions"){
+      setTapIndex(2)
+    }
+  }, [])
+
+  const handleClick = (href) => {
+    let url = href.toLowerCase()
+    router.push(url)
+  }
 
   return (
     <TabContainer>
       {['Swap', 'Liquidity', 'Transactions'].map((item, index) => {
         return (
-          <Link href={index == 0 ? '/swap' : index == 1 ? '/liquidity' : '/liquidity'} small>
+          <div onClick={()=>handleClick(item)}>
             {tapIndex == index ? (
               <TabItem onClick={() => setTapIndex(index)} key={item}>
                 {item}
@@ -56,7 +85,7 @@ export default function SwapTab() {
                 {item}
               </DeActivedTabItem>
             )}
-          </Link>
+          </div>
         )
       })}
     </TabContainer>

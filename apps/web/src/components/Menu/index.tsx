@@ -22,7 +22,6 @@ const Menu = (props) => {
   const [showPhishingWarningBanner] = usePhishingBannerManager()
 
   const menuItems = useMenuItems()
-  if (pathname === "/") pathname = "/swap?chainId=97"
   const activeMenuItem = getActiveMenuItem({ menuConfig: menuItems, pathname })
   const activeSubMenuItem = getActiveSubMenuItem({ menuItem: activeMenuItem, pathname })
 
@@ -42,7 +41,7 @@ const Menu = (props) => {
         }}
         rightSide={
           <>
-            <GlobalSettings mode={SettingsMode.GLOBAL} />
+            {/* <GlobalSettings mode={SettingsMode.GLOBAL} /> */}
             {/* <NetworkSwitcher /> */}
             <UserMenu />
           </>
