@@ -15,16 +15,24 @@ import {
 } from './pageSectionStyles'
 import useGetNextLotteryEvent from './hooks/useGetNextLotteryEvent'
 import useStatusTransitions from './hooks/useStatusTransitions'
-import Hero from './components/Hero'
+// import Hero from './components/Hero';
+import HeroSection from './components/HeroSection'
 import NextDrawCard from './components/NextDrawCard'
-import Countdown from './components/Countdown'
 import HistoryTabMenu from './components/HistoryTabMenu'
 import YourHistoryCard from './components/YourHistoryCard'
 import AllHistoryCard from './components/AllHistoryCard'
-import CheckPrizesSection from './components/CheckPrizesSection'
+import ReferralCard from './components/ReferralCard'
 import HowToPlay from './components/HowToPlay'
+import LotteryBalance from './components/LotteryBalance'
 import useShowMoreUserHistory from './hooks/useShowMoreUserRounds'
 import { PageMeta } from '../../components/Layout/Page'
+
+const TextStyle = {
+  fontFamily: 'Poppins',
+  fontStyle: 'normal',
+  fontWeight: 600,
+  color: '#000207',
+}
 
 const LotteryPage = styled.div`
   min-height: calc(100vh - 64px);
@@ -47,56 +55,28 @@ const Lottery = () => {
     <>
       <PageMeta />
       <LotteryPage>
-        <PageSection background={TITLE_BG} index={1} hasCurvedDivider={false}>
-          <Hero />
+        <PageSection background={TITLE_BG} index={1} hasCurvedDivider={false} innerProps={{ width: '100%' }}>
+          <HeroSection nextEventTime={nextEventTime} postCountdownText={postCountdownText} preCountdownText={preCountdownText} />
         </PageSection>
-        <PageSection
-          containerProps={{ style: { marginTop: '-30px' } }}
-          background={GET_TICKETS_BG}
-          concaveDivider
-          clipFill={{ light: '#7645D9' }}
-          dividerPosition="top"
-          index={2}
-        >
+        <PageSection index={2} innerProps={{ width: '100%' }}>
+          <LotteryBalance />
+        </PageSection>
+        <PageSection containerProps={{ style: { marginTop: '-30px' } }} index={2} innerProps={{ width: '100%' }}>
           <Flex alignItems="center" justifyContent="center" flexDirection="column" pt="24px">
-            {status === LotteryStatus.OPEN && (
-              <Heading scale="xl" color="#ffffff" mb="24px" textAlign="center">
-                {t('Get your tickets now!')}
-              </Heading>
-            )}
-            <Flex alignItems="center" justifyContent="center" mb="48px">
-              {nextEventTime && (postCountdownText || preCountdownText) ? (
-                <Countdown
-                  nextEventTime={nextEventTime}
-                  postCountdownText={postCountdownText}
-                  preCountdownText={preCountdownText}
-                />
-              ) : (
-                <Skeleton height="41px" width="250px" />
-              )}
-            </Flex>
-            <NextDrawCard />
+            <NextDrawCard nextEventTime={nextEventTime} />
           </Flex>
         </PageSection>
-        <PageSection background={CHECK_PRIZES_BG} hasCurvedDivider={false} index={2}>
-          <CheckPrizesSection />
-        </PageSection>
-        <PageSection
-          innerProps={{ style: { margin: '0', width: '100%' } }}
-          background={isDark ? FINISHED_ROUNDS_BG_DARK : FINISHED_ROUNDS_BG}
-          hasCurvedDivider={false}
-          index={2}
-        >
+        <PageSection innerProps={{ margin: '0', width: '100%' }} index={2} >
           <Flex width="100%" flexDirection="column" alignItems="center" justifyContent="center">
-            <Heading mb="24px" scale="xl">
-              {t('Finished Rounds')}
-            </Heading>
-            <Box mb="24px">
+            <Flex width="100%" flexDirection="row" justifyContent="space-between" mb={12}>
+              <Heading style={{ ...TextStyle, fontSize: 22 }}>
+                {t('Finished Rounds')}
+              </Heading>
               <HistoryTabMenu
                 activeIndex={historyTabMenuIndex}
                 setActiveIndex={(index) => setHistoryTabMenuIndex(index)}
               />
-            </Box>
+            </Flex>
             {historyTabMenuIndex === 0 ? (
               <AllHistoryCard />
             ) : (
@@ -107,12 +87,12 @@ const Lottery = () => {
             )}
           </Flex>
         </PageSection>
-        <PageSection
-          dividerPosition="top"
-          dividerFill={{ light: theme.colors.background }}
-          clipFill={{ light: '#9A9FD0', dark: '#66578D' }}
-          index={2}
-        >
+
+        <PageSection index={2} hasCurvedDivider={false} innerProps={{ width: '100%' }}>
+          <ReferralCard />
+        </PageSection>
+
+        <PageSection index={2} hasCurvedDivider={false} >
           <HowToPlay />
         </PageSection>
       </LotteryPage>
