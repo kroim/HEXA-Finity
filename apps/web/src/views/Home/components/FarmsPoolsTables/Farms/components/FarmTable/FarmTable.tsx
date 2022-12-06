@@ -1,7 +1,7 @@
 import { useRef, useMemo } from 'react'
 import { latinise } from 'utils/latinise'
 import styled from 'styled-components'
-import { RowType } from '@pancakeswap/uikit'
+import { ArrowForwardIcon, RowType } from '@pancakeswap/uikit'
 import BigNumber from 'bignumber.js'
 import { getBalanceNumber } from '@pancakeswap/utils/formatBalance'
 import { BIG_ZERO } from '@pancakeswap/utils/bigNumber'
@@ -55,6 +55,25 @@ const TableBody = styled.tbody`
 const TableContainer = styled.div`
   position: relative;
 `
+const TableHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.cardBorder};
+  padding: 32px 32px;
+`;
+
+const Title = styled.div`
+  font-size: 22px;
+  font-weight: 600;
+`;
+
+const ArrowButton = styled.div`
+  border-radius: ${({ theme }) => theme.radii.small};
+  padding: 5px 5px 3px 5px;
+  background-color: #EBEFF9;
+`;
 
 const FarmTable: React.FC<React.PropsWithChildren<ITableProps>> = ({ farms, cakePrice, userDataReady }) => {
   const tableWrapperEl = useRef<HTMLDivElement>(null)
@@ -169,6 +188,12 @@ const FarmTable: React.FC<React.PropsWithChildren<ITableProps>> = ({ farms, cake
   return (
     <Container id="farms-table">
       <TableContainer id="table-container">
+        <TableHeader>
+          <Title>Earn BSW + Fees in Farms</Title>
+          <ArrowButton>
+            <ArrowForwardIcon color="#798DC6" />
+          </ArrowButton>
+        </TableHeader>
         <TableWrapper ref={tableWrapperEl}>
           <StyledTable>
             <TableBody>
