@@ -70,6 +70,7 @@ const Lottery = () => {
             <NextDrawCard nextEventTime={nextEventTime} />
           </Flex>
         </PageSection>
+        
         <PageSection innerProps={{ margin: '0', width: '100%' }} index={2} >
           <Flex width="100%" flexDirection="column" alignItems="center" justifyContent="center">
             <Flex width="100%" flexDirection="row" justifyContent="space-between" mb={12}>

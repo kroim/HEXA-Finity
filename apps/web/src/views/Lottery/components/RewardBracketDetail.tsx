@@ -36,7 +36,7 @@ const RewardBracketDetail: React.FC<React.PropsWithChildren<RewardBracketDetailP
   }
 
   return (
-    <Flex flexDirection="column">
+    <Flex flexDirection="column" alignItems='center'>
       {isLoading ? (
         <Skeleton mb="4px" mt="8px" height={16} width={80} />
       ) : (
