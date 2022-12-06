@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import { Link } from '@pancakeswap/uikit'
 import { useRouter } from 'next/router'
 
 const TabContainer = styled.div`
@@ -50,9 +49,22 @@ const DeActivedTabItem = styled.div`
 `
 
 export default function SwapTab() {
-  const router = useRouter()
 
+  
+  const router = useRouter()
+  
   const [tapIndex, setTapIndex] = useState(0)
+
+  useEffect(() => {
+    console.log(router.pathname)
+    if(router.pathname == "/swap"){
+      setTapIndex(0)
+    } else if(router.pathname == "/liquidity"){
+      setTapIndex(1)
+    } else if(router.pathname == "/transactions"){
+      setTapIndex(2)
+    }
+  }, [])
 
   const handleClick = (href) => {
     let url = href.toLowerCase()
