@@ -1,21 +1,13 @@
 import { useState } from 'react'
 import styled from 'styled-components'
-import { Box, Flex, Heading, Skeleton } from '@pancakeswap/uikit'
-import { LotteryStatus } from 'config/constants/types'
+import { Flex, Heading } from '@pancakeswap/uikit'
 import PageSection from 'components/PageSection'
 import { useTranslation } from '@pancakeswap/localization'
 import useTheme from 'hooks/useTheme'
 import { useFetchLottery, useLottery } from 'state/lottery/hooks'
-import {
-  TITLE_BG,
-  GET_TICKETS_BG,
-  FINISHED_ROUNDS_BG,
-  FINISHED_ROUNDS_BG_DARK,
-  CHECK_PRIZES_BG,
-} from './pageSectionStyles'
+import {TITLE_BG} from './pageSectionStyles'
 import useGetNextLotteryEvent from './hooks/useGetNextLotteryEvent'
 import useStatusTransitions from './hooks/useStatusTransitions'
-// import Hero from './components/Hero';
 import HeroSection from './components/HeroSection'
 import NextDrawCard from './components/NextDrawCard'
 import HistoryTabMenu from './components/HistoryTabMenu'
@@ -23,6 +15,7 @@ import YourHistoryCard from './components/YourHistoryCard'
 import AllHistoryCard from './components/AllHistoryCard'
 import ReferralCard from './components/ReferralCard'
 import HowToPlay from './components/HowToPlay'
+import QuestionCard from './components/QuestionCard'
 import LotteryBalance from './components/LotteryBalance'
 import useShowMoreUserHistory from './hooks/useShowMoreUserRounds'
 import { PageMeta } from '../../components/Layout/Page'
@@ -42,7 +35,6 @@ const Lottery = () => {
   useFetchLottery()
   useStatusTransitions()
   const { t } = useTranslation()
-  const { isDark, theme } = useTheme()
   const {
     currentRound: { status, endTime },
   } = useLottery()
@@ -87,13 +79,12 @@ const Lottery = () => {
             )}
           </Flex>
         </PageSection>
-
         <PageSection index={2} hasCurvedDivider={false} innerProps={{ width: '100%' }}>
           <ReferralCard />
         </PageSection>
-
-        <PageSection index={2} hasCurvedDivider={false} >
+        <PageSection index={2} hasCurvedDivider={false} background='#E1E9FF' containerProps={{ style: { marginTop: '30px' } }} >
           <HowToPlay />
+          <QuestionCard />
         </PageSection>
       </LotteryPage>
     </>
