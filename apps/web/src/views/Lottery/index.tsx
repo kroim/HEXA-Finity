@@ -18,11 +18,10 @@ import useStatusTransitions from './hooks/useStatusTransitions'
 // import Hero from './components/Hero';
 import HeroSection from './components/HeroSection'
 import NextDrawCard from './components/NextDrawCard'
-import Countdown from './components/Countdown'
 import HistoryTabMenu from './components/HistoryTabMenu'
 import YourHistoryCard from './components/YourHistoryCard'
 import AllHistoryCard from './components/AllHistoryCard'
-import CheckPrizesSection from './components/CheckPrizesSection'
+import ReferralCard from './components/ReferralCard'
 import HowToPlay from './components/HowToPlay'
 import LotteryBalance from './components/LotteryBalance'
 import useShowMoreUserHistory from './hooks/useShowMoreUserRounds'
@@ -62,15 +61,11 @@ const Lottery = () => {
         <PageSection index={2} innerProps={{ width: '100%' }}>
           <LotteryBalance />
         </PageSection>
-        <PageSection
-          containerProps={{ style: { marginTop: '-30px' } }}
-          index={2} innerProps={{ width: '100%' }}
-        >
+        <PageSection containerProps={{ style: { marginTop: '-30px' } }} index={2} innerProps={{ width: '100%' }}>
           <Flex alignItems="center" justifyContent="center" flexDirection="column" pt="24px">
             <NextDrawCard nextEventTime={nextEventTime} />
           </Flex>
         </PageSection>
-        
         <PageSection innerProps={{ margin: '0', width: '100%' }} index={2} >
           <Flex width="100%" flexDirection="column" alignItems="center" justifyContent="center">
             <Flex width="100%" flexDirection="row" justifyContent="space-between" mb={12}>
@@ -93,7 +88,11 @@ const Lottery = () => {
           </Flex>
         </PageSection>
 
-        <PageSection index={2} >
+        <PageSection index={2} hasCurvedDivider={false} innerProps={{ width: '100%' }}>
+          <ReferralCard />
+        </PageSection>
+
+        <PageSection index={2} hasCurvedDivider={false} >
           <HowToPlay />
         </PageSection>
       </LotteryPage>

@@ -10,6 +10,7 @@ interface InactiveButtonProps extends BaseButtonProps {
 
 const InactiveButton: PolymorphicComponent<InactiveButtonProps, "button"> = styled(Button)<InactiveButtonProps>`
   background-color: #FFF;
+  height: 100%;
   font-family: 'Poppins';
   font-style: normal;
   font-weight: 500;
@@ -21,6 +22,9 @@ const InactiveButton: PolymorphicComponent<InactiveButtonProps, "button"> = styl
     background-color: transparent;
     color: #000;
   }
+  ${({ theme }) => theme.mediaQueries.sm} {
+    padding: 12px;
+  }
 `;
 
 interface ActiveButtonProps extends BaseButtonProps {
@@ -29,6 +33,7 @@ interface ActiveButtonProps extends BaseButtonProps {
 
 const ActiveButton: PolymorphicComponent<ActiveButtonProps, "button"> = styled(Button)<ActiveButtonProps>`
   background-color: #11A9FF;
+  height: 100%;
   font-family: 'Poppins';
   font-style: normal;
   font-weight: 500;
@@ -39,6 +44,9 @@ const ActiveButton: PolymorphicComponent<ActiveButtonProps, "button"> = styled(B
   &:hover:not(:disabled):not(:active) {
     background-color: transparent;
     color: #11A9FF;
+  }
+  ${({ theme }) => theme.mediaQueries.sm} {
+    padding: 12px;
   }
 `;
 
