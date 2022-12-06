@@ -19,7 +19,7 @@ export const StyledInputCurrencyWrapper = styled(Box)`
   width: 674px;
   margin-top: 30px;
   @media (max-width: 674px) {
-    width: 95vw;
+    width: 90vw;
   }
 `
 
@@ -49,7 +49,7 @@ export const WithDrawArea = styled.div`
   background: linear-gradient(to right, #ff022f 0%, #03175f 40%, #14a2f1 105%);
   border-radius: 20px;
   @media (max-width: 674px) {
-    width: 95vw;
+    width: 90vw;
     flex-direction: column;
     padding: 20px;
   }
