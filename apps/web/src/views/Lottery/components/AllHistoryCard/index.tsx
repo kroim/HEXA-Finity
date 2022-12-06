@@ -1,28 +1,24 @@
 import { useState, useRef, useEffect } from 'react'
 import styled from 'styled-components'
-import { Card, Text, Skeleton, CardHeader, Box } from '@pancakeswap/uikit'
+import { Card, CardHeader } from '@pancakeswap/uikit'
 import { useTranslation } from '@pancakeswap/localization'
 import { useAppDispatch } from 'state'
 import { useLottery } from 'state/lottery/hooks'
 import { fetchLottery } from 'state/lottery/helpers'
 import { LotteryStatus } from 'config/constants/types'
 import RoundSwitcher from './RoundSwitcher'
-import { getDrawnDate, processLotteryResponse } from '../../helpers'
+import { processLotteryResponse } from '../../helpers'
 import PreviousRoundCardBody from '../PreviousRoundCard/Body'
-import PreviousRoundCardFooter from '../PreviousRoundCard/Footer'
 
 const StyledCard = styled(Card)`
   width: 100%;
-
-  ${({ theme }) => theme.mediaQueries.md} {
-    width: 756px;
-  }
 `
 
 const StyledCardHeader = styled(CardHeader)`
   z-index: 2;
-  background: none;
-  border-bottom: 1px ${({ theme }) => theme.colors.cardBorder} solid;
+  background: #0B246A;
+  box-shadow: 2px 14px 68px rgba(26, 35, 74, 0.11);
+  border-radius: 20px 20px 0px 0px;
 `
 
 const AllHistoryCard = () => {
@@ -107,21 +103,11 @@ const AllHistoryCard = () => {
           mostRecentRound={latestRoundId}
           handleInputChange={handleInputChange}
           handleArrowButtonPress={handleArrowButtonPress}
+          selectedLotteryNodeData={selectedLotteryNodeData}
         />
-        <Box mt="8px">
-          {selectedRoundId ? (
-            selectedLotteryNodeData?.endTime ? (
-              <Text fontSize="14px">
-                {t('Drawn')} {getDrawnDate(locale, selectedLotteryNodeData.endTime)}
-              </Text>
-            ) : (
-              <Skeleton width="185px" height="21px" />
-            )
-          ) : null}
-        </Box>
       </StyledCardHeader>
       <PreviousRoundCardBody lotteryNodeData={selectedLotteryNodeData} lotteryId={selectedRoundId} />
-      <PreviousRoundCardFooter lotteryNodeData={selectedLotteryNodeData} lotteryId={selectedRoundId} />
+      {/* <PreviousRoundCardFooter lotteryNodeData={selectedLotteryNodeData} lotteryId={selectedRoundId} /> */}
     </StyledCard>
   )
 }

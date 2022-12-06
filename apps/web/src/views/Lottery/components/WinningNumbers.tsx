@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react'
+import styled from 'styled-components'
 import { Flex, FlexProps } from '@pancakeswap/uikit'
 import random from 'lodash/random'
 import uniqueId from 'lodash/uniqueId'
 import { parseRetrievedNumber } from '../helpers'
-import { BallWithNumber } from '../svgs'
-import { BallColor } from '../svgs/Balls'
 
 interface WinningNumbersProps extends FlexProps {
   number: string
@@ -12,18 +11,24 @@ interface WinningNumbersProps extends FlexProps {
   fontSize?: string
   rotateText?: boolean
 }
+const DrawNumberImg = styled.img`
+  width: 50%;
+  height: 50%;
+  padding: 0 5px;
 
+  ${({ theme }) => theme.mediaQueries.sm} {
+    width: 100%;
+    height: 100%;
+  }
+`
 const WinningNumbers: React.FC<React.PropsWithChildren<WinningNumbersProps>> = ({
   number,
-  size = '32px',
-  fontSize = '16px',
   rotateText,
   ...containerProps
 }) => {
   const [rotationValues, setRotationValues] = useState([])
   const reversedNumber = parseRetrievedNumber(number)
   const numAsArray = reversedNumber.split('')
-  const colors: BallColor[] = ['pink', 'lilac', 'teal', 'aqua', 'green', 'yellow']
 
   useEffect(() => {
     if (rotateText && numAsArray && rotationValues.length === 0) {
@@ -32,17 +37,10 @@ const WinningNumbers: React.FC<React.PropsWithChildren<WinningNumbersProps>> = (
   }, [rotateText, numAsArray, rotationValues])
 
   return (
-    <Flex justifyContent="space-between" {...containerProps}>
+    <Flex justifyContent="space-between" mt={24} mb={24} {...containerProps}>
       {numAsArray.map((num, index) => {
         return (
-          <BallWithNumber
-            key={uniqueId()}
-            rotationTransform={rotateText && rotationValues[index]}
-            size={size}
-            fontSize={fontSize}
-            color={colors[index]}
-            number={num}
-          />
+          <DrawNumberImg src={`/img/lottery/number-${num}.png`} key={uniqueId()} />
         )
       })}
     </Flex>
