@@ -55,28 +55,24 @@ export default function Swap() {
       </StyledHeaderTitle>
       <WithDrawArea>
         <ContentIteamArea>
-          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-            <RightSideArea>
-              <div>
-                <p>Fee Return: </p>
-                <img src="/images/circleQuestion.png" alt="" />
-              </div>
-              <h3>0.00000 HEXA</h3>
-            </RightSideArea>
-            <div className="leftArea">Withdraw</div>
-          </div>
+          <RightSideArea>
+            <div>
+              <p>Fee Return: </p>
+              <img src="/images/circleQuestion.png" alt="" />
+            </div>
+            <h3>0.00000 HEXA</h3>
+          </RightSideArea>
+          <div className="leftArea">Withdraw</div>
         </ContentIteamArea>
         <ContentIteamArea>
-          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-            <RightSideArea>
-              <div>
-                <p>Robi Boost: </p>
-                <img src="/images/circleQuestion.png" alt="" />
-              </div>
-              <h3>0.00000 RB</h3>
-            </RightSideArea>
-            <div className="leftArea">Use</div>
-          </div>
+          <RightSideArea>
+            <div>
+              <p>Robi Boost: </p>
+              <img src="/images/circleQuestion.png" alt="" />
+            </div>
+            <h3>0.00000 RB</h3>
+          </RightSideArea>
+          <div className="leftArea">Use</div>
         </ContentIteamArea>
       </WithDrawArea>
       <Flex flexDirection="column">

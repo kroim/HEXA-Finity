@@ -18,6 +18,9 @@ export const StyledSwapContainer = styled(Flex)<{ $isChartExpanded: boolean }>`
 export const StyledInputCurrencyWrapper = styled(Box)`
   width: 674px;
   margin-top: 30px;
+  @media (max-width: 674px) {
+    width: 95vw;
+  }
 `
 
 export const StyledHeaderTitle = styled.div`
@@ -45,6 +48,11 @@ export const WithDrawArea = styled.div`
   padding: 30px;
   background: linear-gradient(to right, #ff022f 0%, #03175f 40%, #14a2f1 105%);
   border-radius: 20px;
+  @media (max-width: 674px) {
+    width: 95vw;
+    flex-direction: column;
+    padding: 20px;
+  }
 `
 
 export const ContentIteamArea = styled.div`
@@ -66,6 +74,10 @@ export const ContentIteamArea = styled.div`
   }
   .leftArea:hover{
     cursor:pointer
+  }
+  @media (max-width: 674px) {
+    justify-content: space-between;
+    width: 100%;
   }
 `
 

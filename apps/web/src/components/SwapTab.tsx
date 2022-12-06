@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { Link } from '@pancakeswap/uikit'
 import { useRouter } from 'next/router'
@@ -25,6 +25,10 @@ const TabItem = styled.div`
   &:hover {
     cursor: pointer;
   }
+  @media (max-width: 674px) {
+    padding: 7px 10px;
+    font-size: 14px;
+  }
 `
 const DeActivedTabItem = styled.div`
   display: flex;
@@ -38,6 +42,10 @@ const DeActivedTabItem = styled.div`
   background-color: white;
   &:hover {
     cursor: pointer;
+  }
+  @media (max-width: 674px) {
+    padding: 7px 10px;
+    font-size: 14px;
   }
 `
 
