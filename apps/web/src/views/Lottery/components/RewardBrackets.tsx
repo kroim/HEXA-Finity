@@ -84,7 +84,7 @@ const RewardBrackets: React.FC<React.PropsWithChildren<RewardMatchesProps>> = ({
 
   return (
     <Wrapper>
-      <Text fontSize="14px" mb="24px">
+      <Text fontSize="14px" mb="24px" textAlign='center'>
         {t('Match the winning number in the same order to share prizes.')}{' '}
         {!isHistoricRound && t('Current prizes up for grabs:')}
       </Text>

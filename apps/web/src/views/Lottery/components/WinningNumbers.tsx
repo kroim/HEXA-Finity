@@ -3,7 +3,6 @@ import { Flex, FlexProps } from '@pancakeswap/uikit'
 import random from 'lodash/random'
 import uniqueId from 'lodash/uniqueId'
 import { parseRetrievedNumber } from '../helpers'
-import { BallWithNumber } from '../svgs'
 import { BallColor } from '../svgs/Balls'
 
 interface WinningNumbersProps extends FlexProps {
@@ -32,16 +31,14 @@ const WinningNumbers: React.FC<React.PropsWithChildren<WinningNumbersProps>> = (
   }, [rotateText, numAsArray, rotationValues])
 
   return (
-    <Flex justifyContent="space-between" {...containerProps}>
+    <Flex justifyContent="space-between" mt={24} mb={24} {...containerProps}>
       {numAsArray.map((num, index) => {
         return (
-          <BallWithNumber
+          <img src={`/img/lottery/number-${num}.png`}
             key={uniqueId()}
-            rotationTransform={rotateText && rotationValues[index]}
-            size={size}
-            fontSize={fontSize}
-            color={colors[index]}
-            number={num}
+            width={size}
+            height={size}
+            style={{padding: '0 5px'}}
           />
         )
       })}

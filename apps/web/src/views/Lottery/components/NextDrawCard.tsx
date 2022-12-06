@@ -382,7 +382,7 @@ const NextDrawCard = (props) => {
               {(status === LotteryStatus.OPEN || status === LotteryStatus.CLOSE) && (
                 <Flex alignItems="flex-start" justifyContent="flex-start">
                   <ExpandableLabel expanded={isExpanded} iconColor="#FFFFFF" buttonPadding='0px' onClick={() => setIsExpanded(!isExpanded)}>
-                    <span style={{ color: '#FFFFFF' }}>{isExpanded ? t('Hide') : t('More')}</span>
+                    <span style={{ color: '#FFF' }}>{isExpanded ? t('Hide') : t('More')}</span>
                   </ExpandableLabel>
                 </Flex>
               )}
