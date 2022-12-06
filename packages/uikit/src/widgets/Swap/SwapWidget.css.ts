@@ -7,8 +7,9 @@ import { recipe } from "@vanilla-extract/recipes";
 export const switchButtonClass = style([
   atoms({}),
   style({
-    backgroundColor: "primary",
+    backgroundColor: "#DFF6FF !important",
     boxShadow: "inset 0px -2px 0px rgba(0, 0, 0, 0.1)",
+    borderRadius: "50% !important",
   }),
 ]);
 
@@ -78,7 +79,7 @@ export const inputVariants = recipe({
     },
   },
   defaultVariants: {
-    align: "right",
+    align: "left",
     error: false,
   },
 });

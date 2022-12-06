@@ -1,6 +1,6 @@
 import { useTranslation } from '@pancakeswap/localization'
 import { WalletModalV2 } from '@pancakeswap/ui-wallets'
-import { Button, ButtonProps } from '@pancakeswap/uikit'
+import { Button, ButtonProps,Text } from '@pancakeswap/uikit'
 import { createWallets, getDocLink } from 'config/wallet'
 import { useActiveChainId } from 'hooks/useActiveChainId'
 import useAuth from 'hooks/useAuth'
@@ -10,6 +10,7 @@ import { useActiveHandle } from 'hooks/useEagerConnect.bmp.ts'
 import { useMemo, useState } from 'react'
 import { useConnect } from 'wagmi'
 import Trans from './Trans'
+import Image from 'next/image'
 
 const ConnectWalletButton = ({ children, ...props }: ButtonProps) => {
   const handleActive = useActiveHandle()
@@ -37,7 +38,15 @@ const ConnectWalletButton = ({ children, ...props }: ButtonProps) => {
   return (
     <>
       <Button minHeight="45px" onClick={handleClick} {...props}>
-        {children || <Trans>Connect Wallet</Trans>}
+        {/* {children || <Trans>Connect Wallet</Trans>} */}
+        {children || (
+          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+            <Image src="/images/walletButton.png" alt="wallet Image" width={20} height={18} />
+            <Text color="invertedContrast" bold fontSize="16px" ml="10px">
+              <Trans>Connect Wallet</Trans>
+            </Text>
+          </div>
+        )}
       </Button>
       <WalletModalV2
         docText={t('Learn How to Connect')}
