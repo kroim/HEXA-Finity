@@ -6,7 +6,6 @@ import { getDrawnDate } from '../../helpers'
 const StyledInput = styled(Input)`
   width: 80px;
   height: 45px;
-  // padding: 4px 16px;
   border: 1px solid #FFFFFF;
   border-radius: 10px;
   background-color: transparent;
@@ -40,11 +39,30 @@ const StyledIconButton = styled(IconButton)`
     }
   }
 `
-const TextStyle = {
+const RoundHeading = styled(Heading)`
+  display: none;
+  margin-right: 8px;
   fontFamily: 'Poppins',
   fontStyle: 'normal',
-  fontWeight: 500,
-}
+  font-size: 20px;
+  color: #FFF;
+  font-weight: 600;
+  ${({ theme }) => theme.mediaQueries.md} {
+    display: unset;
+  }
+`
+const DrawnText = styled(Text)`
+  display: none;
+  padding-left: 12px;
+  fontFamily: 'Poppins',
+  fontStyle: 'normal',
+  font-size: 14px;
+  color: #FFF;
+  font-weight: 400;
+  ${({ theme }) => theme.mediaQueries.md} {
+    display: unset;
+  }
+`
 interface RoundSwitcherProps {
   isLoading: boolean
   selectedRoundId: string
@@ -74,7 +92,7 @@ const RoundSwitcher: React.FC<React.PropsWithChildren<RoundSwitcherProps>> = ({
   return (
     <Flex alignItems="center" justifyContent="space-between">
       <Flex alignItems="center">
-        <Heading mr="8px" style={{ ...TextStyle, fontSize: 20, color: '#FFF', fontWeight: 600 }}>{t('Round')}</Heading>
+        <RoundHeading>{t('Round')}</RoundHeading>
         <StyledInput
           pattern="^[0-9]+$"
           inputMode="numeric"
@@ -87,9 +105,9 @@ const RoundSwitcher: React.FC<React.PropsWithChildren<RoundSwitcherProps>> = ({
         />
         {selectedRoundId ? (
           selectedLotteryNodeData?.endTime ? (
-            <Text style={{ ...TextStyle, fontSize: 14, color: '#FFF', paddingLeft: 12 }}>
+            <DrawnText>
               {t('Drawn')} {getDrawnDate(locale, selectedLotteryNodeData.endTime)}
-            </Text>
+            </DrawnText>
           ) : (
             <Skeleton width="185px" height="21px" />
           )

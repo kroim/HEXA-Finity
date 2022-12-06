@@ -9,7 +9,6 @@ import { LotteryStatus } from 'config/constants/types'
 import RoundSwitcher from './RoundSwitcher'
 import { processLotteryResponse } from '../../helpers'
 import PreviousRoundCardBody from '../PreviousRoundCard/Body'
-import PreviousRoundCardFooter from '../PreviousRoundCard/Footer'
 
 const StyledCard = styled(Card)`
   width: 100%;

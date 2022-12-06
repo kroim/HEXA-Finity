@@ -33,10 +33,6 @@ interface YourHistoryCardProps {
 
 const StyledCard = styled(Card)`
   width: 100%;
-
-  ${({ theme }) => theme.mediaQueries.md} {
-    width: 756px;
-  }
 `
 
 const StyledCardBody = styled(CardBody)`

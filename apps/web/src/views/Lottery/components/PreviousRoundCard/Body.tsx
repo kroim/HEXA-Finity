@@ -192,7 +192,7 @@ const PreviousRoundCardBody: React.FC<
           </LeftFlex>
 
           <RightFlex>
-            <Flex justifyContent={['center', null, null, 'center']}>
+            <Flex justifyContent={['center', null, null, 'center']} mt='24px'>
               <Heading style={{ ...TextStyle, color: '#000206', fontSize: 22, fontWeight: 500 }}>{t('Winning Number')}</Heading>
               {isLatestRound && <LatestRibbon>{t('Latest')}</LatestRibbon>}
             </Flex>
@@ -202,8 +202,6 @@ const PreviousRoundCardBody: React.FC<
                   <WinningNumbers
                     rotateText={isLargerScreen || false}
                     number={lotteryNodeData?.finalNumber.toString()}
-                    size="100%"
-                    fontSize={isLargerScreen ? '42px' : '16px'}
                   />
                 ) : (
                   <Skeleton
