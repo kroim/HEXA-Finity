@@ -6,25 +6,22 @@ import { ArrowForwardIcon, RowType } from '@pancakeswap/uikit'
 const BenefitTotalPage = styled.div`
   background-color: #DAE4FF;
   border-radius: 20px;
-  padding 24px 0 40px; 
-  margin-top: 20px;
+  padding 30px 30px; 
+  margin: 0;
+  ${({ theme }) => theme.mediaQueries.md} {
+    margin-top: 20px;
+    margin-bottom: 40px;
+    padding 24px 0 40px; 
+  }
 `
 
 const Grid = styled.div`
-  display: grid;
-  grid-gap: 16px 8px;
+  display: unset;
   margin-top: 24px;
-  grid-template-columns: repeat(5, auto);
-  grid-template-areas:
-    'a d b e c';
-
-  ${({ theme }) => theme.mediaQueries.sm} {
-    grid-gap: 16px;
-  }
 
   ${({ theme }) => theme.mediaQueries.md} {
-    grid-template-areas:
-      'a b c d e';
+    display: grid;
+    grid-template-areas: 'a b c d e';
     grid-gap: 32px;
     grid-template-columns: repeat(5, auto);
   }
@@ -32,10 +29,19 @@ const Grid = styled.div`
 
 const ItemTitle = styled.div`
   text-align: center;
-  font-size: 14px;
+  font-size: 16px;
   color: #798DC6;
-  font-weight: 400;
-  margin-bottom: 10px;
+  font-weight: 400; 
+  margin-bottom: 0;
+  margin-right: 20px;
+
+  ${({ theme }) => theme.mediaQueries.md} {
+    text-align: center;
+    font-size: 14px;
+    color: #798DC6;
+    font-weight: 400;
+    margin-bottom: 10px;
+  } 
 `
 
 const ItemValue = styled.div`
@@ -46,11 +52,15 @@ const ItemValue = styled.div`
 `
 
 const ItemImage = styled.div`
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  margin-bottom: 10px;
- 
+  display: unset;
+  margin-right: 10px;
+
+  ${({ theme }) => theme.mediaQueries.md} {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 10px;
+  } 
 `
 
 const ItemImageGround = styled.div`
@@ -62,7 +72,24 @@ const ItemImageGround = styled.div`
 `
 
 const Item = styled.div`
-  border-right: 1px solid #061E63;
+  border: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  ${({ theme }) => theme.mediaQueries.md} {
+    display: unset;
+    border-right: 1px solid #061E63;
+  }
+`
+
+const ItemLast = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  ${({ theme }) => theme.mediaQueries.md} {
+    display: unset;
+  }
 `
 
 const BenefitTotal = () => {
@@ -116,13 +143,15 @@ const BenefitTotal = () => {
           </Item>
         </Flex>
         <Flex flexDirection="column" style={{ gridArea: 'e' }}>
-          <ItemImage>
-            <ItemImageGround>
-              <img style={{height: 24, width: 24}} src="/images/hexa/benefit/benefit25.png" />
-            </ItemImageGround>
-          </ItemImage>
-          <ItemTitle color="textSubtle">{t('LP Earned')}</ItemTitle>
-          <ItemValue color="textSubtle">$23.98M</ItemValue>
+          <ItemLast>
+            <ItemImage>
+              <ItemImageGround>
+                <img style={{height: 24, width: 24}} src="/images/hexa/benefit/benefit25.png" />
+              </ItemImageGround>
+            </ItemImage>
+            <ItemTitle color="textSubtle">{t('LP Earned')}</ItemTitle>
+            <ItemValue color="textSubtle">$23.98M</ItemValue>
+          </ItemLast>
         </Flex>
       </Grid>
     </BenefitTotalPage>
