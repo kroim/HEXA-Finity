@@ -11,10 +11,10 @@ export const mobileFooterHeight = 73;
 export const ModalHeader = styled.div<{ background?: string }>`
   align-items: center;
   background: transparent;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.cardBorder};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.white};
   display: flex;
   padding: 12px 24px;
-
+  padding-bottom: 0;
   ${({ theme }) => theme.mediaQueries.md} {
     background: ${({ background }) => background || "transparent"};
   }
@@ -41,7 +41,7 @@ export const ModalCloseButton: React.FC<React.PropsWithChildren<{ onDismiss: Mod
 }) => {
   return (
     <IconButton variant="text" onClick={onDismiss} aria-label="Close the dialog">
-      <CloseIcon color="primary" />
+      <CloseIcon color="contrast" />
     </IconButton>
   );
 };

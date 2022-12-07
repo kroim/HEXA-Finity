@@ -93,7 +93,9 @@ const SlippageTabs = () => {
         <Flex flexWrap="wrap">
           <Button
             mt="4px"
-            mr="4px"
+            mr="18px"
+            height="50px"
+            width="80px"
             scale="sm"
             onClick={() => {
               setSlippageInput('')
@@ -105,7 +107,9 @@ const SlippageTabs = () => {
           </Button>
           <Button
             mt="4px"
-            mr="4px"
+            mr="18px"
+            height="50px"
+            width="80px"
             scale="sm"
             onClick={() => {
               setSlippageInput('')
@@ -116,8 +120,10 @@ const SlippageTabs = () => {
             0.5%
           </Button>
           <Button
-            mr="4px"
             mt="4px"
+            mr="18px"
+            height="50px"
+            width="80px"
             scale="sm"
             onClick={() => {
               setSlippageInput('')
@@ -147,7 +153,7 @@ const SlippageTabs = () => {
                 isSuccess={![10, 50, 100].includes(userSlippageTolerance)}
               />
             </Box>
-            <Text color="primary" bold ml="2px">
+            <Text ml="15px">
               %
             </Text>
           </Flex>

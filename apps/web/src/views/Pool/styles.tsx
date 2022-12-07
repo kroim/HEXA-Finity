@@ -38,6 +38,24 @@ export const StyledHeaderTitle = styled.div`
     margin-top: 15px;
   }
 `
+export const TooltipSection = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 40px;
+  h1 {
+    font-size: 44px;
+    font-weight: 600;
+  }
+  p {
+    font-size: 18px;
+    font-weight: 200;
+    max-width: 662px;
+    line-height: 1.4;
+    margin-top: 15px;
+  }
+`
 export const WithDrawArea = styled.div`
   display: flex;
   flex-direction: row;

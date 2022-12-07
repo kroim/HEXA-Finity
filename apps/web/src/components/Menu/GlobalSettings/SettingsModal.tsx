@@ -105,7 +105,7 @@ const SettingsModal: React.FC<React.PropsWithChildren<InjectedModalProps>> = ({ 
   }
 
   return (
-    <Modal title={t('Settings')} headerBackground="gradientCardHeader" onDismiss={onDismiss}>
+    <Modal title={t('Settings')} headerBackground="white" onDismiss={onDismiss}>
       <ScrollableContainer>
         {mode === SettingsMode.GLOBAL && (
           <>
@@ -162,15 +162,15 @@ const SettingsModal: React.FC<React.PropsWithChildren<InjectedModalProps>> = ({ 
         {mode === SettingsMode.SWAP_LIQUIDITY && (
           <>
             <Flex pt="3px" flexDirection="column">
-              <Text bold textTransform="uppercase" fontSize="18px" color="secondary" mb="24px">
+              {/* <Text bold textTransform="uppercase" fontSize="18px" color="secondary" mb="24px">
                 {t('Swaps & Liquidity')}
-              </Text>
+              </Text> */}
               <Flex justifyContent="space-between" alignItems="center" mb="24px">
                 {chainId === ChainId.BSC && <GasSettings />}
               </Flex>
               <TransactionSettings />
             </Flex>
-            {SUPPORT_ZAP.includes(chainId) && (
+            {/* {SUPPORT_ZAP.includes(chainId) && (
               <Flex justifyContent="space-between" alignItems="center" mb="24px">
                 <Flex alignItems="center">
                   <Text>{t('Zap (Beta)')}</Text>
@@ -201,8 +201,8 @@ const SettingsModal: React.FC<React.PropsWithChildren<InjectedModalProps>> = ({ 
                   }}
                 />
               </Flex>
-            )}
-            <Flex justifyContent="space-between" alignItems="center" mb="24px">
+            )} */}
+            {/* <Flex justifyContent="space-between" alignItems="center" mb="24px">
               <Flex alignItems="center">
                 <Text>{t('Expert Mode')}</Text>
                 <QuestionHelper
@@ -217,8 +217,8 @@ const SettingsModal: React.FC<React.PropsWithChildren<InjectedModalProps>> = ({ 
                 checked={expertMode}
                 onChange={handleExpertModeToggle}
               />
-            </Flex>
-            <Flex justifyContent="space-between" alignItems="center" mb="24px">
+            </Flex> */}
+            {/* <Flex justifyContent="space-between" alignItems="center" mb="24px">
               <Flex alignItems="center">
                 <Text>{t('Disable Multihops')}</Text>
                 <QuestionHelper text={t('Restricts swaps to direct pairs only.')} placement="top-start" ml="4px" />
@@ -231,7 +231,7 @@ const SettingsModal: React.FC<React.PropsWithChildren<InjectedModalProps>> = ({ 
                   setSingleHopOnly(!singleHopOnly)
                 }}
               />
-            </Flex>
+            </Flex> */}
             <Flex justifyContent="space-between" alignItems="center" mb="24px">
               <Flex alignItems="center">
                 <Text>{t('Flippy sounds')}</Text>
@@ -243,7 +243,7 @@ const SettingsModal: React.FC<React.PropsWithChildren<InjectedModalProps>> = ({ 
               </Flex>
               <PancakeToggle checked={audioPlay} onChange={toggleSetAudioMode} scale="md" />
             </Flex>
-            <Flex justifyContent="space-between" alignItems="center" mb="24px">
+            {/* <Flex justifyContent="space-between" alignItems="center" mb="24px">
               <Flex alignItems="center">
                 <Text>{t('Smart Router (Beta)')}</Text>
                 <QuestionHelper
@@ -265,7 +265,7 @@ const SettingsModal: React.FC<React.PropsWithChildren<InjectedModalProps>> = ({ 
                 onChange={(e) => setSmartRouterOpen(e.target.checked)}
                 scale="md"
               />
-            </Flex>
+            </Flex> */}
           </>
         )}
       </ScrollableContainer>
