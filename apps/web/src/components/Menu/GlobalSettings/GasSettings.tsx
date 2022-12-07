@@ -36,7 +36,7 @@ const GasSettings = () => {
           mt="4px"
           mr="20px"
           height='50px'
-          width='180px'
+          width='190px'
           scale="sm"
           onClick={() => {
             setGasPrice(GAS_PRICE_GWEI.default)
@@ -49,7 +49,7 @@ const GasSettings = () => {
           mt="4px"
           mr="20px"
           height='50px'
-          width='120px'
+          width='130px'
           scale="sm"
           onClick={() => {
             setGasPrice(GAS_PRICE_GWEI.fast)
@@ -62,7 +62,7 @@ const GasSettings = () => {
           mr="20px"
           mt="4px"
           height='50px'
-          width='160px'
+          width='170px'
           scale="sm"
           onClick={() => {
             setGasPrice(GAS_PRICE_GWEI.instant)

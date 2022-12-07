@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { escapeRegExp } from 'utils'
-import { Text, Button, Input, Flex, Box, QuestionHelper } from '@pancakeswap/uikit'
+import { Text, Button, Input, Flex, Box, QuestionHelper, Toggle } from '@pancakeswap/uikit'
 import { useTranslation } from '@pancakeswap/localization'
-import { useUserSlippageTolerance, useUserTransactionTTL } from 'state/user/hooks'
+import { useUserSlippageTolerance, useUserTransactionTTL, useAudioModeManager } from 'state/user/hooks'
 
 enum SlippageError {
   InvalidInput = 'InvalidInput',
@@ -22,6 +22,7 @@ const SlippageTabs = () => {
   const [ttl, setTtl] = useUserTransactionTTL()
   const [slippageInput, setSlippageInput] = useState('')
   const [deadlineInput, setDeadlineInput] = useState('')
+  const [audioPlay, toggleSetAudioMode] = useAudioModeManager()
 
   const { t } = useTranslation()
 
@@ -134,7 +135,7 @@ const SlippageTabs = () => {
             1.0%
           </Button>
           <Flex alignItems="center">
-            <Box width="76px" mt="4px">
+            <Box width="227px" mt="4px">
               <Input
                 scale="sm"
                 inputMode="decimal"
@@ -153,9 +154,7 @@ const SlippageTabs = () => {
                 isSuccess={![10, 50, 100].includes(userSlippageTolerance)}
               />
             </Box>
-            <Text ml="15px">
-              %
-            </Text>
+            <Text ml="15px">%</Text>
           </Flex>
         </Flex>
         {!!slippageError && (
@@ -168,34 +167,50 @@ const SlippageTabs = () => {
           </Text>
         )}
       </Flex>
-      <Flex justifyContent="space-between" alignItems="center" mb="24px">
-        <Flex alignItems="center">
-          <Text>{t('Tx deadline (mins)')}</Text>
-          <QuestionHelper
-            text={t('Your transaction will revert if it is left confirming for longer than this time.')}
-            placement="top-start"
-            ml="4px"
-          />
-        </Flex>
-        <Flex>
-          <Box width="52px" mt="4px">
-            <Input
-              scale="sm"
-              inputMode="numeric"
-              pattern="^[0-9]+$"
-              isWarning={!!deadlineError}
-              onBlur={() => {
-                parseCustomDeadline((ttl / 60).toString())
-              }}
-              placeholder={(ttl / 60).toString()}
-              value={deadlineInput}
-              onChange={(event) => {
-                if (event.currentTarget.validity.valid) {
-                  parseCustomDeadline(event.target.value)
-                }
-              }}
+      <Flex justifyContent="space-between" flexWrap="wrap" alignItems="center" mb="10px">
+        <Flex justifyContent="space-between" flexDirection="column">
+          <Flex alignItems="center">
+            <Text>{t('Transaction Deadline')}</Text>
+            <QuestionHelper
+              color="primary"
+              text={t('Your transaction will revert if it is left confirming for longer than this time.')}
+              placement="top-start"
+              ml="4px"
             />
-          </Box>
+          </Flex>
+          <Flex justifyContent="space-between" flexDirection="row" alignItems="center">
+            <Box width="220px" mt="4px">
+              <Input
+                scale="sm"
+                inputMode="numeric"
+                pattern="^[0-9]+$"
+                isWarning={!!deadlineError}
+                onBlur={() => {
+                  parseCustomDeadline((ttl / 60).toString())
+                }}
+                placeholder={(ttl / 60).toString()}
+                value={deadlineInput}
+                onChange={(event) => {
+                  if (event.currentTarget.validity.valid) {
+                    parseCustomDeadline(event.target.value)
+                  }
+                }}
+              />
+            </Box>
+            <Text ml="20px">{t('Minutes')}</Text>
+          </Flex>
+        </Flex>
+        <Flex justifyContent="space-between" flexDirection="column" alignItems="center">
+          <Flex alignItems="center">
+            <Text mb="15px">{t('Audio')}</Text>
+            {/* <QuestionHelper
+                  text={t('Fun sounds to make a truly immersive pancake-flipping trading experience')}
+                  placement="top-start"
+                  ml="4px"
+                /> */}
+          </Flex>
+          <Toggle id="toggle-disable-multihop-button" checked={audioPlay} scale="md" onChange={toggleSetAudioMode} />
+          {/* <PancakeToggle checked={audioPlay} onChange={toggleSetAudioMode} scale="md" /> */}
         </Flex>
       </Flex>
     </Flex>
