@@ -24,6 +24,10 @@ import { perpLangMap } from 'utils/getPerpetualLanguageCode'
 import { perpTheme } from 'utils/getPerpetualTheme'
 import RotateSection from './components/RotateSection'
 import FarmsPoolsTables from './components/FarmsPoolsTables'
+import OurBenefit from './components/OurBenefit'
+import BenefitTotal from './components/BenefitTotal'
+import Resources from './components/Resources'
+import Exchanges from './components/Exchanges'
 
 const StyledHeroSection = styled(PageSection)`
   padding-top: 16px;
@@ -125,7 +129,7 @@ const Home: React.FC<React.PropsWithChildren> = () => {
   const { isDesktop, isMobile } = useMatchBreakpoints()
   const { isDark } = useTheme()
 
-  const HomeSectionContainerStyles = { margin: '0', width: '100%', maxWidth: '968px' }
+  const HomeSectionContainerStyles = { margin: '0', width: '100%', backgroundColor: '#DAE4FF' }
 
   const perpetualUrl = useMemo(
     () => `https://perp.pancakeswap.finance/${perpLangMap(code)}/futures/BTCUSDT?theme=${perpTheme(isDark)}`,
@@ -210,7 +214,7 @@ const Home: React.FC<React.PropsWithChildren> = () => {
         <MultipleBanner />
       </PageSection>
 
-{/* ----------- Frams list work part ------------------- */}
+{/* ----------- Frams and Pools Section ------------------- */}
       <PageSection
         innerProps={{ style: { margin: '0', width: '100%' } }}
         containerProps={{
@@ -222,29 +226,26 @@ const Home: React.FC<React.PropsWithChildren> = () => {
         <FarmsPoolsTables />
       </PageSection>
 
-      {/* <PageSection
-        innerProps={{ style: HomeSectionContainerStyles }}
-        background={theme.colors.gradientCardHeader}
-        index={2}
-        hasCurvedDivider={false}
-      >
-        <OuterWedgeWrapper>
-          <InnerWedgeWrapper width="150%" top>
-            <WedgeTopRight />
-          </InnerWedgeWrapper>
-        </OuterWedgeWrapper>
-        <SalesSection {...earnSectionData(t)} />
-        {chainId === ChainId.BSC && <FarmsPoolsRow />}
-      </PageSection> */}
-      {/* <PageSection
-        innerProps={{ style: HomeSectionContainerStyles }}
+{/* ----------- Our Benifit Section ------------------- */}
+      <PageSection
+        innerProps={{ style: { margin: '0', width: '100%' } }}
         containerProps={{
           id: 'home-4',
         }}
         index={2}
         hasCurvedDivider={false}
       >
-        <WinSection />
+        <OurBenefit />
+      </PageSection>
+      <PageSection
+        innerProps={{ style: { margin: '0', width: '100%' } }}
+        containerProps={{
+          id: 'home-4',
+        }}
+        index={2}
+        hasCurvedDivider={false}
+      >
+        <BenefitTotal />
       </PageSection>
       <PageSection
         innerProps={{ style: HomeSectionContainerStyles }}
@@ -252,17 +253,24 @@ const Home: React.FC<React.PropsWithChildren> = () => {
         index={2}
         hasCurvedDivider={false}
       >
-        <SalesSection {...cakeSectionData(t)} />
-        <CakeDataRow />
+        <Resources />
       </PageSection>
       <PageSection
         innerProps={{ style: HomeSectionContainerStyles }}
-        background="linear-gradient(180deg, #7645D9 0%, #5121B1 100%)"
+        background={theme.colors.background}
         index={2}
         hasCurvedDivider={false}
       >
-        <Footer />
-      </PageSection> */}
+        <Resources />
+      </PageSection>
+      <PageSection
+        innerProps={{ style: HomeSectionContainerStyles }}
+        background={theme.colors.background}
+        index={2}
+        hasCurvedDivider={false}
+      >
+        <Exchanges />
+      </PageSection>
     </>
   )
 }
