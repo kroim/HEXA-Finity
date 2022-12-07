@@ -12,9 +12,19 @@ import { toV2LiquidityToken, useTrackedTokenPairs } from '../../state/user/hooks
 import Dots from '../../components/Loader/Dots'
 import { AppHeader, AppBody } from '../../components/App'
 import Page from '../Page'
+import SwapTab from 'components/SwapTab'
+
+import {
+  StyledInputCurrencyWrapper,
+  StyledSwapContainer,
+  StyledHeaderTitle,
+  WithDrawArea,
+  ContentIteamArea,
+  RightSideArea,
+} from './styles'
 
 const Body = styled(CardBody)`
-  background-color: ${({ theme }) => theme.colors.dropdownDeep};
+  /* background-color: ${({ theme }) => theme.colors.dropdownDeep}; */
 `
 
 export default function Pool() {
@@ -111,8 +121,24 @@ export default function Pool() {
 
   return (
     <Page>
+      <StyledHeaderTitle>
+        <h1>Become a Liquidity Provider</h1>
+        <p>
+          Earn high yeilds from transaction fees.
+          <br />
+          <span style={{ color: '#11A9FF' }}>Learn how to add liquidity</span>
+        </p>
+      </StyledHeaderTitle>
       <AppBody>
-        <AppHeader title={t('Your Liquidity')} subtitle={t('Remove liquidity to receive tokens back')} />
+        <SwapTab />
+        <AppHeader title={t('Liquidity')} subtitle={t('Add liquidity to receive LP tokens')} />
+        <CardFooter style={{ textAlign: 'center' }}>
+          <Link href="/add" passHref>
+            <Button id="join-pool-button" width="100%" endIcon={<AddIcon color="invertedContrast" />}>
+              {t('Add Liquidity')}
+            </Button>
+          </Link>
+        </CardFooter>
         <Body>
           {renderBody()}
           {account && !v2IsLoading && (
@@ -128,13 +154,6 @@ export default function Pool() {
             </Flex>
           )}
         </Body>
-        <CardFooter style={{ textAlign: 'center' }}>
-          <Link href="/add" passHref>
-            <Button id="join-pool-button" width="100%" startIcon={<AddIcon color="invertedContrast" />}>
-              {t('Add Liquidity')}
-            </Button>
-          </Link>
-        </CardFooter>
       </AppBody>
     </Page>
   )

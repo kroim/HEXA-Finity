@@ -18,8 +18,9 @@ const AppHeaderContainer = styled(Flex)`
   align-items: center;
   justify-content: space-between;
   padding: 24px;
+  padding-bottom: 0;
   width: 100%;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.cardBorder};
+  /* border-bottom: 1px solid ${({ theme }) => theme.colors.cardBorder}; */
 `
 
 const AppHeader: React.FC<React.PropsWithChildren<Props>> = ({ title, subtitle, helper, backTo, noConfig = false }) => {

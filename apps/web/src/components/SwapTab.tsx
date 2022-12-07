@@ -15,7 +15,7 @@ const TabItem = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 7px 30px;
+  padding: 12px 30px;
   border-radius: 10px;
   color: white;
   font-size: 18px;
