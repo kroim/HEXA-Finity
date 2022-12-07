@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
-import { useTranslation } from '@pancakeswap/localization'
 import { SwitchTransition, CSSTransition } from 'react-transition-group'
 import styled from 'styled-components'
+import { useTranslation } from '@pancakeswap/localization'
 
-const ExchangesPage = styled.div`
+const PartnersPage = styled.div`
   margin: 10px 0 10px 0;
 
   ${({ theme }) => theme.mediaQueries.sm} {
@@ -21,10 +21,10 @@ const Title = styled.div`
   color: #000000;
   font-weight: 600;
   line-height: 39px;
-  margin-bottom: 20px;
+  margin-bottom: 20px;  
 `
 
-const ExchangesList = styled.div`
+const PartnersList = styled.div`
   grid-gap: 10px;
   display: grid;
   grid-template-columns: repeat(2, auto);
@@ -50,62 +50,47 @@ const CardItem = styled.div`
 
 `
 
-const BeniefitTitle = styled.div`
-  text-align: center;
-  font-weight: 600;
-  font-size: 16px;
-  color: #061E63;
-  margin-bottom:20px;
-`
-
-const BeniefitContent = styled.div`
-  font-size: 12px;
-  font-weight: 400;
-  color: #061E63;
-  line-height: 24px;
-`
-
-const Exchanges = ({}) => {
+const Partners = ({}) => {
 
   const { t } = useTranslation()
 
-  const exchanges = [
+  const partners = [
     {
-      img: "/images/hexa/exchanges/Exchanges1.png"
+      img: "/images/hexa/exchanges/Exchanges7.png"
     },
     {
-      img: "/images/hexa/exchanges/Exchanges2.png"
+      img: "/images/hexa/exchanges/Exchanges8.png"
     },
     {
-      img: "/images/hexa/exchanges/Exchanges3.png"
+      img: "/images/hexa/exchanges/Exchanges9.png"
     },
     {
-      img: "/images/hexa/exchanges/Exchanges4.png"
+      img: "/images/hexa/exchanges/Exchanges10.png"
     },
     {
-      img: "/images/hexa/exchanges/Exchanges5.png"
+      img: "/images/hexa/exchanges/Exchanges11.png"
     },
     {
-      img: "/images/hexa/exchanges/Exchanges6.png"
+      img: "/images/hexa/exchanges/Exchanges12.png"
     },
   ]
 
   return (
-    <ExchangesPage>
+    <PartnersPage>
       <Title>
-        Exchanges
+        HexaFinity Partners
       </Title>
-      <ExchangesList>
-        {exchanges.map(function (item, index) {
+      <PartnersList>
+        {partners.map(function (item, index) {
           return (
             <CardItem key={index}>
               <img style={{height: 37}} src={item.img} />
             </CardItem>
           )
         })}
-       </ExchangesList>
-    </ExchangesPage>
+       </PartnersList>
+    </PartnersPage>
   )
 }
 
-export default Exchanges
+export default Partners

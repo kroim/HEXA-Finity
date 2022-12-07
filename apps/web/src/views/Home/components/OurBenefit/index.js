@@ -1,9 +1,14 @@
 import { useEffect, useState } from 'react'
 import { SwitchTransition, CSSTransition } from 'react-transition-group'
 import styled from 'styled-components'
+import { useTranslation } from '@pancakeswap/localization'
 
 const BeniefitPage = styled.div`
-  margin-top: 40px;
+  margin-top: 0;
+
+  ${({ theme }) => theme.mediaQueries.md} {
+     margin-top: 40px;
+  }
 `
 
 const Title = styled.div`
@@ -12,17 +17,29 @@ const Title = styled.div`
   color: #000000;
   font-weight: 600;
   line-height: 39px;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
+
+  ${({ theme }) => theme.mediaQueries.md} {
+     margin-bottom: 40px;
+ }
 `
 
 const Beniefits = styled.div`
   grid-gap: 50px;
   display: grid;
-  grid-template-columns: auto auto auto auto ;
+  grid-template-columns: auto auto auto auto;
+  @media (max-width: 1200px) {
+    grid-gap: 30px;
+    grid-template-columns: auto auto;
+  }
+  @media (max-width: 674px) {
+    grid-gap: 20px;
+    grid-template-columns: auto;
+  }
 `
 
 const BeniefitItem = styled.div`
-  flex: 25%;
+  width: 700px
   @media (max-width: 674px) {
     flex: 100%;
   }
@@ -33,7 +50,11 @@ const BeniefitTitle = styled.div`
   font-weight: 600;
   font-size: 16px;
   color: #061E63;
-  margin-bottom:20px;
+  margin-bottom:10px;
+
+  ${({ theme }) => theme.mediaQueries.md} {
+    margin-bottom: 20px;
+}
 `
 
 const BeniefitContent = styled.div`
@@ -43,7 +64,24 @@ const BeniefitContent = styled.div`
   line-height: 24px;
 `
 
+const BeniefitImg = styled.img`
+  height: 40px;
+  margin-bottom: 10px;
+  ${({ theme }) => theme.mediaQueries.md} {
+    height: 74px;
+  }
+`
+const BeniefitImgPart = styled.div`
+  display:flex;
+  justify-content: center;
+  ${({ theme }) => theme.mediaQueries.md} {
+    justify-content: left;
+  }
+`
+
+
 const OurBenefit = ({}) => {
+  const { t } = useTranslation()
 
   const contents = [
     {
@@ -54,7 +92,7 @@ const OurBenefit = ({}) => {
     {
       title: 'The Lowest Exchange Fee',
       content: 'All the rewards coming from the accounts with no referrers are used for weekly BSW token burning.',
-      img: "/images/hexa/benefit/benifit2.png"
+      img: "/images/hexa/benefit/benifit5.png"
     },
     {
       title: 'Trade Fee Reimbursement',
@@ -71,13 +109,15 @@ const OurBenefit = ({}) => {
   return (
     <BeniefitPage>
       <Title>
-        Our Benefits
+        {t('Our Benefits')}
       </Title>
       <Beniefits>
         {contents.map(function (item, index) {
           return (
             <BeniefitItem key={index}>
-              <img style={{height: 74}} src={item.img} />
+              <BeniefitImgPart>
+                <BeniefitImg src={item.img} />
+              </BeniefitImgPart>
               <BeniefitTitle>
                 {item.title}
               </BeniefitTitle>
