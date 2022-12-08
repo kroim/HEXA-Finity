@@ -78,11 +78,11 @@ const RankingTable = styled.table`
   width: 100%;
   thead {
     border-bottom: 1px solid #DAE4FF;
-    display: block;
+    // display: block;
     tr {
-      display: flex;
+      // display: flex;
       width: 100%;
-      justify-content: space-around;
+      // justify-content: space-around;
     }
     th {
       font-family: 'Poppins';
@@ -94,14 +94,14 @@ const RankingTable = styled.table`
     }
   }
   tbody {
-    display: block;
+    // display: block;
     max-height: 500px;
     overflow-y: auto;
     tr {
       border-bottom: 1px solid #DAE4FF;
-      display: flex;
+      // display: flex;
       width: 100%;
-      justify-content: space-around;
+      // justify-content: space-around;
       td {
         font-family: 'Poppins';
         font-style: normal;
@@ -120,7 +120,7 @@ const CompetitionScore = (props) => {
   const { t } = useTranslation()
   const { address: account } = useAccount()
   const { isWrongNetwork } = useActiveChainId()
-  const ellipsisAddress = (_address : string) => {
+  const ellipsisAddress = (_address: string) => {
     return _address ? `${_address.substring(0, 2)}...${_address.substring(_address.length - 4)}` : '';
   }
   const { rankingData } = props;
@@ -167,26 +167,27 @@ const CompetitionScore = (props) => {
         <StyledStepCard width="100%">
           <StepCardInner2>
             <Text style={{ ...colors.textFamily2, color: '#000', fontSize: 22, padding: '20px' }}>{t('Ranking List')}</Text>
-            <RankingTable>
-              <thead>
-                <tr>
-                  <th>Place</th>
-                  <th>Wallet</th>
-                  <th>Tickets Volume</th>
-                  <th>Rewards</th>
-                </tr>
-              </thead>
-              <tbody>
-                {rankingData && rankingData.data.map((data, index) => (
-                  <tr key={index}>
-                    <td>{data.rank}</td>
-                    <td>{ellipsisAddress(data.address)}</td>
-                    <td>{localiseTradingVolume(data.volume)} $</td>
-                    <td>+134.50 $</td>
+            <div style={{ position: 'relative', height: 500, overflow: 'auto' }}>
+              <RankingTable>
+                <thead>
+                  <tr style={{ position: 'sticky', top: 0, backgroundColor: 'white' }}>
+                    <th>Place</th>
+                    <th>Wallet</th>
+                    <th>Tickets Volume</th>
+                    <th>Rewards</th>
                   </tr>
-                ))}
-              </tbody>
-            </RankingTable>
+                </thead>
+                <tbody>
+                  {rankingData && rankingData.data.map((data, index) => (
+                    <tr key={index}>
+                      <td>{data.rank}</td>
+                      <td>{ellipsisAddress(data.address)}</td>
+                      <td>{localiseTradingVolume(data.volume)} $</td>
+                      <td>+134.50 $</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </RankingTable></div>
           </StepCardInner2>
         </StyledStepCard>
       </StepContainer>
