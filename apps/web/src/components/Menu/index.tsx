@@ -22,7 +22,6 @@ const Menu = (props) => {
   const [showPhishingWarningBanner] = usePhishingBannerManager()
 
   const menuItems = useMenuItems()
-  console.log('menuItems', menuItems)
 
   const activeMenuItem = getActiveMenuItem({ menuConfig: menuItems, pathname })
   const activeSubMenuItem = getActiveSubMenuItem({ menuItem: activeMenuItem, pathname })

@@ -80,7 +80,6 @@ const PrizesGrid: React.FC<React.PropsWithChildren<PrizesGridProps>> = ({ prizes
   const rows = prizesConfig[tab + 1]
 
   const handleItemClick = (index: number) => setTab(index)
-
   return (
     <Box pt="24px">
       <TabMenu activeIndex={tab} onItemClick={handleItemClick}>

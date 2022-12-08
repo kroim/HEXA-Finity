@@ -5,7 +5,7 @@ import MoDCompetition from './MoDCompetition'
 const TradingCompetitionPage: React.FC<React.PropsWithChildren> = () => {
   return (
     <>
-      <SubMenu />
+      {/* <SubMenu /> */}
       <MoDCompetition />
     </>
   )

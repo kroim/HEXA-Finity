@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { ThemeConsumer } from 'styled-components'
 import { Flex, Box } from '@pancakeswap/uikit'
 
 export const CompetitionPage = styled.div`
@@ -32,3 +32,27 @@ export const BottomBunnyWrapper = styled(Box)`
     height: 214px;
   }
 `
+
+export const colors = {
+  background: '#041647',
+  active: '#00C400',
+  ended: 'rgb(249, 59, 93)',
+  black: '#000',
+  white: '#FFF',
+  textFamily1: {
+    fontFamily: 'Poppins',
+    fontStyle: 'normal',
+    fontWeight: 400
+  },
+  textFamily2: {
+    fontFamily: 'Poppins',
+    fontStyle: 'normal',
+    fontWeight: 500
+  },
+  textFamily3: {
+    fontFamily: 'Poppins',
+    fontStyle: 'normal',
+    fontWeight: 600
+  },
+  text1: '#2F4DA0',
+}
