@@ -5,6 +5,7 @@ import { GAS_PRICE_GWEI, GAS_PRICE } from 'state/types'
 
 const GasSettings = () => {
   const { t } = useTranslation()
+  console.log('useGasPriceManager', useGasPriceManager)
   const [gasPrice, setGasPrice] = useGasPriceManager()
 
   return (
@@ -20,9 +21,9 @@ const GasSettings = () => {
         />
       </Flex>
       <Flex flexWrap="wrap">
-        <Button
+        {/* <Button
           mt="4px"
-          mr="4px"
+          mr="20px"
           scale="sm"
           onClick={() => {
             setGasPrice(GAS_PRICE_GWEI.rpcDefault)
@@ -30,10 +31,12 @@ const GasSettings = () => {
           variant={gasPrice === GAS_PRICE_GWEI.rpcDefault ? 'primary' : 'tertiary'}
         >
           {t('RPC Default')}
-        </Button>
+        </Button> */}
         <Button
           mt="4px"
-          mr="4px"
+          mr="20px"
+          height='50px'
+          width='190px'
           scale="sm"
           onClick={() => {
             setGasPrice(GAS_PRICE_GWEI.default)
@@ -44,7 +47,9 @@ const GasSettings = () => {
         </Button>
         <Button
           mt="4px"
-          mr="4px"
+          mr="20px"
+          height='50px'
+          width='130px'
           scale="sm"
           onClick={() => {
             setGasPrice(GAS_PRICE_GWEI.fast)
@@ -54,8 +59,10 @@ const GasSettings = () => {
           {t('Fast (%gasPrice%)', { gasPrice: GAS_PRICE.fast })}
         </Button>
         <Button
-          mr="4px"
+          mr="20px"
           mt="4px"
+          height='50px'
+          width='170px'
           scale="sm"
           onClick={() => {
             setGasPrice(GAS_PRICE_GWEI.instant)

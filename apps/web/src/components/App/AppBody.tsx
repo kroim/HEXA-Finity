@@ -3,7 +3,7 @@ import { Card } from '@pancakeswap/uikit'
 
 export const BodyWrapper = styled(Card)`
   border-radius: 24px;
-  max-width: 100%;
+  max-width: 674px;
   width: 100%;
   z-index: 1;
 `

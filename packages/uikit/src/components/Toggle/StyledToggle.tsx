@@ -3,31 +3,31 @@ import { ToggleProps, HandleProps, InputProps, ScaleKeys, scales, StyleTogglePro
 
 const scaleKeyValues = {
   sm: {
-    handleHeight: "16px",
-    handleWidth: "16px",
-    handleLeft: "2px",
-    handleTop: "2px",
-    checkedLeft: "calc(100% - 18px)",
-    toggleHeight: "20px",
-    toggleWidth: "36px",
+    handleHeight: "24px",
+    handleWidth: "24px",
+    handleLeft: "-3px",
+    handleTop: "-3px",
+    checkedLeft: "calc(100% - 20px)",
+    toggleHeight: "18px",
+    toggleWidth: "37px",
   },
   md: {
-    handleHeight: "26px",
-    handleWidth: "26px",
-    handleLeft: "3px",
-    handleTop: "3px",
-    checkedLeft: "calc(100% - 30px)",
-    toggleHeight: "32px",
-    toggleWidth: "56px",
+    handleHeight: "24px",
+    handleWidth: "24px",
+    handleLeft: "-3px",
+    handleTop: "-3px",
+    checkedLeft: "calc(100% - 20px)",
+    toggleHeight: "18px",
+    toggleWidth: "37px",
   },
   lg: {
-    handleHeight: "32px",
-    handleWidth: "32px",
-    handleLeft: "4px",
-    handleTop: "4px",
-    checkedLeft: "calc(100% - 36px)",
-    toggleHeight: "40px",
-    toggleWidth: "72px",
+    handleHeight: "24px",
+    handleWidth: "24px",
+    handleLeft: "-3px",
+    handleTop: "-3px",
+    checkedLeft: "calc(100% - 20px)",
+    toggleHeight: "18px",
+    toggleWidth: "37px",
   },
 };
 
@@ -38,7 +38,7 @@ const getScale =
   };
 
 export const Handle = styled.div<HandleProps>`
-  background-color: ${({ theme }) => theme.toggle.handleBackground};
+  background-color: #00C400;
   border-radius: 50%;
   cursor: pointer;
   height: ${getScale("handleHeight")};
@@ -62,19 +62,21 @@ export const Input = styled.input<InputProps>`
     left: ${getScale("checkedLeft")};
   }
 
-  &:focus + ${Handle} {
+  /* &:focus + ${Handle} {
     box-shadow: ${({ theme }) => theme.shadows.focus};
   }
 
   &:hover + ${Handle}:not(:disabled):not(:checked) {
     box-shadow: ${({ theme }) => theme.shadows.focus};
-  }
+  } */
 `;
 
 const StyledToggle = styled.div<StyleToggleProps>`
   align-items: center;
-  background-color: ${({ theme, $checked, $checkedColor, $defaultColor }) =>
-    theme.colors[$checked ? $checkedColor : $defaultColor]};
+  /* background-color: ${({ theme, $checked, $checkedColor, $defaultColor }) =>
+    "gray"}; */
+  /* background-color: ${({ theme, $checked, $checkedColor, $defaultColor }) =>
+    theme.colors[$checked ? $checkedColor : $defaultColor]}; */
   border-radius: 24px;
   box-shadow: ${({ theme }) => theme.shadows.inset};
   cursor: pointer;
@@ -83,6 +85,7 @@ const StyledToggle = styled.div<StyleToggleProps>`
   position: relative;
   transition: background-color 200ms;
   width: ${getScale("toggleWidth")};
+  box-shadow: inset 0 0 10px #6ea16e;
 `;
 
 export default StyledToggle;
