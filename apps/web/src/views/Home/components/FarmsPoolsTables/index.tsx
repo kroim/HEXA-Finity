@@ -130,4 +130,3 @@ const FarmsPoolsTables: React.FC<React.PropsWithChildren> = () => {
 export const FarmsContext = createContext({ chosenFarms: [] })
 
 export default FarmsPoolsTables
-  
