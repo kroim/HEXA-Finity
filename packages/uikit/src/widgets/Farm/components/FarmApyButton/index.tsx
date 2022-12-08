@@ -37,11 +37,13 @@ export const FarmApyButton: React.FC<React.PropsWithChildren<FarmApyButtonProps>
         onClick={handleClick}
       >
         {children}
-        {variant === "text-and-button" && (
-          <IconButton variant="text" scale="sm" ml="4px">
-            <CalculateIcon width="18px" />
-          </IconButton>
-        )}
+        <img src="/images/hexa/question.png" style={{marginLeft: 10}} alt="Calculate image" />
+        {/* {variant === "text-and-button" && (
+          // <IconButton variant="text" scale="sm" ml="4px">
+          //   <CalculateIcon width="18px" />
+          // </IconButton>
+          <img src="/images/hexa/benefit/calc.png" alt="Calculate image" />
+        )} */}
       </ApyLabelContainer>
     </Flex>
   );

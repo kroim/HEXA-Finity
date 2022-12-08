@@ -23,6 +23,13 @@ import MultipleBanner from './components/Banners/MultipleBanner'
 import { perpLangMap } from 'utils/getPerpetualLanguageCode'
 import { perpTheme } from 'utils/getPerpetualTheme'
 import RotateSection from './components/RotateSection'
+import FarmsPoolsTables from './components/FarmsPoolsTables'
+import OurBenefit from './components/OurBenefit'
+import BenefitTotal from './components/BenefitTotal'
+import Resources from './components/Resources/index'
+import Exchanges from './components/Exchanges'
+import Partners from './components/Partners'
+import BinanceLab from './components/BinanceLab'
 
 const StyledHeroSection = styled(PageSection)`
   padding-top: 16px;
@@ -112,6 +119,13 @@ const TradeRightArea = styled.div`
     display: flex;
   }
 `
+const BackgroundSection = styled.div`
+  background-color: #DAE4FF;
+  padding: 0;
+  ${({ theme }) => theme.mediaQueries.md} {
+    padding: 30px;
+  }
+`
 
 const Home: React.FC<React.PropsWithChildren> = () => {
   const { theme } = useTheme()
@@ -124,7 +138,7 @@ const Home: React.FC<React.PropsWithChildren> = () => {
   const { isDesktop, isMobile } = useMatchBreakpoints()
   const { isDark } = useTheme()
 
-  const HomeSectionContainerStyles = { margin: '0', width: '100%', maxWidth: '968px' }
+  const HomeSectionContainerStyles = { margin: '0', width: '100%', backgroundColor: '#DAE4FF', padding: 0 }
 
   const perpetualUrl = useMemo(
     () => `https://perp.pancakeswap.finance/${perpLangMap(code)}/futures/BTCUSDT?theme=${perpTheme(isDark)}`,
@@ -208,48 +222,70 @@ const Home: React.FC<React.PropsWithChildren> = () => {
         <RotateSection />
         <MultipleBanner />
       </PageSection>
+
+{/* ----------- Frams and Pools Section ------------------- */}
       <PageSection
-        innerProps={{ style: HomeSectionContainerStyles }}
-        background={theme.colors.gradientCardHeader}
-        index={2}
-        hasCurvedDivider={false}
-      >
-        <OuterWedgeWrapper>
-          <InnerWedgeWrapper width="150%" top>
-            <WedgeTopRight />
-          </InnerWedgeWrapper>
-        </OuterWedgeWrapper>
-        <SalesSection {...earnSectionData(t)} />
-        {/* TODO: until we are enable fetch multi-chain farms */}
-        {chainId === ChainId.BSC && <FarmsPoolsRow />}
-      </PageSection>
-      <PageSection
-        innerProps={{ style: HomeSectionContainerStyles }}
+        innerProps={{ style: { margin: '0', width: '100%' } }}
         containerProps={{
           id: 'home-3',
         }}
         index={2}
         hasCurvedDivider={false}
       >
-        <WinSection />
+        <FarmsPoolsTables />
       </PageSection>
+
+{/* ----------- Our Benifit Section ------------------- */}
       <PageSection
-        innerProps={{ style: HomeSectionContainerStyles }}
-        background={theme.colors.background}
+        innerProps={{ style: { margin: '0', width: '100%' } }}
+        containerProps={{
+          id: 'home-4',
+        }}
         index={2}
         hasCurvedDivider={false}
       >
-        <SalesSection {...cakeSectionData(t)} />
-        <CakeDataRow />
+        <OurBenefit />
       </PageSection>
       <PageSection
-        innerProps={{ style: HomeSectionContainerStyles }}
-        background="linear-gradient(180deg, #7645D9 0%, #5121B1 100%)"
+        innerProps={{ style: { margin: '0', width: '100%' } }}
+        containerProps={{
+          id: 'home-4',
+        }}
         index={2}
         hasCurvedDivider={false}
       >
-        <Footer />
+        <BenefitTotal />
       </PageSection>
+      <BackgroundSection>
+        <PageSection
+          innerProps={{ style: { margin: '0', width: '100%', background: '#DAE4FF'} }}
+          index={2}
+          hasCurvedDivider={false}
+        >
+          <Resources />
+        </PageSection>
+        <PageSection
+          innerProps={{ style: { margin: '0', width: '100%', background: '#DAE4FF' } }}
+          index={2}
+          hasCurvedDivider={false}
+        >
+          <BinanceLab />
+        </PageSection>
+        <PageSection
+          innerProps={{ style: { margin: '0', width: '100%', background: '#DAE4FF' } }}
+          index={2}
+          hasCurvedDivider={false}
+        >
+          <Exchanges />
+        </PageSection>
+        <PageSection
+          innerProps={{ style: { margin: '0', width: '100%', background: '#DAE4FF' } }}
+          index={2}
+          hasCurvedDivider={false}
+        >
+          <Partners />
+        </PageSection>
+      </BackgroundSection>
     </>
   )
 }
