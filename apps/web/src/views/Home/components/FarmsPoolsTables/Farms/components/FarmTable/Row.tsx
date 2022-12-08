@@ -84,20 +84,17 @@ const Row: React.FunctionComponent<React.PropsWithChildren<RowPropsWithLoading>>
   const handleRenderRow = () => {
     return (
       <StyledTr>
-        {Object.keys(props).map((key) => {
+        {Object.keys(props).map((key, index) => {
           const columnIndex = columnNames.indexOf(key)
           if (columnIndex === -1) {
             return null
           }
-
           switch (key) {
             case 'farm':
               return (
                 <td key={key}>
                   <CellInner>
-                    <CellLayout>
-                      {createElement(cells[key], { ...props[key] })}
-                    </CellLayout>
+                    {createElement(cells[key], { ...props[key] })}
                   </CellInner>
                 </td>
               )
@@ -135,13 +132,13 @@ const Row: React.FunctionComponent<React.PropsWithChildren<RowPropsWithLoading>>
         <td>
           <CellInner>
             <CellLayout>
-              {/* <Link href={} external> */}
+              <Link href="/farms" external>
                 <Button variant="primarySub" external>
                   <Text color="primary" bold fontSize="16px" mr="4px">
                     {t('Start Farm')}
                   </Text>
                 </Button>
-              {/* </Link> */}
+              </Link>
             </CellLayout>
           </CellInner>
         </td>

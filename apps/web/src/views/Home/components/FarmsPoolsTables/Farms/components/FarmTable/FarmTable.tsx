@@ -1,13 +1,12 @@
 import { useRef, useMemo } from 'react'
 import { latinise } from 'utils/latinise'
 import styled from 'styled-components'
-import { ArrowForwardIcon, RowType } from '@pancakeswap/uikit'
+import { ArrowForwardIcon, RowType, Link } from '@pancakeswap/uikit'
 import BigNumber from 'bignumber.js'
 import { getBalanceNumber } from '@pancakeswap/utils/formatBalance'
 import { BIG_ZERO } from '@pancakeswap/utils/bigNumber'
 import { useRouter } from 'next/router'
 import { getDisplayApr } from '../getDisplayApr'
-
 import Row, { RowProps } from './Row'
 import { DesktopColumnSchema, FarmWithStakedValue } from '../types'
 
@@ -70,8 +69,9 @@ const Title = styled.div`
 `;
 
 const ArrowButton = styled.div`
+  corsor: pointer;
   border-radius: ${({ theme }) => theme.radii.small};
-  padding: 5px 5px 3px 5px;
+  padding: 7px 5px 1px 5px;
   background-color: #EBEFF9;
 `;
 
@@ -107,6 +107,7 @@ const FarmTable: React.FC<React.PropsWithChildren<ITableProps>> = ({ farms, cake
   )
 
   const getFarmEarnings = (farm) => {
+  
     let earnings = BIG_ZERO
     const existingEarnings = new BigNumber(farm.userData.earnings)
 
@@ -190,17 +191,20 @@ const FarmTable: React.FC<React.PropsWithChildren<ITableProps>> = ({ farms, cake
       <TableContainer id="table-container">
         <TableHeader>
           <Title>Earn BSW + Fees in Farms</Title>
-          <ArrowButton>
-            <ArrowForwardIcon color="#798DC6" />
-          </ArrowButton>
+          <Link href="/farms" external>
+            <ArrowButton>
+              <ArrowForwardIcon color="#798DC6" />
+            </ArrowButton>
+          </Link>
         </TableHeader>
         <TableWrapper ref={tableWrapperEl}>
           <StyledTable>
             <TableBody>
-              {sortedRows.map((row) => {
+              {sortedRows.map((row, index) => {
                 return  (
-                  <Row {...row} userDataReady={userDataReady} key={`table-row-${row.farm.pid}`} />
-                ) 
+                  index <5 && (
+                    <Row {...row} userDataReady={userDataReady} key={`table-row-${row.farm.pid}`} />
+                  )) 
               })}
             </TableBody>
           </StyledTable>

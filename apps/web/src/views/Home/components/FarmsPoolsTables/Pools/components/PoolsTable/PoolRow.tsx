@@ -1,5 +1,5 @@
 import { memo } from 'react'
-import { useMatchBreakpoints, Pool, Button, Text } from '@pancakeswap/uikit'
+import { useMatchBreakpoints, Pool, Button, Text, Link } from '@pancakeswap/uikit'
 import { usePool, useDeserializedPoolByVaultKey } from 'state/pools/hooks'
 import { VaultKey } from 'state/types'
 import styled from 'styled-components'
@@ -36,13 +36,13 @@ export const VaultPoolRow: React.FC<
       <NameCell pool={pool} />
       <AutoAprCell pool={pool} />
       <CellInner>
-        {/* <Link href={} external> */}
+        <Link href="/pools" external>
           <Button variant="primarySub" external>
             <Text color="primary" bold fontSize="16px" mr="4px">
               {t('Stake HEXA')}
             </Text>
           </Button>
-        {/* </Link> */}
+        </Link>
       </CellInner>
     </PoolRows>
   )
@@ -62,13 +62,13 @@ const PoolRow: React.FC<React.PropsWithChildren<{ sousId: number; account: strin
       <NameCell pool={pool} />
       <AutoAprCell pool={pool} />
       <CellInner>
-        {/* <Link href={} external> */}
-          <Button variant="primary" external>
+        <Link href="/pools" external>
+          <Button variant="primarySub" external>
             <Text color="primary" bold fontSize="16px" mr="4px">
               {t('Stake HEXA')}
             </Text>
           </Button>
-        {/* </Link> */}
+        </Link>
       </CellInner>
     </PoolRows>
   )

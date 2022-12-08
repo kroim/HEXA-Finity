@@ -25,6 +25,10 @@ const AprLabelContainer = styled(Flex)`
   }
 `
 
+const TitleGroup = styled(Flex)`
+  display: flex;
+  align-items: center;
+`
 interface AprCellProps {
   pool: Pool.DeserializedPool<Token>
 }
@@ -138,30 +142,36 @@ const AutoAprCell: React.FC<React.PropsWithChildren<AprCellProps>> = ({ pool }) 
   return (
     <Pool.BaseCell role="cell" flex={['1 0 50px', '1 0 50px', '2 0 100px', '2 0 100px', '1 0 120px']}>
       <Pool.CellContent>
-        <Text fontSize="12px" color="textSubtle" textAlign="left">
-          {t('APY')}
-        </Text>
+        <TitleGroup>
+          <Text fontSize="12px" color="#798DC6" textAlign="left" mr="6px">
+            {t('APY')}
+          </Text>
+          <Button
+            onClick={(e) => {
+              e.stopPropagation()
+              return vaultPosition > VaultPosition.Flexible ? onPresentLockedApyModal() : onPresentFlexibleApyModal()
+            }}
+            variant="text"
+            width="20px"
+            height="20px"
+            padding="0px"
+          >
+            {/* <CalculateIcon color="textSubtle" width="20px" /> */}
+            <img src="/images/hexa/calc.png" alt="calculation img" style={{height: 14}} />
+          </Button>
+        </TitleGroup>
+        
         {flexibleApy ? (
-          <AprLabelContainer alignItems="center" justifyContent="flex-start">
+          <AprLabelContainer alignItems="end" justifyContent="flex-start">
             <Balance
-              fontSize="16px"
+              fontSize="12px"
+              color="#11A9FF"
               value={vaultPosition > VaultPosition.Flexible ? parseFloat(lockedApy) : parseFloat(flexibleApy)}
               decimals={2}
               unit="%"
+              mr="10px"
             />
-            <Button
-              onClick={(e) => {
-                e.stopPropagation()
-                return vaultPosition > VaultPosition.Flexible ? onPresentLockedApyModal() : onPresentFlexibleApyModal()
-              }}
-              variant="text"
-              width="20px"
-              height="20px"
-              padding="0px"
-              marginLeft="4px"
-            >
-              <CalculateIcon color="textSubtle" width="20px" />
-            </Button>
+            <img src="/images/hexa/question.png" alt="calculation img" style={{height: 15}} />
           </AprLabelContainer>
         ) : (
           <Skeleton width="80px" height="16px" />

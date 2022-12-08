@@ -50,21 +50,6 @@ const CardItem = styled.div`
 
 `
 
-const BeniefitTitle = styled.div`
-  text-align: center;
-  font-weight: 600;
-  font-size: 16px;
-  color: #061E63;
-  margin-bottom:20px;
-`
-
-const BeniefitContent = styled.div`
-  font-size: 12px;
-  font-weight: 400;
-  color: #061E63;
-  line-height: 24px;
-`
-
 const Exchanges = ({}) => {
 
   const { t } = useTranslation()

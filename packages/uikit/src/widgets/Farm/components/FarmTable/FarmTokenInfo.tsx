@@ -64,7 +64,7 @@ const Farm: React.FunctionComponent<React.PropsWithChildren<FarmTableFarmTokenIn
       <TokenWrapper>{children}</TokenWrapper>
       <div>
         {handleRenderFarming()}
-        <Text bold>{label}</Text>
+        <Text mt="10px" color="#2F4DA0" fontSize="14px">{label}</Text>
       </div>
     </Container>
   );
