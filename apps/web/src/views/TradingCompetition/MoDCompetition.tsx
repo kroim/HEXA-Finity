@@ -22,10 +22,7 @@ import {
 } from 'config/constants/trading-competition/phases'
 import PageSection from 'components/PageSection'
 import { DARKBG, MIDBLUEBG, MIDBLUEBG_DARK, TRADINGCOMPETITIONBANNER } from './pageSectionStyles'
-import {
-  //  RanksIcon,
-  RulesIcon,
-} from './svgs'
+import { RulesIcon } from './svgs'
 import Countdown from './components/Countdown'
 import StormBunny from './pngs/MoD-storm-bunny.png'
 import RibbonWithImage from './components/RibbonWithImage'
@@ -33,7 +30,7 @@ import HowToJoin from './components/HowToJoin'
 import BattleCta from './components/BattleCta'
 import Rules from './components/Rules'
 import { UserTradingInformation, initialUserTradingInformation, initialUserLeaderboardInformation } from './types'
-import { CompetitionPage, BannerFlex, BottomBunnyWrapper } from './styles'
+import { CompetitionPage, BannerFlex, BottomBunnyWrapper, colors } from './styles'
 import RanksIcon from './svgs/RanksIcon'
 import ModBattleBanner, { CoinDecoration } from './mod/components/BattleBanner/ModBattleBanner'
 import ModPrizesInfo from './mod/components/PrizesInfo/ModPrizesInfo'
@@ -43,6 +40,11 @@ import { useRegistrationClaimStatus } from './useRegistrationClaimStatus'
 import TeamRanksWithParticipants from './components/TeamRanks/TeamRanksWithParticipants'
 import MoDCakerBunny from './pngs/MoD-caker.png'
 import PrizesInfoSection from './components/PrizesInfoSection'
+import CustomModBattleBanner from './mod/CustomModBattleBanner'
+import CompetitionBalance from './mod/CompetitionBalance'
+import CompetitionStep from './mod/CompetitionStep'
+import CompetitionScore from './mod/CompetitionScore'
+import CompetitionRules from './mod/CompetitionRules'
 
 const MoDCompetition = () => {
   const { account, chainId } = useActiveWeb3React()
@@ -158,142 +160,20 @@ const MoDCompetition = () => {
     <>
       <PageMeta />
       <CompetitionPage id="pcs-competition-page">
-        <PageSection
-          style={{ paddingTop: '0px' }}
-          innerProps={{ style: { paddingTop: isMobile ? '30px' : '28px' } }}
-          background={TRADINGCOMPETITIONBANNER}
-          hasCurvedDivider={false}
-          index={1}
-          overflow="hidden"
-        >
-          <BannerFlex mb={shouldHideCta ? '0px' : '48px'}>
-            <Countdown currentPhase={currentPhase} hasCompetitionEnded={hasCompetitionEnded} />
-            <ModBattleBanner />
-          </BannerFlex>
+        <PageSection index={1} background={colors.background} hasCurvedDivider={false} innerProps={{ width: '100%' }}>
+          <CustomModBattleBanner currentPhase={currentPhase} hasCompetitionEnded={hasCompetitionEnded} />
         </PageSection>
-        <PageSection
-          containerProps={{ style: { marginTop: '-30px' } }}
-          background={isDark ? MIDBLUEBG_DARK : MIDBLUEBG}
-          concaveDivider
-          clipFill={{ light: '#CCD8F0', dark: '#434575' }}
-          dividerPosition="top"
-          index={2}
-          dividerComponent={
-            shouldHideCta ? null : (
-              <BattleCta
-                userTradingInformation={userTradingInformation}
-                currentPhase={currentPhase}
-                account={account}
-                isCompetitionLive={isCompetitionLive}
-                hasCompetitionEnded={hasCompetitionEnded}
-                userCanClaimPrizes={userCanClaimPrizes}
-                finishedAndPrizesClaimed={finishedAndPrizesClaimed}
-                finishedAndNothingToClaim={finishedAndNothingToClaim}
-                profile={profile}
-                isLoading={isLoading}
-                onRegisterSuccess={onRegisterSuccess}
-                onClaimSuccess={onClaimSuccess}
-                coinDecoration={<CoinDecoration />}
-              />
-            )
-          }
-        >
-          <Box mt={shouldHideCta ? '0px' : ['94px', null, '36px']} mb="64px">
-            {/* If competition has not yet started, render HowToJoin component - if not, render YourScore */}
-            {currentPhase.state === REGISTRATION ? (
-              <HowToJoin />
-            ) : (
-              <ModYourScore
-                currentPhase={currentPhase}
-                hasRegistered={userTradingInformation.hasRegistered}
-                userTradingInformation={userTradingInformation}
-                account={account}
-                profile={profile}
-                isLoading={isLoading}
-                userLeaderboardInformation={userLeaderboardInformation}
-                userCanClaimPrizes={userCanClaimPrizes}
-                finishedAndPrizesClaimed={finishedAndPrizesClaimed}
-                finishedAndNothingToClaim={finishedAndNothingToClaim}
-                onClaimSuccess={onClaimSuccess}
-              />
-            )}
-          </Box>
+        <PageSection index={2} hasCurvedDivider={false} innerProps={{ width: '100%' }}>
+          <CompetitionBalance />
         </PageSection>
-        {currentPhase.state !== REGISTRATION && (
-          <PageSection
-            containerProps={{ style: { marginTop: '-20px' } }}
-            index={3}
-            concaveDivider
-            clipFill={{ light: theme.colors.background }}
-            dividerPosition="top"
-            dividerComponent={
-              <RibbonWithImage imageComponent={<RanksIcon width="175px" />} ribbonDirection="up">
-                {t('Team Ranks')}
-              </RibbonWithImage>
-            }
-          >
-            <Box my="64px">
-              <TeamRanksWithParticipants
-                image={MoDCakerBunny}
-                team1LeaderboardInformation={team1LeaderboardInformation}
-                team2LeaderboardInformation={team2LeaderboardInformation}
-                team3LeaderboardInformation={team3LeaderboardInformation}
-                globalLeaderboardInformation={globalLeaderboardInformation}
-                participantSubgraphAddress={TC_MOD_SUBGRAPH}
-                subgraphName="pancakeswap/trading-competition-v4"
-              />
-            </Box>
-          </PageSection>
-        )}
-        <PrizesInfoSection prizesInfoComponent={<ModPrizesInfo />} />
-        <PageSection
-          containerProps={{ style: { marginTop: '-1px' } }}
-          index={5}
-          dividerPosition="top"
-          clipFill={{
-            light: 'linear-gradient(139.73deg, #ecf5ff 0%, #f2effe 100%)',
-            dark: 'linear-gradient(139.73deg, #383357 0%, #3d2b53 100%)',
-          }}
-          dividerComponent={
-            <RibbonWithImage imageComponent={<RulesIcon width="175px" />} ribbonDirection="up">
-              {t('Rules')}
-            </RibbonWithImage>
-          }
-        >
-          <Box mt="64px">
-            <Rules />
-          </Box>
+        <PageSection index={2} hasCurvedDivider={false} innerProps={{ width: '100%' }}>
+          <CompetitionStep />
         </PageSection>
-        <PageSection
-          index={6}
-          dividerPosition="top"
-          dividerFill={{ light: '#191326' }}
-          clipFill={{ light: theme.colors.background }}
-          background={DARKBG}
-        >
-          <Flex alignItems="center" position="relative">
-            <BottomBunnyWrapper>
-              <Image src={StormBunny} width={182} height={213} />
-            </BottomBunnyWrapper>
-            {shouldHideCta ? null : (
-              <Flex height="fit-content" position="relative" zIndex="2">
-                <BattleCta
-                  userTradingInformation={userTradingInformation}
-                  currentPhase={currentPhase}
-                  account={account}
-                  isCompetitionLive={isCompetitionLive}
-                  hasCompetitionEnded={hasCompetitionEnded}
-                  userCanClaimPrizes={userCanClaimPrizes}
-                  finishedAndPrizesClaimed={finishedAndPrizesClaimed}
-                  finishedAndNothingToClaim={finishedAndNothingToClaim}
-                  profile={profile}
-                  isLoading={isLoading}
-                  onRegisterSuccess={onRegisterSuccess}
-                  onClaimSuccess={onClaimSuccess}
-                />
-              </Flex>
-            )}
-          </Flex>
+        <PageSection index={2} hasCurvedDivider={false} innerProps={{ width: '100%', marginBottom: '36px' }}>
+          <CompetitionScore rankingData={globalLeaderboardInformation} />
+        </PageSection>
+        <PageSection index={2} hasCurvedDivider={false} background='#DAE4FF' innerProps={{ width: '100%', marginBottom: '36px' }}>
+          <CompetitionRules />
         </PageSection>
       </CompetitionPage>
     </>
