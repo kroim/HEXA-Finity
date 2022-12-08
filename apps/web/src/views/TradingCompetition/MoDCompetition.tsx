@@ -172,7 +172,7 @@ const MoDCompetition = () => {
         <PageSection index={2} hasCurvedDivider={false} innerProps={{ width: '100%', marginBottom: '36px' }}>
           <CompetitionScore rankingData={globalLeaderboardInformation} />
         </PageSection>
-        <PageSection index={2} hasCurvedDivider={false} background='#DAE4FF' innerProps={{ width: '100%', marginBottom: '36px' }}>
+        <PageSection id='competition_rules' index={2} hasCurvedDivider={false} background='#DAE4FF' innerProps={{ width: '100%', marginBottom: '36px' }}>
           <CompetitionRules />
         </PageSection>
       </CompetitionPage>
