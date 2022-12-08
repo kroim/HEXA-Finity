@@ -34,11 +34,12 @@ export const StyledPrimaryImage = styled(TokenImage)<StyledImageProps>`
 
 export const StyledSecondaryImage = styled(TokenImage)<StyledImageProps>`
   position: absolute;
-  width: 50%;
+  width: 82%;
 
   ${StyledSystemVariant({
     variants: {
       [variants.DEFAULT]: {
+        display: 'none',
         bottom: 0,
         left: "auto",
         right: 0,
@@ -46,11 +47,12 @@ export const StyledSecondaryImage = styled(TokenImage)<StyledImageProps>`
         zIndex: 6,
       },
       [variants.INVERTED]: {
-        bottom: "auto",
-        left: 0,
+        bottom: 0,
+        left: -10,
         right: "auto",
-        top: 0,
-        zIndex: 5,
+        zIndex:7,
+        maxHeight: 50,
+        maxWidth: 50
       },
     },
   })}

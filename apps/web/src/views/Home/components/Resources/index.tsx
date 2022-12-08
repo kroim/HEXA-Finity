@@ -1,10 +1,10 @@
 import { Flex, Heading, Skeleton, Text, Balance, Button, Link, ArrowForwardIcon, ArrowBackIcon } from '@pancakeswap/uikit'
+import { useEffect, useReducer, useRef, useCallback } from 'react'
 import styled from 'styled-components'
-import { Swiper, SwiperSlide } from 'swiper/react'
+import { Swiper, SwiperSlide, useSwiper } from 'swiper/react'
 import { useTranslation } from '@pancakeswap/localization'
 import SwiperCore, { Autoplay, Pagination } from 'swiper'
 import { useMatchBreakpoints } from '@pancakeswap/uikit'
-
 const resourcesList = [
   { 
     id: 1, 
@@ -18,23 +18,34 @@ const resourcesList = [
     name: 'Binance',
     description: 'Invite your friends to register via your referral link'
   },
-  // { 
-  //   id: 3, 
-  //   imageUrl: 'images/banners/doubleEternal.png',
-  //   name: 'DappRadar',
-  //   description: 'Prices are set when the round starts, equal to $1 in HEXA per ticket.'
-  // }
+  { 
+    id: 2, 
+    imageUrl: 'images/hexa/resources/Cryptocurrency.png',
+    name: 'Binance',
+    description: 'Invite your friends to register via your referral link'
+  },
+  { 
+    id: 2, 
+    imageUrl: 'images/hexa/resources/Cryptocurrency.png',
+    name: 'Binance',
+    description: 'Invite your friends to register via your referral link'
+  },
+  { 
+    id: 2, 
+    imageUrl: 'images/hexa/resources/Cryptocurrency.png',
+    name: 'Binance',
+    description: 'Invite your friends to register via your referral link'
+  },
 ]
 
 const ResourcesPage = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;  
-  flex-direction: column;
-
+  display: unset;
   ${({ theme }) => theme.mediaQueries.md} {
-    flex-direction: unset;
+    display: flex;
+    align-items: center;
+    
   }
+  
 `
 
 const Title = styled.div`
@@ -69,77 +80,24 @@ const ArrowButton = styled.div`
 
 const ArrowButtonGroup = styled.div`
   display: flex;
-`;
-
-const StyledSwiper = styled(Swiper)`
-  position: relative;
-  padding-bottom: 30px;
-  .swiper {
-    width: 100%;
-    height: 100%;
-  }
-
-  .swiper-slide {
-    text-align: center;
-    font-size: 18px;
-    background: #fff;
-
-    /* Center slide text vertically */
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    -webkit-justify-content: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    -webkit-align-items: center;
-    align-items: center;
-  }
-
-  .swiper-slide img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  .swiper-pagination {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    justify-content: center;
-    width: 108px;
-    bottom: 0px;
-  }
-  .swiper-pagination-bullet {
-    background-color: #aabef0;
-  }
-`
-
-const ResourcesList = styled.div`
-  display: flex;
-  flex-direction: column;
-
+  justify-content: center;
   ${({ theme }) => theme.mediaQueries.md} {
-    flex-direction: unset;
+    justify-content: left;
   }
 `;
+
 
 const ResourcesCard = styled.div`
   padding: 20px 20px 30px 20px;
   margin: 10px 0;
   background: #FFFFFF;
-  box-shadow: 2px 14px 68px rgba(26, 35, 74, 0.11);
   border-radius: 20px;
   width: 100%;
 
   ${({ theme }) => theme.mediaQueries.md} {
     padding: 40px 30px 50px 30px;
     margin: 10px 10px;
-    width: 376px;
+    width: 340px;
   }
 `;
 
@@ -159,6 +117,8 @@ const CardContent = styled.div`
   text-align: center;
   line-height: 24px;
   margin-bottom: 20px;
+  height: 44px;
+  overflow: hidden;
 `;
 
 const CardImage = styled.div`
@@ -172,13 +132,26 @@ const CardButton = styled.div`
   justify-content: center;
 `
 
-const Resources = () => {
+const SwiperPart = styled.div`
+  width: 100%;
+  ${({ theme }) => theme.mediaQueries.md} {
+    width: 70%;
+  }
+`
+
+
+export default function Resources() {
   const { t } = useTranslation()
   const { isDesktop, isMobile } = useMatchBreakpoints()
 
+  const SwiperButtonNext = () => {
+    const swiper = useSwiper();
+    return <button onClick={() => swiper.slideNext()} hidden id="nextButton"></button>;
+  };
+
   return (
     <ResourcesPage>
-      <div style={{margin:'10px 0'}}>
+      <div style={{margin:'10px 20px 10px 0'}}>
         <Title>
           Reviews From Reputable<br></br> Crypto Resources
         </Title>
@@ -186,86 +159,126 @@ const Resources = () => {
           Read more about the accomplishments of Biswap on the most reputable crypto resources.
         </Content>
         <ArrowButtonGroup>
-          <ArrowButton style={{marginRight: 10}}>
+          <ArrowButton style={{marginRight: 10}} >
             <ArrowBackIcon color="#798DC6" />
           </ArrowButton>
-          <ArrowButton>
+          <ArrowButton >
             <ArrowForwardIcon color="#798DC6" />
           </ArrowButton>
         </ArrowButtonGroup>
       </div>
-      <ResourcesList>
-        {resourcesList.map((item, index) => {
-          return (
-            <ResourcesCard key={index}>
-              <CardImage>
-                <img src={item.imageUrl} alt="resource image" />
-              </CardImage>
-              <CardTitle>{item.name}</CardTitle>
-              <CardContent>{item.description}</CardContent>
-              <CardButton>
-                {/* <Link href={perpetualUrl} external> */}
-                  <Button>
-                    <Text color="invertedContrast" bold fontSize="12px" mr="4px">
-                      {t('Read More')}
-                    </Text>
-                    <ArrowForwardIcon color="invertedContrast" />
-                  </Button>
-                {/* </Link> */}
-              </CardButton>
-            </ResourcesCard>
-          )
-        })}
-      </ResourcesList>
-      {/* <div style={{ marginTop: 20, paddingBottom: 50 }}>
+      <SwiperPart>
         {isMobile ? (
-          <StyledSwiper
+          <Swiper
             modules={[Autoplay, Pagination]}
-            spaceBetween={20}
+            spaceBetween={10}
             slidesPerView={1}
             effect="fade"
             fadeEffect={{ crossFade: true }}
             speed={500}
-            autoplay={{ delay: 5000, pauseOnMouseEnter: true }}
+            autoplay={{ delay: 2000, pauseOnMouseEnter: true }}
             loop
-            pagination={{ clickable: true }}
+            pagination={{ clickable: false }}
+            style = {{backgroundColor: '#DAE4FF'}}
           >
-            {bannerImageList.map((item) => {
+            <SwiperSlide>slider explanation</SwiperSlide>
+
+            <ArrowButtonGroup>
+              <ArrowButton style={{marginRight: 10}}>
+                <ArrowBackIcon color="#798DC6" />
+              </ArrowButton>
+              <ArrowButton>
+                <ArrowForwardIcon color="#798DC6" />
+              </ArrowButton>
+            </ArrowButtonGroup>
+
+            {resourcesList.map((item) => {
               return (
                 <SwiperSlide key={item.id}>
                   <div style={{ display: 'flex' }}>
-                    <img src={item.imageUrl} alt="banner image" />
+                    <ResourcesCard>
+                      <CardImage>
+                        <img src={item.imageUrl} alt="resource image" />
+                      </CardImage>
+                      <CardTitle>{item.name}</CardTitle>
+                      <CardContent>{item.description}</CardContent>
+                      <CardButton>
+                        {/* <Link href={perpetualUrl} external> */}
+                          <Button>
+                            <Text color="invertedContrast" bold fontSize="12px" mr="4px">
+                              {t('Read More')}
+                            </Text>
+                            <ArrowForwardIcon color="invertedContrast" />
+                          </Button>
+                        {/* </Link> */}
+                      </CardButton>
+                    </ResourcesCard>
                   </div>
                 </SwiperSlide>
               )
             })}
-          </StyledSwiper>
+          </Swiper>
         ) : (
-          <StyledSwiper
+          <Swiper
             modules={[Autoplay, Pagination]}
-            spaceBetween={20}
-            slidesPerView={3}
+            slidesPerView={2.5}
+            spaceBetween={10}
             effect="fade"
             fadeEffect={{ crossFade: true }}
             speed={500}
-            autoplay={{ delay: 5000, pauseOnMouseEnter: true }}
+            autoplay={{ delay: 2000, pauseOnMouseEnter: true }}
+            style = {{backgroundColor: '#DAE4FF'}}
             loop
-            pagination={{ clickable: true }}
-          >
-            {bannerImageList.map((item) => {
-              return (
-                <SwiperSlide key={item.id}>
-                  <div style={{ display: 'flex' }}>
-                    <img src={item.imageUrl} alt="banner image" />
-                  </div>
-                </SwiperSlide>
-              )
-            })}
-          </StyledSwiper>
+          > 
+            <div style={{display: 'flex'}}>
+              <div style={{margin:'10px 20px 10px 0'}}>
+                <Title>
+                  Reviews From Reputable<br></br> Crypto Resources
+                </Title>
+                <Content>
+                  Read more about the accomplishments of Biswap on the most reputable crypto resources.
+                </Content>
+                <ArrowButtonGroup>
+                  <ArrowButton style={{marginRight: 10}} >
+                    <ArrowBackIcon color="#798DC6" />
+                  </ArrowButton>
+                  <ArrowButton >
+                    <ArrowForwardIcon color="#798DC6" />
+                  </ArrowButton>
+                </ArrowButtonGroup>
+              </div>
+              <SwiperButtonNext />
+              {resourcesList.map((item) => {
+                return (
+                  <SwiperSlide key={item.id}>
+                    <div style={{ display: 'flex' }}>
+                      <ResourcesCard>
+                        <CardImage>
+                          <img src={item.imageUrl} alt="resource image" />
+                        </CardImage>
+                        <CardTitle>{item.name}</CardTitle>
+                        <CardContent>{item.description}</CardContent>
+                        <CardButton>
+                          {/* <Link href={perpetualUrl} external> */}
+                            <Button>
+                              <Text color="invertedContrast" bold fontSize="12px" mr="4px">
+                                {t('Read More')}
+                              </Text>
+                              <ArrowForwardIcon color="invertedContrast" />
+                            </Button>
+                          {/* </Link> */}
+                        </CardButton>
+                      </ResourcesCard>
+                    </div>
+                  </SwiperSlide>
+                )
+              })}
+            </div>
+          </Swiper>
         )}
-      </div> */}
+      </SwiperPart>
     </ResourcesPage>
   )
 }
 
-export default Resources
+

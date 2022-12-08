@@ -75,11 +75,11 @@ const NameCell: React.FC<React.PropsWithChildren<NameCellProps>> = ({ pool }) =>
                   {t('Staked')}
                 </Text>
               ))}
-            <Text bold={!isMobile} small={isMobile}>
+            <Text fontSize="12px" color="#000000" mb="2px">
               {title}
             </Text>
             {showSubtitle && (
-              <Text fontSize="12px" color="textSubtle">
+              <Text fontSize="12px" color="#2F4DA0" mt="2px">
                 {subtitle}
               </Text>
             )}

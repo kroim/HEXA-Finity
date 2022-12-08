@@ -137,7 +137,7 @@ const ApyButton: React.FC<React.PropsWithChildren<ApyButtonProps>> = ({
     >
       {useTooltipText ? (
         <>
-          <TooltipText ref={targetRef} decorationColor="secondary">
+          <TooltipText ref={targetRef} style={{color: "#11A9FF", fontSize: 12}}>
             {displayApr}%
           </TooltipText>
           {tooltipVisible && tooltip}

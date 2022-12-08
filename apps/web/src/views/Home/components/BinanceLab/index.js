@@ -3,6 +3,7 @@ import { useTranslation } from '@pancakeswap/localization'
 import { ArrowForwardIcon, Button, Text, Link } from '@pancakeswap/uikit'
 import { SwitchTransition, CSSTransition } from 'react-transition-group'
 import styled from 'styled-components'
+import { useMatchBreakpoints } from '@pancakeswap/uikit'
 
 const BinanceLabPage = styled.div`
   margin: 0;
@@ -80,6 +81,7 @@ const ImgArea = styled.img`
 const BinanceLab = ({}) => {
 
   const { t } = useTranslation()
+  const { isDesktop, isMobile } = useMatchBreakpoints()
 
   return (
     <BinanceLabPage>
@@ -96,12 +98,21 @@ const BinanceLab = ({}) => {
           </Body>
           <DetailButton>
             {/* <Link href={perpetualUrl} external> */}
-              <Button>
-                <Text color="invertedContrast" bold fontSize="14px" mr="4px">
-                  {t('Details')}
-                </Text>
-                <ArrowForwardIcon color="invertedContrast" />
-              </Button>
+            {isMobile? (
+                <Button width="100%">
+                  <Text color="invertedContrast" bold fontSize="14px" mr="4px">
+                    {t('Details')}
+                  </Text>
+                  <ArrowForwardIcon color="invertedContrast" />
+                </Button>
+              ): (
+                <Button >
+                  <Text color="invertedContrast" bold fontSize="14px" mr="4px">
+                    {t('Details')}
+                  </Text>
+                  <ArrowForwardIcon color="invertedContrast" />
+                </Button>
+              )}
             {/* </Link> */}
           </DetailButton>
         </div>

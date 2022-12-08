@@ -81,7 +81,6 @@ const Apr: React.FC<React.PropsWithChildren<AprProps>> = ({
           displayApr={value}
           lpRewardsApr={lpRewardsApr}
           addLiquidityUrl={addLiquidityUrl}
-          strikethrough={strikethrough}
           useTooltipText={useTooltipText}
           hideButton={hideButton}
           boosted={boosted}
