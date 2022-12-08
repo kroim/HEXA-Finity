@@ -39,6 +39,7 @@ const resourcesList = [
 ]
 
 const ResourcesPage = styled.div`
+  position: relative;
   display: unset;
   ${({ theme }) => theme.mediaQueries.md} {
     display: flex;
@@ -79,10 +80,15 @@ const ArrowButton = styled.div`
 `;
 
 const ArrowButtonGroup = styled.div`
+  position: unset;
+  z-index: 10;
   display: flex;
   justify-content: center;
   ${({ theme }) => theme.mediaQueries.md} {
     justify-content: left;
+    position: absolute;
+    top: 280px;
+    left: 0;
   }
 `;
 
@@ -146,7 +152,20 @@ export default function Resources() {
 
   const SwiperButtonNext = () => {
     const swiper = useSwiper();
-    return <button onClick={() => swiper.slideNext()} hidden id="nextButton"></button>;
+    return (
+      <ArrowButton style={{marginRight: 10}} onClick={() => swiper.slideNext()}>
+        <ArrowBackIcon color="#798DC6" />
+      </ArrowButton>
+    )
+  };
+
+  const SwiperButtonBack = () => {
+    const swiper = useSwiper();
+    return (
+      <ArrowButton style={{marginRight: 10}} onClick={() => swiper.slidePrev()}>
+        <ArrowForwardIcon color="#798DC6" />
+      </ArrowButton>
+    )
   };
 
   return (
@@ -158,14 +177,14 @@ export default function Resources() {
         <Content>
           Read more about the accomplishments of Biswap on the most reputable crypto resources.
         </Content>
-        <ArrowButtonGroup>
+        {/* <ArrowButtonGroup>
           <ArrowButton style={{marginRight: 10}} >
             <ArrowBackIcon color="#798DC6" />
           </ArrowButton>
           <ArrowButton >
             <ArrowForwardIcon color="#798DC6" />
           </ArrowButton>
-        </ArrowButtonGroup>
+        </ArrowButtonGroup> */}
       </div>
       <SwiperPart>
         {isMobile ? (
@@ -179,19 +198,12 @@ export default function Resources() {
             autoplay={{ delay: 2000, pauseOnMouseEnter: true }}
             loop
             pagination={{ clickable: false }}
-            style = {{backgroundColor: '#DAE4FF'}}
+            style = {{backgroundColor: '#DAE4FF', position: 'unset', display: 'flex', flexDirection: 'column-reverse', alignItems: 'end'}}
           >
-            <SwiperSlide>slider explanation</SwiperSlide>
-
             <ArrowButtonGroup>
-              <ArrowButton style={{marginRight: 10}}>
-                <ArrowBackIcon color="#798DC6" />
-              </ArrowButton>
-              <ArrowButton>
-                <ArrowForwardIcon color="#798DC6" />
-              </ArrowButton>
+              <SwiperButtonNext />
+              <SwiperButtonBack />
             </ArrowButtonGroup>
-
             {resourcesList.map((item) => {
               return (
                 <SwiperSlide key={item.id}>
@@ -227,53 +239,38 @@ export default function Resources() {
             fadeEffect={{ crossFade: true }}
             speed={500}
             autoplay={{ delay: 2000, pauseOnMouseEnter: true }}
-            style = {{backgroundColor: '#DAE4FF'}}
+            style = {{backgroundColor: '#DAE4FF', position: 'unset'}}
             loop
           > 
-            <div style={{display: 'flex'}}>
-              <div style={{margin:'10px 20px 10px 0'}}>
-                <Title>
-                  Reviews From Reputable<br></br> Crypto Resources
-                </Title>
-                <Content>
-                  Read more about the accomplishments of Biswap on the most reputable crypto resources.
-                </Content>
-                <ArrowButtonGroup>
-                  <ArrowButton style={{marginRight: 10}} >
-                    <ArrowBackIcon color="#798DC6" />
-                  </ArrowButton>
-                  <ArrowButton >
-                    <ArrowForwardIcon color="#798DC6" />
-                  </ArrowButton>
-                </ArrowButtonGroup>
-              </div>
+            <ArrowButtonGroup>
               <SwiperButtonNext />
-              {resourcesList.map((item) => {
-                return (
-                  <SwiperSlide key={item.id}>
-                    <div style={{ display: 'flex' }}>
-                      <ResourcesCard>
-                        <CardImage>
-                          <img src={item.imageUrl} alt="resource image" />
-                        </CardImage>
-                        <CardTitle>{item.name}</CardTitle>
-                        <CardContent>{item.description}</CardContent>
-                        <CardButton>
-                          {/* <Link href={perpetualUrl} external> */}
-                            <Button>
-                              <Text color="invertedContrast" bold fontSize="12px" mr="4px">
-                                {t('Read More')}
-                              </Text>
-                              <ArrowForwardIcon color="invertedContrast" />
-                            </Button>
-                          {/* </Link> */}
-                        </CardButton>
-                      </ResourcesCard>
-                    </div>
-                  </SwiperSlide>
-                )
-              })}
-            </div>
+              <SwiperButtonBack />
+            </ArrowButtonGroup>
+            {resourcesList.map((item) => {
+              return (
+                <SwiperSlide key={item.id}>
+                  <div style={{ display: 'flex' }}>
+                    <ResourcesCard>
+                      <CardImage>
+                        <img src={item.imageUrl} alt="resource image" />
+                      </CardImage>
+                      <CardTitle>{item.name}</CardTitle>
+                      <CardContent>{item.description}</CardContent>
+                      <CardButton>
+                        {/* <Link href={perpetualUrl} external> */}
+                          <Button>
+                            <Text color="invertedContrast" bold fontSize="12px" mr="4px">
+                              {t('Read More')}
+                            </Text>
+                            <ArrowForwardIcon color="invertedContrast" />
+                          </Button>
+                        {/* </Link> */}
+                      </CardButton>
+                    </ResourcesCard>
+                  </div>
+                </SwiperSlide>
+              )
+            })}
           </Swiper>
         )}
       </SwiperPart>
