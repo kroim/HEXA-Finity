@@ -8,9 +8,12 @@ import {
   StyledIconMobileContainer,
   StyledList,
   StyledListItem,
+  SupportItem,
   StyledSocialLinks,
   StyledText,
   StyledToolsContainer,
+  FotterLeft,
+  BuyBtn,
 } from "./styles";
 
 import { Button } from "../Button";
@@ -42,9 +45,9 @@ const MenuItem: React.FC<React.PropsWithChildren<FooterProps>> = ({
       justifyContent="center"
     >
       <Flex flexDirection="column" width={["100%", null, "1200px;"]}>
-        <StyledIconMobileContainer display={["block", null, "none"]}>
+        {/* <StyledIconMobileContainer display={["block", null, "none"]}>
           <LogoWithTextIcon width="130px" />
-        </StyledIconMobileContainer>
+        </StyledIconMobileContainer> */}
         <Flex
           order={[2, null, 1]}
           flexDirection={["column", null, "row"]}
@@ -52,6 +55,43 @@ const MenuItem: React.FC<React.PropsWithChildren<FooterProps>> = ({
           alignItems="flex-start"
           mb={["42px", null, "36px"]}
         >
+          <FotterLeft>
+            <Flex display="flex" flexDirection="column">
+              <Flex display="flex" alignItems="center" flexDirection="row" mb={["20px", null, "60px"]}>
+                <img src="/images/footerLogo.png" alt="footerLogo" />
+                <Flex ml="20px" flexDirection="column">
+                  <h2 className="tokePrice">HEXA Price</h2>
+                  <p className="tokenValue">$0.625</p>
+                </Flex>
+              </Flex>
+              <Flex display="flex" alignItems="center" flexDirection="row">
+                <img src="/images/footerLogo.png" alt="footerLogo" />
+                <BuyBtn>Buy HEXA</BuyBtn>
+              </Flex>
+            </Flex>
+            <Flex display="flex" flexDirection="column" ml={["0", null, "50px"]}>
+              <Flex display="flex" alignItems="center" mt="10px" flexDirection="row" justifyContent="space-between" width={["100%", null, "200px"]}>
+                <h2 className="tokePrice1">Max supply:</h2>
+                <p className="tokenValue2">700 000 000</p>
+              </Flex>
+              <Flex display="flex" alignItems="center" mt="20px" flexDirection="row" justifyContent="space-between" width={["100%", null, "200px"]}>
+                <h2 className="tokePrice1">Total supply:</h2>
+                <p className="tokenValue2">118 545 997</p>
+              </Flex>
+              <Flex display="flex" alignItems="center" mt="20px" flexDirection="row" justifyContent="space-between" width={["100%", null, "200px"]}>
+                <h2 className="tokePrice1">Circulating supply:</h2>
+                <p className="tokenValue2">112 253 474</p>
+              </Flex>
+              <Flex display="flex" alignItems="center" mt="20px" flexDirection="row" justifyContent="space-between" width={["100%", null, "200px"]}>
+                <h2 className="tokePrice1">Total Burned:</h2>
+                <p className="tokenValue2">6 292 523</p>
+              </Flex>
+              <Flex display="flex" alignItems="center" mt="20px" flexDirection="row" justifyContent="space-between" width={["100%", null, "200px"]}>
+                <h2 className="tokePrice1">Market Cap:</h2>
+                <p className="tokenValue2">$70 321 974</p>
+              </Flex>
+            </Flex>
+          </FotterLeft>
           {items?.map((item) => (
             <StyledList key={item.label}>
               <StyledListItem>{item.label}</StyledListItem>
@@ -63,7 +103,8 @@ const MenuItem: React.FC<React.PropsWithChildren<FooterProps>> = ({
                       href={href}
                       target="_blank"
                       rel="noreferrer noopener"
-                      color={isHighlighted ? vars.colors.warning : "text"}
+                      // color={isHighlighted ? vars.colors.warning : "text"}
+                      color="#798DC6"
                       bold={false}
                     >
                       {label}
@@ -75,45 +116,23 @@ const MenuItem: React.FC<React.PropsWithChildren<FooterProps>> = ({
               ))}
             </StyledList>
           ))}
-          <Box display={["none", null, "block"]}>
-            <LogoWithTextIcon width="160px" />
-          </Box>
+          <div>
+            <StyledSocialLinks order={[2]} pb={["10px", null, "10px"]} mb={["20px", null, "20px"]} />
+            <SupportItem>Support 24/7</SupportItem>
+            <Flex order={[1, null, 2]} mb={["24px", null, "0"]} justifyContent="space-between" alignItems="center">
+              <Button
+                data-theme={isDark ? "dark" : "light"}
+                as="a"
+                href="https://pancakeswap.finance/swap?outputCurrency=0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82&chainId=56"
+                target="_blank"
+                scale="sm"
+                endIcon={<ArrowForwardIcon color="backgroundAlt" />}
+              >
+                Contact us
+              </Button>
+            </Flex>
+          </div>
         </Flex>
-        <StyledSocialLinks order={[2]} pb={["42px", null, "32px"]} mb={["0", null, "32px"]} />
-        <StyledToolsContainer
-          data-theme="dark"
-          order={[1, null, 3]}
-          flexDirection={["column", null, "row"]}
-          justifyContent="space-between"
-        >
-          <Flex order={[2, null, 1]} alignItems="center">
-            <SkeletonV2 variant="round" width="56px" height="32px" isDataReady={isMounted}>
-              <ThemeSwitcher isDark={isDark} toggleTheme={toggleTheme} />
-            </SkeletonV2>
-            <LangSelector
-              currentLang={currentLang}
-              langs={langs}
-              setLang={setLang}
-              color="textSubtle"
-              dropdownPosition="top-right"
-            />
-          </Flex>
-          <Flex order={[1, null, 2]} mb={["24px", null, "0"]} justifyContent="space-between" alignItems="center">
-            <Box mr="20px">
-              <CakePrice cakePriceUsd={cakePriceUsd} color="textSubtle" />
-            </Box>
-            <Button
-              data-theme={isDark ? "dark" : "light"}
-              as="a"
-              href="https://pancakeswap.finance/swap?outputCurrency=0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82&chainId=56"
-              target="_blank"
-              scale="sm"
-              endIcon={<ArrowForwardIcon color="backgroundAlt" />}
-            >
-              {buyCakeLabel}
-            </Button>
-          </Flex>
-        </StyledToolsContainer>
       </Flex>
     </StyledFooter>
   );

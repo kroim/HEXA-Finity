@@ -62,7 +62,7 @@ export const darkColors = {
   secondary80: '#9A6AFF80',
   background: '#08060B',
   backgroundDisabled: '#3c3742',
-  backgroundAlt: '#27262c',
+  backgroundAlt: '#041647',
   backgroundAlt2: 'rgba(39, 38, 44, 0.7)',
   cardBorder: '#383241',
   contrast: '#FFFFFF',

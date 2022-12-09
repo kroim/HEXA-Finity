@@ -6,75 +6,72 @@ export const footerLinks: (t: ContextApi['t']) => FooterLinkType[] = (t) => [
     label: t('About'),
     items: [
       {
-        label: t('Contact'),
+        label: t('Docs'),
         href: 'https://docs.pancakeswap.finance/contact-us',
         isHighlighted: true,
       },
       {
-        label: t('Brand'),
+        label: t('Team'),
         href: 'https://docs.pancakeswap.finance/brand',
       },
       {
-        label: t('Blog'),
+        label: t('News'),
         href: 'https://medium.com/pancakeswap',
       },
       {
-        label: t('Community'),
+        label: t('Github'),
         href: 'https://docs.pancakeswap.finance/contact-us/telegram',
       },
       {
-        label: t('Litepaper'),
+        label: t('Bug Bounty'),
         href: 'https://v2litepaper.pancakeswap.finance/',
-      },
-      {
-        label: '—',
-      },
-      {
-        label: t('Online Store'),
-        href: 'https://pancakeswap.creator-spring.com/',
-      },
+      }
     ],
   },
   {
-    label: t('Help'),
+    label: t('Products'),
     items: [
       {
-        label: t('Customer Support'),
+        label: t('Exchange'),
         href: 'https://docs.pancakeswap.finance/contact-us/customer-support',
       },
       {
-        label: t('Troubleshooting'),
+        label: t('Liquidity'),
         href: 'https://docs.pancakeswap.finance/help/troubleshooting',
       },
       {
-        label: t('Guides'),
+        label: t('Farms'),
+        href: 'https://docs.pancakeswap.finance/get-started',
+      },
+      {
+        label: t('Launchpools'),
+        href: 'https://docs.pancakeswap.finance/get-started',
+      },
+      {
+        label: t('Lottery'),
         href: 'https://docs.pancakeswap.finance/get-started',
       },
     ],
   },
   {
-    label: t('Developers'),
+    label: t('Service'),
     items: [
       {
-        label: 'Github',
+        label: 'Referral program',
         href: 'https://github.com/pancakeswap',
       },
       {
-        label: t('Documentation'),
+        label: t('HEXA Token'),
         href: 'https://docs.pancakeswap.finance',
       },
       {
-        label: t('Bug Bounty'),
+        label: t('Apply to Launch'),
         href: 'https://docs.pancakeswap.finance/code/bug-bounty',
       },
       {
-        label: t('Audits'),
+        label: t('$10M Program'),
         href: 'https://docs.pancakeswap.finance/help/faq#is-pancakeswap-safe-has-pancakeswap-been-audited',
-      },
-      {
-        label: t('Careers'),
-        href: 'https://docs.pancakeswap.finance/hiring/become-a-chef',
-      },
+      }
     ],
   },
 ]
