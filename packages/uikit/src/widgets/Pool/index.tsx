@@ -14,3 +14,4 @@ export * from "./PoolsTable";
 export * from "./Cells/BaseCell";
 export * from "./Cells/ExpandActionCell";
 export * from "./PoolsTable/ExpandRow";
+export * from "./StyledPoolCard";

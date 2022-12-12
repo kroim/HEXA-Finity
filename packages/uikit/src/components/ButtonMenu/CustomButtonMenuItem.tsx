@@ -20,7 +20,7 @@ const InactiveButton: PolymorphicComponent<InactiveButtonProps, "button"> = styl
   border-radius: 8px;
   &:hover:not(:disabled):not(:active) {
     background-color: transparent;
-    color: #000;
+    color: ${({ inactiveColor }) => (inactiveColor ? inactiveColor : "#000")};
   }
   ${({ theme }) => theme.mediaQueries.sm} {
     padding: 12px;
@@ -50,12 +50,17 @@ const ActiveButton: PolymorphicComponent<ActiveButtonProps, "button"> = styled(B
   }
 `;
 
-const ButtonMenuItem: PolymorphicComponent<ButtonMenuItemProps, "button"> = ({
+interface TabButtonMenuItemProps extends ButtonMenuItemProps {
+  backgroundActiveColor: string;
+  backgroundInactiveColor: string;
+  inactiveColor: string;
+}
+const CustomButtonMenuItem: PolymorphicComponent<TabButtonMenuItemProps, "button"> = ({
   isActive = false,
   variant = variants.PRIMARY,
   as,
   ...props
-}: ButtonMenuItemProps) => {
+}: TabButtonMenuItemProps) => {
   if (!isActive) {
     return <InactiveButton forwardedAs={as} variant={variant} {...props} />;
   }
@@ -63,4 +68,4 @@ const ButtonMenuItem: PolymorphicComponent<ButtonMenuItemProps, "button"> = ({
   return <ActiveButton forwardedAs={as} variant={variant} {...props} />;
 };
 
-export default ButtonMenuItem;
+export default CustomButtonMenuItem;

@@ -15,11 +15,11 @@ export const PoolCardHeader: React.FC<
     isStaking?: boolean;
   }>
 > = ({ isFinished = false, isStaking = false, children }) => {
-  const background = isStaking ? "gradientBubblegum" : "gradientCardHeader";
+  const background = isStaking ? "transparent" : "transparent";
 
   return (
     <Wrapper isFinished={isFinished} background={background}>
-      <Flex alignItems="center" justifyContent="space-between">
+      <Flex alignItems="center" flexDirection={'column'}>
         {children}
       </Flex>
     </Wrapper>
@@ -31,10 +31,10 @@ export const PoolCardHeaderTitle: React.FC<
 > = ({ isFinished, title, subTitle }) => {
   return (
     <Flex flexDirection="column">
-      <Heading color={isFinished ? "textDisabled" : "body"} scale="lg">
+      <Heading color={isFinished ? "textDisabled" : "body"} scale="lg" textAlign={'center'}>
         {title}
       </Heading>
-      <Text fontSize="14px" color={isFinished ? "textDisabled" : "textSubtle"}>
+      <Text fontSize="14px" color={isFinished ? "textDisabled" : "textSubtle"} textAlign='center'>
         {subTitle}
       </Text>
     </Flex>

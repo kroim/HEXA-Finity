@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 
 import PoolTabButtons from "./PoolTabButtons";
 import { ViewMode } from "../../components/ToggleView/ToggleView";
-import { Flex, Text, SearchInput, Select, OptionProps } from "../../components";
+import { Flex, Text, CustomSearchInput, CustomSelect, OptionProps } from "../../components";
 
 import { DeserializedPool, DeserializedPoolVault } from "./types";
 import { sortPools } from "./helpers";
@@ -187,15 +187,15 @@ export function PoolControls<T>({
           hideViewMode={hideViewMode}
         />
         <FilterContainer>
+          <LabelWrapper style={{ marginRight: 16 }}>
+            <CustomSearchInput initialValue={searchQuery} onChange={handleChangeSearchQuery} placeholder="Search Launchpools" color="#2F4DA0" placeholderColor="#2F4DA0" />
+          </LabelWrapper>
           <LabelWrapper>
-            <Text fontSize="12px" bold color="textSubtle" textTransform="uppercase">
-              {t("Sort by")}
-            </Text>
             <ControlStretch>
-              <Select
+              <CustomSelect
                 options={[
                   {
-                    label: t("Hot"),
+                    label: t("All"),
                     value: "hot",
                   },
                   {
@@ -218,12 +218,6 @@ export function PoolControls<T>({
                 onOptionChange={handleSortOptionChange}
               />
             </ControlStretch>
-          </LabelWrapper>
-          <LabelWrapper style={{ marginLeft: 16 }}>
-            <Text fontSize="12px" bold color="textSubtle" textTransform="uppercase">
-              {t("Search")}
-            </Text>
-            <SearchInput initialValue={searchQuery} onChange={handleChangeSearchQuery} placeholder="Search Pools" />
           </LabelWrapper>
         </FilterContainer>
       </PoolControlsView>

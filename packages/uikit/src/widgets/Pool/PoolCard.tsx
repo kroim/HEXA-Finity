@@ -1,7 +1,7 @@
 import { CardBody, Flex, CardRibbon, Skeleton, Pool } from "@pancakeswap/uikit";
 import { useTranslation } from "@pancakeswap/localization";
 import { ReactElement } from "react";
-import { StyledCard } from "./StyledCard";
+import { StyledPoolCard } from "./StyledPoolCard";
 import { DeserializedPool } from "./types";
 
 interface PoolCardPropsType<T> {
@@ -20,7 +20,7 @@ export function PoolCard<T>({ pool, cardContent, aprRow, isStaked, cardFooter, t
   const isCakePool = earningToken?.symbol === "CAKE" && stakingToken?.symbol === "CAKE";
 
   return (
-    <StyledCard
+    <StyledPoolCard
       isActive={isCakePool}
       isFinished={isFinished && sousId !== 0}
       ribbon={isFinished && <CardRibbon variantColor="textDisabled" text={t("Finished")} />}
@@ -53,6 +53,6 @@ export function PoolCard<T>({ pool, cardContent, aprRow, isStaked, cardFooter, t
         </Flex>
       </CardBody>
       {cardFooter}
-    </StyledCard>
+    </StyledPoolCard>
   );
 }
