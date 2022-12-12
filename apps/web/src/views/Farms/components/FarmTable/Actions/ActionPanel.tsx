@@ -77,7 +77,7 @@ const Container = styled.div<{ expanded }>`
     padding: 30px 40px;
   }
   ${({ theme }) => theme.mediaQueries.lg} {
-    padding: 30px 110px;
+    padding: 30px 80px;
   }
 `
 const AvailLP = styled.div`

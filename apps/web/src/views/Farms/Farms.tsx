@@ -15,7 +15,6 @@ import {
   Farm as FarmUI,
   Loading,
   SearchInput,
-  Select,
   OptionProps,
   FlexLayout,
   PageHeader,
@@ -24,6 +23,7 @@ import {
   ButtonMenu,
   ButtonMenuItem,
 } from '@pancakeswap/uikit'
+import { Select } from './components/FilterSelect'
 import styled from 'styled-components'
 import Page from 'components/Layout/Page'
 import { useFarms, usePollFarmsWithUserData, usePriceCakeBusd } from 'state/farms/hooks'
@@ -53,6 +53,7 @@ const FarmsPage = styled(Box)`
 const FarmsWrapper1 = styled.div`
   width: 100%;
   background: #ecf1ff;
+  padding-bottom: 30px;
 `
 const FarmsWrapper2 = styled.div`
   width: 100%;
@@ -104,11 +105,11 @@ const StyledSearchInput = styled(SearchInput)`
   }
 `
 const FilterSelect = styled(Select)`
-  width: 90px;
-  min-width: 90px;
+  width: 100px;
+  min-width: 100px;
   ${({ theme }) => theme.mediaQueries.sm} {
-    width: 117px;
-    min-width: 117px;
+    width: 127px;
+    min-width: 127px;
   }
 `
 const FilterContainer = styled.div`
@@ -391,7 +392,7 @@ const Farms: React.FC<React.PropsWithChildren> = ({ children }) => {
                   <StyledSearchInput
                     initialValue={normalizedUrlSearch}
                     onChange={handleChangeQuery}
-                    placeholder="Search Farms"
+                    placeholder="Search Farms"                   
                   />
                 </SearchWrapper>
                 <FilterSelect
@@ -463,15 +464,9 @@ const Farms: React.FC<React.PropsWithChildren> = ({ children }) => {
                 <Loading />
               </Flex>
             )}
-            {poolLength && <div ref={observerRef} />}
-            <LunchSection />
+            {poolLength && <div ref={observerRef} />}          
           </Container>
-        </FarmsWrapper1>
-        <FarmsWrapper2>
-          <Page>
-            <ChooseSection />
-          </Page>
-        </FarmsWrapper2>
+        </FarmsWrapper1>       
       </FarmsPage>
     </FarmsContext.Provider>
   )

@@ -118,6 +118,19 @@ const FarmTable: React.FC<React.PropsWithChildren<ITableProps>> = ({ farms, cake
     const lowercaseQuery = latinise(typeof query?.search === 'string' ? query.search.toLowerCase() : '')
     const initialActivity = latinise(lpLabel?.toLowerCase()) === lowercaseQuery
     const row: RowProps = {
+      apy: {
+        value: getDisplayApr(farm.apr, farm.lpRewardsApr),
+        pid: farm.pid,
+        multiplier: farm.multiplier,
+        lpLabel,
+        lpSymbol: farm.lpSymbol,
+        lpTokenPrice: farm.lpTokenPrice,
+        tokenAddress,
+        quoteTokenAddress,
+        cakePrice,
+        lpRewardsApy: farm.lpRewardsApr,
+        originalValue: farm.apr,
+      },
       apr: {
         value: getDisplayApr(farm.apr, farm.lpRewardsApr),
         pid: farm.pid,
@@ -130,7 +143,7 @@ const FarmTable: React.FC<React.PropsWithChildren<ITableProps>> = ({ farms, cake
         cakePrice,
         lpRewardsApr: farm.lpRewardsApr,
         originalValue: farm.apr,
-      },
+      },      
       farm: {
         label: lpLabel,
         pid: farm.pid,

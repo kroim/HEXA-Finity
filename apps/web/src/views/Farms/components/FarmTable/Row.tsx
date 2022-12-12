@@ -23,11 +23,13 @@ import BoostedApr from '../YieldBooster/components/BoostedApr'
 import BoostedTag from '../YieldBooster/components/BoostedTag'
 import Details from './Details'
 import CellLayout from './CellLayout'
+import Apy, { ApyProps } from './Apy'
 
 const { FarmAuctionTag, CoreTag } = FarmUI.Tags
 const { Multiplier, Liquidity, Earned } = FarmUI.FarmTable
 
 export interface RowProps {
+  apy: ApyProps
   apr: AprProps
   farm: FarmTableFarmTokenInfoProps
   earned: FarmTableEarnedProps
@@ -43,6 +45,7 @@ interface RowPropsWithLoading extends RowProps {
 }
 
 const cells = {
+  apy: Apy,
   apr: Apr,
   farm: Farm,
   earned: Earned,
@@ -148,6 +151,17 @@ const Row: React.FunctionComponent<React.PropsWithChildren<RowPropsWithLoading>>
                     </CellInner>
                   </td>
                 )
+              case 'apy':
+                return (
+                  <td key={key}>
+                    <CellInner>
+                      <CellLayout label={t('APY')}>
+                        <div style={{marginRight: '10px', fontSize: '12px', color: '#0EA9FF'}}>164.07%</div> 
+                        <img src='/images/farms/question.png' />                   
+                      </CellLayout>
+                    </CellInner>
+                  </td>
+                )
               case 'apr':
                 return (
                   <td key={key}>
@@ -158,20 +172,7 @@ const Row: React.FunctionComponent<React.PropsWithChildren<RowPropsWithLoading>>
                           hideButton={isSmallerScreen}
                           strikethrough={props?.details?.boosted}
                           boosted={props?.details?.boosted}
-                        />
-                        {props?.details?.boosted && userDataReady ? (
-                          <BoostedApr
-                            lpRewardsApr={props?.apr?.lpRewardsApr}
-                            apr={props?.apr?.originalValue}
-                            pid={props.farm?.pid}
-                            lpTotalSupply={props.details?.lpTotalSupply}
-                            userBalanceInFarm={
-                              stakedBalance.plus(tokenBalance).gt(0)
-                                ? stakedBalance.plus(tokenBalance)
-                                : proxy.stakedBalance.plus(proxy.tokenBalance)
-                            }
-                          />
-                        ) : null}
+                        />                
                       </CellLayout>
                     </CellInner>
                   </td>
@@ -191,7 +192,6 @@ const Row: React.FunctionComponent<React.PropsWithChildren<RowPropsWithLoading>>
         </StyledTr>
       )
     }
-
     return (
       <>
         <tr style={{ cursor: 'pointer' }} onClick={toggleActionPanel}>
