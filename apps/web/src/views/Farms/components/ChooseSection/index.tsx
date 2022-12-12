@@ -89,7 +89,7 @@ const TextStyle = {
   fontFamily: 'Poppins',
   fontStyle: 'normal',
 }
-const ChooseUs: React.FC<React.PropsWithChildren> = () => {
+const ChooseSection: React.FC<React.PropsWithChildren> = () => {
   const { t } = useTranslation()
 
   const items: ChooseType[] = [
@@ -138,4 +138,4 @@ const ChooseUs: React.FC<React.PropsWithChildren> = () => {
   )
 }
 
-export default ChooseUs
+export default ChooseSection
