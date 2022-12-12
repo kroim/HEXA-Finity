@@ -56,6 +56,12 @@ const TableBody = styled.tbody`
 
 const TableContainer = styled.div`
   position: relative;
+  max-height: 300px;
+  ${({ theme }) => theme.mediaQueries.sm} {
+    max-height: 700px;
+  }
+  overflow-y: scroll;
+  overflow-x: none;
 `
 
 const FarmTable: React.FC<React.PropsWithChildren<ITableProps>> = ({ farms, cakePrice, userDataReady }) => {

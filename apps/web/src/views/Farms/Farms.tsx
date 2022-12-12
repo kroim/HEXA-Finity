@@ -20,6 +20,9 @@ import {
   FlexLayout,
   PageHeader,
   NextLinkFromReactRouter,
+  Row,
+  ButtonMenu,
+  ButtonMenuItem,
 } from '@pancakeswap/uikit'
 import styled from 'styled-components'
 import Page from 'components/Layout/Page'
@@ -38,8 +41,26 @@ import ToggleView from 'components/ToggleView/ToggleView'
 import { useActiveChainId } from 'hooks/useActiveChainId'
 import Table from './components/FarmTable/FarmTable'
 import { FarmWithStakedValue } from './components/types'
-import { BCakeBoosterCard } from './components/BCakeBoosterCard'
+import HeroSection from './components/HeroSection'
+import PageSection from 'components/PageSection'
+import Container from 'components/Layout/Container'
+import ChooseUs from './components/ChooseUs'
 
+const FarmsPage = styled(Box)`
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1600px;
+`
+const FarmsWrapper1 = styled.div`
+  width: 100%;
+  background: #ecf1ff;
+`
+const FarmsWrapper2 = styled.div`
+  width: 100%;
+  background: #dae4ff;
+  padding-top: 30px;
+  padding-bottom: 30px;
+`
 const ControlContainer = styled.div`
   display: flex;
   width: 100%;
@@ -53,33 +74,10 @@ const ControlContainer = styled.div`
   ${({ theme }) => theme.mediaQueries.sm} {
     flex-direction: row;
     flex-wrap: wrap;
-    padding: 16px 32px;
+    padding: 40px 0;    
     margin-bottom: 0;
   }
 `
-const FarmFlexWrapper = styled(Flex)`
-  flex-wrap: wrap;
-  ${({ theme }) => theme.mediaQueries.md} {
-    flex-wrap: nowrap;
-  }
-`
-const FarmH1 = styled(Heading)`
-  font-size: 32px;
-  margin-bottom: 8px;
-  ${({ theme }) => theme.mediaQueries.sm} {
-    font-size: 64px;
-    margin-bottom: 24px;
-  }
-`
-const FarmH2 = styled(Heading)`
-  font-size: 16px;
-  margin-bottom: 8px;
-  ${({ theme }) => theme.mediaQueries.sm} {
-    font-size: 24px;
-    margin-bottom: 18px;
-  }
-`
-
 const ToggleWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -89,13 +87,31 @@ const ToggleWrapper = styled.div`
     margin-left: 8px;
   }
 `
-
-const LabelWrapper = styled.div`
+const SearchWrapper = styled.div`
   > ${Text} {
     font-size: 12px;
   }
+  width: 160px;
+  ${({ theme }) => theme.mediaQueries.sm} {
+    width: 220px;
+  }
 `
-
+const StyledSearchInput = styled(SearchInput)`
+  font-size: 12px;
+  height: 40px;
+  ${({ theme }) => theme.mediaQueries.sm} {
+    font-size: 14px;
+    height: 50px;
+  }
+`
+const FilterSelect = styled(Select)`
+  width: 90px;
+  min-width: 90px;
+  ${({ theme }) => theme.mediaQueries.sm} {
+    width: 117px;
+    min-width: 117px;
+  }
+`
 const FilterContainer = styled.div`
   display: flex;
   align-items: center;
@@ -107,7 +123,6 @@ const FilterContainer = styled.div`
     padding: 0;
   }
 `
-
 const ViewControls = styled.div`
   flex-wrap: wrap;
   justify-content: space-between;
@@ -128,13 +143,26 @@ const ViewControls = styled.div`
     }
   }
 `
-
+const HarvestButton = styled(Button)`
+  background: #aabef0;
+  width: 117px;
+  height: 40px;
+  color: #041647;
+  margin-left: 15px;
+  font-size: 12px;
+  ${({ theme }) => theme.mediaQueries.sm} {
+    font-size: 14px;
+  }
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  padding: 0;
+`
 const StyledImage = styled(Image)`
   margin-left: auto;
   margin-right: auto;
   margin-top: 58px;
 `
-
 const FinishedTextContainer = styled(Flex)`
   padding-bottom: 32px;
   flex-direction: column;
@@ -142,13 +170,76 @@ const FinishedTextContainer = styled(Flex)`
     flex-direction: row;
   }
 `
-
 const FinishedTextLink = styled(Link)`
   font-weight: 400;
   white-space: nowrap;
   text-decoration: underline;
 `
+const LunchSection = styled.div`
+  width: 100%;
+  align-items: center;
+  grid-gap: 15px;
+  display: grid;
+  grid-template-columns: 100%;
 
+  ${({ theme }) => theme.mediaQueries.md} {
+    grid-template-columns: 60% 30%;
+    padding-top: 70px;
+    padding-bottom: 50px;
+  }
+`
+const LunchLeftArea = styled.div`
+  line-height: 1.2;
+  z-index: 20;
+  h2 {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 39px;
+    color: #000000;
+  }
+  p {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 26px;
+    color: #061e63;
+    margin-top: 12px;
+  }
+  ${({ theme }) => theme.mediaQueries.sm} {
+    h2 {
+      font-size: 26px;
+    }
+    p {
+      font-size: 16px;
+    }
+  }
+`
+const LunchRightArea = styled.div`
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0;
+  flex: 1;
+  ${({ theme }) => theme.mediaQueries.sm} {
+    margin-left: 52px;    
+  }
+  img {
+    max-width: 100%;
+    max-height: 100%;
+  }
+`
+const ChooseSection = styled.div`
+  margin-top: 0;
+`
+const StyledButtonMenu = styled(ButtonMenu)`
+  display: flex;
+  flex-wrap: wrap;
+`
 const NUMBER_OF_FARMS_VISIBLE = 12
 
 const Farms: React.FC<React.PropsWithChildren> = ({ children }) => {
@@ -164,13 +255,16 @@ const Farms: React.FC<React.PropsWithChildren> = ({ children }) => {
 
   const [viewMode, setViewMode] = useUserFarmsViewMode()
   const { address: account } = useAccount()
-  const [sortOption, setSortOption] = useState('hot')
+  const [sortOption, setSortOption] = useState('all')
   const { observerRef, isIntersecting } = useIntersectionObserver()
   const chosenFarmsLength = useRef(0)
 
   const isArchived = pathname.includes('archived')
   const isInactive = pathname.includes('history')
   const isActive = !isInactive && !isArchived
+  const [farmsIndex, setFarmsIndex] = useState(0)
+
+  const handleFarmsClick = (newIndex: any) => setFarmsIndex(newIndex)
 
   useCakeVaultUserData()
 
@@ -182,7 +276,7 @@ const Farms: React.FC<React.PropsWithChildren> = ({ children }) => {
 
   const [stakedOnly, setStakedOnly] = useUserFarmStakedOnly(isActive)
   const [boostedOnly, setBoostedOnly] = useState(false)
-  
+
   const activeFarms = farmsLP.filter(
     (farm) => farm.pid !== 0 && farm.multiplier !== '0X' && (!poolLength || poolLength > farm.pid),
   )
@@ -238,7 +332,7 @@ const Farms: React.FC<React.PropsWithChildren> = ({ children }) => {
           return latinise(farm.lpSymbol.toLowerCase()).includes(lowercaseQuery)
         })
       }
-  
+
       return farmsToDisplayWithAPR
     },
     [query, isActive, chainId, cakePrice, regularCakePerBlock],
@@ -330,130 +424,143 @@ const Farms: React.FC<React.PropsWithChildren> = ({ children }) => {
 
   return (
     <FarmsContext.Provider value={{ chosenFarmsMemoized }}>
-      <PageHeader>
-        <FarmFlexWrapper justifyContent="space-between">
-          <Box>
-            <FarmH1 as="h1" scale="xxl" color="secondary" mb="24px">
-              {t('Farms')}
-            </FarmH1>
-            <FarmH2 scale="lg" color="text">
-              {t('Stake LP tokens to earn.')}
-            </FarmH2>
-            <NextLinkFromReactRouter to="/farms/auction" prefetch={false}>
-              <Button p="0" variant="text">
-                <Text color="primary" bold fontSize="16px" mr="4px">
-                  {t('Community Auctions')}
+      <HeroSection />
+      <FarmsPage px={['16px', '24px']}>
+        <FarmsWrapper1>
+          <Container>
+            <ControlContainer>
+              <ViewControls>
+                {/* <FarmUI.FarmTabButtons hasStakeInFinishedFarms={stakedInactiveFarms.length > 0} /> */}
+                <StyledButtonMenu activeIndex={farmsIndex} onItemClick={handleFarmsClick}>
+                  <ButtonMenuItem>Live</ButtonMenuItem>
+                  <ButtonMenuItem>Main</ButtonMenuItem>
+                  <ButtonMenuItem>Innovation</ButtonMenuItem>
+                  <ButtonMenuItem>GameFi</ButtonMenuItem>
+                  <ButtonMenuItem>Archive</ButtonMenuItem>
+                </StyledButtonMenu>
+                <ToggleWrapper>
+                  <Toggle
+                    id="staked-only-farms"
+                    checked={stakedOnly}
+                    onChange={() => setStakedOnly(!stakedOnly)}
+                    scale="sm"
+                  />
+                  <Text> {t('Staked only')}</Text>
+                </ToggleWrapper>
+              </ViewControls>
+              <FilterContainer>
+                <SearchWrapper style={{ marginRight: 15 }}>
+                  <StyledSearchInput
+                    initialValue={normalizedUrlSearch}
+                    onChange={handleChangeQuery}
+                    placeholder="Search Farms"
+                  />
+                </SearchWrapper>
+                <FilterSelect
+                  options={[
+                    {
+                      label: t('All'),
+                      value: 'all',
+                    },
+                    {
+                      label: t('Hot'),
+                      value: 'hot',
+                    },
+                    {
+                      label: t('APR'),
+                      value: 'apr',
+                    },
+                    {
+                      label: t('Multiplier'),
+                      value: 'multiplier',
+                    },
+                    {
+                      label: t('Earned'),
+                      value: 'earned',
+                    },
+                    {
+                      label: t('Liquidity'),
+                      value: 'liquidity',
+                    },
+                    {
+                      label: t('Latest'),
+                      value: 'latest',
+                    },
+                  ]}
+                  onOptionChange={handleSortOptionChange}
+                />
+                <HarvestButton>Harvest all</HarvestButton>
+              </FilterContainer>
+            </ControlContainer>
+            {isInactive && (
+              <FinishedTextContainer>
+                <Text fontSize={['16px', null, '20px']} color="failure" pr="4px">
+                  {t("Don't see the farm you are staking?")}
                 </Text>
-                <ArrowForwardIcon color="primary" />
-              </Button>
-            </NextLinkFromReactRouter>
-          </Box>
-          {chainId === ChainId.BSC && (
-            <Box>
-              <BCakeBoosterCard />
-            </Box>
-          )}
-        </FarmFlexWrapper>
-      </PageHeader>
-      <Page>
-        <ControlContainer>
-          <ViewControls>
-            <ToggleView idPrefix="clickFarm" viewMode={viewMode} onToggle={setViewMode} />
-            <ToggleWrapper>
-              <Toggle
-                id="staked-only-farms"
-                checked={stakedOnly}
-                onChange={() => setStakedOnly(!stakedOnly)}
-                scale="sm"
-              />
-              <Text> {t('Staked only')}</Text>
-            </ToggleWrapper>
-            <ToggleWrapper>
-              <Toggle
-                id="staked-only-farms"
-                checked={boostedOnly}
-                onChange={() => setBoostedOnly((prev) => !prev)}
-                scale="sm"
-              />
-              <Text> {t('Booster Available')}</Text>
-            </ToggleWrapper>
-            <FarmUI.FarmTabButtons hasStakeInFinishedFarms={stakedInactiveFarms.length > 0} />
-          </ViewControls>
-          <FilterContainer>
-            <LabelWrapper>
-              <Text textTransform="uppercase">{t('Sort by')}</Text>
-              <Select
-                options={[
-                  {
-                    label: t('Hot'),
-                    value: 'hot',
-                  },
-                  {
-                    label: t('APR'),
-                    value: 'apr',
-                  },
-                  {
-                    label: t('Multiplier'),
-                    value: 'multiplier',
-                  },
-                  {
-                    label: t('Earned'),
-                    value: 'earned',
-                  },
-                  {
-                    label: t('Liquidity'),
-                    value: 'liquidity',
-                  },
-                  {
-                    label: t('Latest'),
-                    value: 'latest',
-                  },
-                ]}
-                onOptionChange={handleSortOptionChange}
-              />
-            </LabelWrapper>
-            <LabelWrapper style={{ marginLeft: 16 }}>
-              <Text textTransform="uppercase">{t('Search')}</Text>
-              <SearchInput initialValue={normalizedUrlSearch} onChange={handleChangeQuery} placeholder="Search Farms" />
-            </LabelWrapper>
-          </FilterContainer>
-        </ControlContainer>
-        {isInactive && (
-          <FinishedTextContainer>
-            <Text fontSize={['16px', null, '20px']} color="failure" pr="4px">
-              {t("Don't see the farm you are staking?")}
-            </Text>
-            <Flex>
-              <FinishedTextLink href="/migration" fontSize={['16px', null, '20px']} color="failure">
-                {t('Go to migration page')}
-              </FinishedTextLink>
-              <Text fontSize={['16px', null, '20px']} color="failure" padding="0px 4px">
-                or
-              </Text>
-              <FinishedTextLink
-                external
-                color="failure"
-                fontSize={['16px', null, '20px']}
-                href="https://v1-farms.pancakeswap.finance/farms/history"
-              >
-                {t('check out v1 farms')}.
-              </FinishedTextLink>
-            </Flex>
-          </FinishedTextContainer>
-        )}
-        {viewMode === ViewMode.TABLE ? (
-          <Table farms={chosenFarmsMemoized} cakePrice={cakePrice} userDataReady={userDataReady} />
-        ) : (
-          <FlexLayout>{children}</FlexLayout>
-        )}
-        {account && !userDataLoaded && stakedOnly && (
-          <Flex justifyContent="center">
-            <Loading />
-          </Flex>
-        )}
-        {poolLength && <div ref={observerRef} />}
-        <StyledImage src="/images/decorations/3dpan.png" alt="Pancake illustration" width={120} height={103} />
-      </Page>
+                <Flex>
+                  <FinishedTextLink href="/migration" fontSize={['16px', null, '20px']} color="failure">
+                    {t('Go to migration page')}
+                  </FinishedTextLink>
+                  <Text fontSize={['16px', null, '20px']} color="failure" padding="0px 4px">
+                    or
+                  </Text>
+                  <FinishedTextLink
+                    external
+                    color="failure"
+                    fontSize={['16px', null, '20px']}
+                    href="https://v1-farms.pancakeswap.finance/farms/history"
+                  >
+                    {t('check out v1 farms')}.
+                  </FinishedTextLink>
+                </Flex>
+              </FinishedTextContainer>
+            )}
+            {viewMode === ViewMode.TABLE ? (
+              <Table farms={chosenFarmsMemoized} cakePrice={cakePrice} userDataReady={userDataReady} />
+            ) : (
+              <FlexLayout>{children}</FlexLayout>
+            )}
+            {account && !userDataLoaded && stakedOnly && (
+              <Flex justifyContent="center">
+                <Loading />
+              </Flex>
+            )}
+            {poolLength && <div ref={observerRef} />}
+            <LunchSection>
+              <LunchLeftArea>
+                <h2>Launch Your Project on Hexa Finity!</h2>
+                <p>
+                  Farms stimulate users to provide liquidity for your trading pair by distributing HEXA tokens to your
+                  pair’s LP token holders. Launchpool is a platform where a project owner can distribute tokens to BNB
+                  users who stake HEXA tokens in the pool. When a project applies for Hexa Finity Launchpool we can also
+                  create a new farming pair (subject to discussion). Hexa Finity Launchpool and Farms are platforms that
+                  help project teams promote their token and get exposure to thousands of active Hexa Finity users
+                  across the globe. We look for strong teams with clear and innovative vision in the crypto space. If
+                  you think you are one of the projects, do not wait any longer and apply below.
+                </p>
+                <div style={{ marginTop: '22px' }}>
+                  <Button style={{ width: '199px', height: '54px', background: '#F93B5D' }}>
+                    <Text color="invertedContrast" bold fontSize="16px" mr="10px">
+                      {t('Apply to Lunch')}
+                    </Text>
+                    <Image src="/images/farms/lunch.png" alt="lunch" width={14} height={14} />
+                  </Button>
+                </div>
+              </LunchLeftArea>
+              <LunchRightArea>
+                <img src="/images/farms/lunch-image.png" alt="perpetual" />
+              </LunchRightArea>
+            </LunchSection>
+          </Container>
+        </FarmsWrapper1>
+        <FarmsWrapper2>
+          <Page style={{}}>
+            <ChooseSection>
+              <ChooseUs />
+            </ChooseSection>
+          </Page>
+        </FarmsWrapper2>
+      </FarmsPage>
     </FarmsContext.Provider>
   )
 }

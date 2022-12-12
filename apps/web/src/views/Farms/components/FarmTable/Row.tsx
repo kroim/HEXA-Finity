@@ -21,9 +21,11 @@ import ActionPanel from './Actions/ActionPanel'
 import { DesktopColumnSchema, MobileColumnSchema, FarmWithStakedValue } from '../types'
 import BoostedApr from '../YieldBooster/components/BoostedApr'
 import BoostedTag from '../YieldBooster/components/BoostedTag'
+import Details from './Details'
+import CellLayout from './CellLayout'
 
 const { FarmAuctionTag, CoreTag } = FarmUI.Tags
-const { CellLayout, Details, Multiplier, Liquidity, Earned } = FarmUI.FarmTable
+const { Multiplier, Liquidity, Earned } = FarmUI.FarmTable
 
 export interface RowProps {
   apr: AprProps
@@ -50,6 +52,7 @@ const cells = {
 }
 
 const CellInner = styled.div`
+  margin-left: 30px;
   padding: 24px 0px;
   display: flex;
   width: 100%;
@@ -128,7 +131,7 @@ const Row: React.FunctionComponent<React.PropsWithChildren<RowPropsWithLoading>>
                     {userDataReady ? (
                       <CellInner style={{ width: '140px' }}>
                         {props[key] === 'community' ? <FarmAuctionTag scale="sm" /> : <CoreTag scale="sm" />}
-                        {props?.details?.boosted ? <BoostedTag scale="sm" ml="16px" /> : null}
+                        {props?.details?.boosted ? <BoostedTag scale="sm" ml="5px" /> : null}
                       </CellInner>
                     ) : (
                       <Skeleton width={60} height={24} />
