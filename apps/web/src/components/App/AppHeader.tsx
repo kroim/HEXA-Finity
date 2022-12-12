@@ -56,11 +56,6 @@ const AppHeader: React.FC<React.PropsWithChildren<Props>> = ({ title, subtitle, 
               </Flex>
             )}
           </Flex>
-          <Flex alignItems="center">
-            <Text color="textSubtle" fontSize="14px">
-              {subtitle}
-            </Text>
-          </Flex>
         </Flex>
       </Flex>
     </AppHeaderContainer>
