@@ -6,7 +6,9 @@ import { Input } from "../Input";
 
 const StyledInput = styled(Input)`
   border-radius: 16px;
+  border:1px solid #2F4DA0;
   margin-left: auto;
+  color: #FFFFFF;
 `;
 
 const InputWrapper = styled.div`

@@ -135,7 +135,7 @@ const Row: React.FunctionComponent<React.PropsWithChildren<RowPropsWithLoading>>
                     {userDataReady ? (
                       <CellInner style={{ width: '140px' }}>
                         {props[key] === 'community' ? <FarmAuctionTag scale="sm" /> : <CoreTag scale="sm" />}
-                        {props?.details?.boosted ? <BoostedTag scale="sm" ml="5px" /> : null}
+                        {props?.details?.boosted ? <BoostedTag scale="sm" ml="5px" /> : null}             
                       </CellInner>
                     ) : (
                       <Skeleton width={60} height={24} />

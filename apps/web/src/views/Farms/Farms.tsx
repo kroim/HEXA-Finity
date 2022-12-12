@@ -21,8 +21,8 @@ import {
   NextLinkFromReactRouter,
   Row,
   ButtonMenu,
-  ButtonMenuItem,
 } from '@pancakeswap/uikit'
+import ButtonMenuItem from './components/ButtonMenuItem'
 import { Select } from './components/FilterSelect'
 import styled from 'styled-components'
 import Page from 'components/Layout/Page'
@@ -81,7 +81,7 @@ const ControlContainer = styled.div`
 const ToggleWrapper = styled.div`
   display: flex;
   align-items: center;
-  margin-left: 10px;
+  margin-left: 30px;
 
   ${Text} {
     margin-left: 8px;

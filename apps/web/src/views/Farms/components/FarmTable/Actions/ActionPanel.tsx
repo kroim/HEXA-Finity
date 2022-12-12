@@ -23,6 +23,7 @@ import { HarvestAction, HarvestActionContainer, ProxyHarvestActionContainer } fr
 import StakedAction, { ProxyStakedContainer, StakedContainer } from './StakedAction'
 import { ActionContainer as ActionContainerSection, ActionContent, ActionTitles } from './styles'
 import ConnectWalletButton from './ConnectWalletButton'
+import Link from 'next/link'
 
 const { Multiplier, Liquidity } = FarmUI.FarmTable
 
@@ -160,7 +161,7 @@ const ActionPanel: React.FunctionComponent<React.PropsWithChildren<ActionPanelPr
   return (
     <Container expanded={expanded}>
       <Button variant="secondary" scale="md">
-        Get LP
+        <Link href={`/add/${liquidityUrlPathParts}`}>Get LP</Link>
       </Button>
       <AvailLP>
         <div className="title">Available LP</div>
