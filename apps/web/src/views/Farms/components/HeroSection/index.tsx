@@ -79,12 +79,11 @@ const HeroSection = (props) => {
         <HeroView>
           <HeroContainer>
             <HeroLeftArea>
-              <h2>Farms</h2>
+              <h2>{t('Farms')}</h2>
               <p>
-                Hexa Finity Farms offer multiple farming opportunities to you. Get double rewards by staking your LP
-                tokens in return for additional HEXA tokens and earning high income from swap transactions.{' '}
+                {t('Hexa Finity Farms offer multiple farming opportunities to you. Get double rewards by staking your LP tokens in return for additional HEXA tokens and earning high income from swap transactions.')}
                 <Link external ellipsis href="/" style={{ display: 'inline', color: '#11A9FF' }}>
-                  Learn how to start
+                  {t('Learn how to start')}
                 </Link>
               </p>
               <div style={{ marginTop: '30px' }}>

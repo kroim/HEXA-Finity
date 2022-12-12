@@ -112,6 +112,10 @@ const Row: React.FunctionComponent<React.PropsWithChildren<RowPropsWithLoading>>
     }
   }, [initialActivity])
 
+  useEffect(()=>{
+    console.log('test farms list: ', props)
+  }, [props])
+  
   const { isDesktop, isMobile } = useMatchBreakpoints()
 
   const isSmallerScreen = !isDesktop
@@ -227,20 +231,7 @@ const Row: React.FunctionComponent<React.PropsWithChildren<RowPropsWithLoading>>
                   hideButton
                   strikethrough={props?.details?.boosted}
                   boosted={props?.details?.boosted}
-                />
-                {props?.details?.boosted && userDataReady ? (
-                  <BoostedApr
-                    lpRewardsApr={props?.apr?.lpRewardsApr}
-                    apr={props?.apr?.originalValue}
-                    pid={props.farm?.pid}
-                    lpTotalSupply={props.details?.lpTotalSupply}
-                    userBalanceInFarm={
-                      stakedBalance.plus(tokenBalance).gt(0)
-                        ? stakedBalance.plus(tokenBalance)
-                        : proxy.stakedBalance.plus(proxy.tokenBalance)
-                    }
-                  />
-                ) : null}
+                />                
               </CellLayout>
             </AprMobileCell>
           </td>
