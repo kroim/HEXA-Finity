@@ -24,9 +24,10 @@ import BoostedTag from '../YieldBooster/components/BoostedTag'
 import Details from './Details'
 import CellLayout from './CellLayout'
 import Apy, { ApyProps } from './Apy'
+import Liquidity from './Liquidity'
 
 const { FarmAuctionTag, CoreTag } = FarmUI.Tags
-const { Multiplier, Liquidity, Earned } = FarmUI.FarmTable
+const { Multiplier, Earned } = FarmUI.FarmTable
 
 export interface RowProps {
   apy: ApyProps
