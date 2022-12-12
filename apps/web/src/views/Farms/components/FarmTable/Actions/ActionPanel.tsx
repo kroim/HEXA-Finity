@@ -1,6 +1,5 @@
 import { useTranslation } from '@pancakeswap/localization'
 import {
-  LinkExternal,
   Text,
   useMatchBreakpoints,
   Farm as FarmUI,
@@ -8,6 +7,7 @@ import {
   FarmTableMultiplierProps,
   Button,
 } from '@pancakeswap/uikit'
+import LinkExternal from './LinkExternal'
 import { useContext } from 'react'
 import styled, { css, keyframes } from 'styled-components'
 import { getBlockExploreLink } from 'utils'
@@ -102,7 +102,7 @@ const AvailLP = styled.div`
   }
 `
 const HarvestButton = styled(Button)`
-  background: #AABEF0;
+  background: #aabef0;
   color: #041647;
   font-size: 14px;
 `
@@ -161,7 +161,7 @@ const ActionPanel: React.FunctionComponent<React.PropsWithChildren<ActionPanelPr
   return (
     <Container expanded={expanded}>
       <Button variant="secondary" scale="md">
-        <Link href={`/add/${liquidityUrlPathParts}`}>Get LP</Link>
+        <LinkExternal href={`/add/${liquidityUrlPathParts}`}>Get LP</LinkExternal>   
       </Button>
       <AvailLP>
         <div className="title">Available LP</div>
