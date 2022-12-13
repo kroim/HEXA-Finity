@@ -3,13 +3,13 @@ import { ToggleProps, HandleProps, InputProps, ScaleKeys, scales, StyleTogglePro
 
 const scaleKeyValues = {
   sm: {
-    handleHeight: "24px",
-    handleWidth: "24px",
-    handleLeft: "-3px",
-    handleTop: "-3px",
-    checkedLeft: "calc(100% - 20px)",
-    toggleHeight: "18px",
-    toggleWidth: "37px",
+    handleHeight: "26px",
+    handleWidth: "26px",
+    handleLeft: "3px",
+    handleTop: "-1px",
+    checkedLeft: "calc(100% - 30px)",
+    toggleHeight: "23px",
+    toggleWidth: "50px",
   },
   md: {
     handleHeight: "24px",
@@ -38,7 +38,7 @@ const getScale =
   };
 
 export const Handle = styled.div<HandleProps>`
-  background-color: #00C400;
+  background-color: #041647;
   border-radius: 50%;
   cursor: pointer;
   height: ${getScale("handleHeight")};
@@ -73,10 +73,8 @@ export const Input = styled.input<InputProps>`
 
 const StyledToggle = styled.div<StyleToggleProps>`
   align-items: center;
-  /* background-color: ${({ theme, $checked, $checkedColor, $defaultColor }) =>
-    "gray"}; */
-  /* background-color: ${({ theme, $checked, $checkedColor, $defaultColor }) =>
-    theme.colors[$checked ? $checkedColor : $defaultColor]}; */
+  background-color: ${({ theme, $checked, $checkedColor, $defaultColor }) =>
+    $checked ? theme.colors[$checkedColor] : "#C7D6FF"};
   border-radius: 24px;
   box-shadow: ${({ theme }) => theme.shadows.inset};
   cursor: pointer;

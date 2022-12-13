@@ -112,15 +112,9 @@ export const HarvestAction: React.FunctionComponent<React.PropsWithChildren<Harv
   )
 
   return (
-    <FarmTableHarvestAction
-      earnings={earnings}
-      earningsBusd={earningsBusd}
-      displayBalance={displayBalance}
-      pendingTx={pendingTx}
-      userDataReady={userDataReady}
-      proxyCakeBalance={proxyCakeBalance}
-      handleHarvest={onClickHarvestButton}
-    />
+    <div>
+      ${displayBalance}
+    </div>
   )
 }
 

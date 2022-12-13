@@ -1,12 +1,13 @@
 import { useTranslation } from '@pancakeswap/localization'
 import {
-  LinkExternal,
   Text,
   useMatchBreakpoints,
   Farm as FarmUI,
   FarmTableLiquidityProps,
   FarmTableMultiplierProps,
+  Button,
 } from '@pancakeswap/uikit'
+import LinkExternal from './LinkExternal'
 import { useContext } from 'react'
 import styled, { css, keyframes } from 'styled-components'
 import { getBlockExploreLink } from 'utils'
@@ -21,6 +22,8 @@ import Apr, { AprProps } from '../Apr'
 import { HarvestAction, HarvestActionContainer, ProxyHarvestActionContainer } from './HarvestAction'
 import StakedAction, { ProxyStakedContainer, StakedContainer } from './StakedAction'
 import { ActionContainer as ActionContainerSection, ActionContent, ActionTitles } from './styles'
+import ConnectWalletButton from './ConnectWalletButton'
+import Link from 'next/link'
 
 const { Multiplier, Liquidity } = FarmUI.FarmTable
 
@@ -64,57 +67,65 @@ const Container = styled.div<{ expanded }>`
   background: ${({ theme }) => theme.colors.dropdown};
   display: flex;
   width: 100%;
-  flex-direction: column-reverse;
-  padding: 24px;
-
-  ${({ theme }) => theme.mediaQueries.lg} {
-    flex-direction: row;
-    align-items: center;
-    padding: 16px 32px;
-  }
-`
-
-const StyledLinkExternal = styled(LinkExternal)`
-  font-weight: 400;
-`
-
-const StakeContainer = styled.div`
-  color: ${({ theme }) => theme.colors.text};
-  align-items: center;
-  display: flex;
-  justify-content: space-between;
-
-  ${({ theme }) => theme.mediaQueries.sm} {
-    justify-content: flex-start;
-  }
-`
-
-const ActionContainer = styled.div`
-  display: flex;
   flex-direction: column;
-
-  ${({ theme }) => theme.mediaQueries.sm} {
+  padding: 24px;
+  gap: 10px;
+  ${({ theme }) => theme.mediaQueries.md} {
+    gap: 0;
     flex-direction: row;
+    justify-content: space-between;
     align-items: center;
-    flex-grow: 1;
-    flex-basis: 0;
-    flex-wrap: wrap;
+    padding: 30px 40px;
+  }
+  ${({ theme }) => theme.mediaQueries.lg} {
+    padding: 30px 80px;
   }
 `
-
-const InfoContainer = styled.div`
-  min-width: 200px;
+const AvailLP = styled.div`
+  font-family: 'Poppins';
+  color: #798dc6;
+  .title {
+    color: #798dc6;
+    font-size: 12px;
+  }
+  .lp-name {
+    color: rgb(47, 77, 160);
+    font-size: 13px;
+    margin-top: 5px;
+    font-weight: 600;
+  }
+  .balance {
+    color: rgb(47, 77, 160);
+    font-size: 16px;
+    margin-top: 5px;
+    font-weight: bold;
+  }
 `
-
-const ValueContainer = styled.div``
-
-const ValueWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 4px 0px;
+const HarvestButton = styled(Button)`
+  background: #aabef0;
+  color: #041647;
+  font-size: 14px;
 `
-
+const EarnedDiv = styled.div`
+  font-family: 'Poppins';
+  color: #798dc6;
+  .title {
+    color: #798dc6;
+    font-size: 12px;
+  }
+  .bal-hexa {
+    color: rgb(47, 77, 160);
+    font-size: 13px;
+    margin-top: 5px;
+    font-weight: 600;
+  }
+  .balance {
+    color: rgb(47, 77, 160);
+    font-size: 16px;
+    margin-top: 5px;
+    font-weight: bold;
+  }
+`
 const ActionPanel: React.FunctionComponent<React.PropsWithChildren<ActionPanelProps>> = ({
   details,
   apr,
@@ -149,91 +160,41 @@ const ActionPanel: React.FunctionComponent<React.PropsWithChildren<ActionPanelPr
 
   return (
     <Container expanded={expanded}>
-      <InfoContainer>
-        <ValueContainer>
-          {farm.isCommunity && farm.auctionHostingEndDate && (
-            <ValueWrapper>
-              <Text>{t('Auction Hosting Ends')}</Text>
-              <Text paddingLeft="4px">
-                {new Date(farm.auctionHostingEndDate).toLocaleString(locale, {
-                  month: 'short',
-                  day: 'numeric',
-                  year: 'numeric',
-                })}
-              </Text>
-            </ValueWrapper>
+      <Button variant="secondary" scale="md">
+        <LinkExternal href={`/add/${liquidityUrlPathParts}`}>Get LP</LinkExternal>   
+      </Button>
+      <AvailLP>
+        <div className="title">Available LP</div>
+        <div className="lp-name">{lpLabel}</div>
+        <div className="balance">
+          {shouldUseProxyFarm ? (
+            <ProxyHarvestActionContainer {...proxyFarm} userDataReady={userDataReady}>
+              {(props) => <HarvestAction {...props} />}
+            </ProxyHarvestActionContainer>
+          ) : (
+            <HarvestActionContainer {...farm} userDataReady={userDataReady}>
+              {(props) => <HarvestAction {...props} />}
+            </HarvestActionContainer>
           )}
-          {!isDesktop && (
-            <>
-              <ValueWrapper>
-                <Text>{t('APR')}</Text>
-                <Apr {...apr} useTooltipText={false} boosted={farm.boosted} />
-              </ValueWrapper>
-              <ValueWrapper>
-                <Text>{t('Multiplier')}</Text>
-                <Multiplier {...multiplier} />
-              </ValueWrapper>
-              <ValueWrapper>
-                <Text>{t('Liquidity')}</Text>
-                <Liquidity {...liquidity} />
-              </ValueWrapper>
-            </>
+        </div>
+      </AvailLP>
+      <ConnectWalletButton />
+      <HarvestButton>Harvest all</HarvestButton>
+      <EarnedDiv>
+        <div className="title">Earned</div>
+        <div className="bal-hexa">0 HEXA</div>
+        <div className="balance">
+          {shouldUseProxyFarm ? (
+            <ProxyHarvestActionContainer {...proxyFarm} userDataReady={userDataReady}>
+              {(props) => <HarvestAction {...props} />}
+            </ProxyHarvestActionContainer>
+          ) : (
+            <HarvestActionContainer {...farm} userDataReady={userDataReady}>
+              {(props) => <HarvestAction {...props} />}
+            </HarvestActionContainer>
           )}
-        </ValueContainer>
-        {isActive && (
-          <StakeContainer>
-            <StyledLinkExternal href={`/add/${liquidityUrlPathParts}`}>
-              {t('Get %symbol%', { symbol: lpLabel })}
-            </StyledLinkExternal>
-          </StakeContainer>
-        )}
-        <StyledLinkExternal href={bsc}>{t('View Contract')}</StyledLinkExternal>
-        <StyledLinkExternal href={info}>{t('See Pair Info')}</StyledLinkExternal>
-      </InfoContainer>
-      <ActionContainer>
-        {shouldUseProxyFarm ? (
-          <ProxyHarvestActionContainer {...proxyFarm} userDataReady={userDataReady}>
-            {(props) => <HarvestAction {...props} />}
-          </ProxyHarvestActionContainer>
-        ) : (
-          <HarvestActionContainer {...farm} userDataReady={userDataReady}>
-            {(props) => <HarvestAction {...props} />}
-          </HarvestActionContainer>
-        )}
-        {farm?.boosted && (
-          <ActionContainerSection style={{ minHeight: 124.5 }}>
-            <BoostedAction
-              title={(status) => (
-                <ActionTitles>
-                  <Text mr="3px" bold textTransform="uppercase" color="textSubtle" fontSize="12px">
-                    {t('Yield Booster')}
-                  </Text>
-                  <Text bold textTransform="uppercase" color="secondary" fontSize="12px">
-                    {status}
-                  </Text>
-                </ActionTitles>
-              )}
-              desc={(actionBtn) => <ActionContent>{actionBtn}</ActionContent>}
-              farmPid={farm?.pid}
-              lpTotalSupply={farm?.lpTotalSupply}
-              userBalanceInFarm={
-                stakedBalance.plus(tokenBalance).gt(0)
-                  ? stakedBalance.plus(tokenBalance)
-                  : proxy.stakedBalance.plus(proxy.tokenBalance)
-              }
-            />
-          </ActionContainerSection>
-        )}
-        {shouldUseProxyFarm ? (
-          <ProxyStakedContainer {...proxyFarm} userDataReady={userDataReady} lpLabel={lpLabel} displayApr={apr.value}>
-            {(props) => <StakedAction {...props} />}
-          </ProxyStakedContainer>
-        ) : (
-          <StakedContainer {...farm} userDataReady={userDataReady} lpLabel={lpLabel} displayApr={apr.value}>
-            {(props) => <StakedAction {...props} />}
-          </StakedContainer>
-        )}
-      </ActionContainer>
+        </div>
+      </EarnedDiv>
     </Container>
   )
 }
