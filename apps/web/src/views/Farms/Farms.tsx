@@ -46,6 +46,14 @@ import LunchSection from './components/LunchSection'
 import ChooseSection from './components/ChooseSection'
 
 const FarmsPage = styled(Box)`
+  ${({ theme }) => theme.mediaQueries.md} {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  ${({ theme }) => theme.mediaQueries.lg} {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
   margin-left: auto;
   margin-right: auto;
   max-width: 1600px;
@@ -62,10 +70,10 @@ const FarmsWrapper2 = styled.div`
   padding-bottom: 30px;
 `
 const TableContainer = styled(Container)`
-${({ theme }) => theme.mediaQueries.sm} { 
-  margin-left: 0;
-  margin-right: 0;
-}
+  ${({ theme }) => theme.mediaQueries.sm} {
+    margin-left: 0;
+    margin-right: 0;
+  }
 `
 const ControlContainer = styled.div`
   display: flex;
@@ -80,7 +88,7 @@ const ControlContainer = styled.div`
   ${({ theme }) => theme.mediaQueries.sm} {
     flex-direction: row;
     flex-wrap: wrap;
-    padding: 40px 0;    
+    padding: 40px 0;
     margin-bottom: 0;
   }
 `
@@ -374,7 +382,7 @@ const Farms: React.FC<React.PropsWithChildren> = ({ children }) => {
   return (
     <FarmsContext.Provider value={{ chosenFarmsMemoized }}>
       <HeroSection />
-      <FarmsPage px={['16px', '24px']}>
+      <FarmsPage>
         <FarmsWrapper1>
           <Container>
             <ControlContainer>
@@ -478,9 +486,9 @@ const Farms: React.FC<React.PropsWithChildren> = ({ children }) => {
                 <Loading />
               </Flex>
             )}
-            {poolLength && <div ref={observerRef} />}          
+            {poolLength && <div ref={observerRef} />}
           </Container>
-        </FarmsWrapper1>       
+        </FarmsWrapper1>
       </FarmsPage>
     </FarmsContext.Provider>
   )
