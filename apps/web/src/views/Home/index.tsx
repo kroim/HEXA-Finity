@@ -205,7 +205,7 @@ const Home: React.FC<React.PropsWithChildren> = () => {
             </Link>
           </TradeLeftArea>
           <TradeRightArea>
-            <img src="/images/perpetual.png" alt="perpetual" />
+            <img src="/images/home/banner.png" alt="perpetual" />
           </TradeRightArea>
         </TradeView>
         {/* <Hero /> */}
