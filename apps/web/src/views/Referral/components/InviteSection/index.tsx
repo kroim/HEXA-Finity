@@ -3,7 +3,7 @@ import { Box, Flex, Text, Heading, Link, Image, useMatchBreakpoints, Button } fr
 import { useTranslation } from '@pancakeswap/localization'
 import Container from 'components/Layout/Container'
 
-const InviteContainer = styled(Flex)`
+const InviteContent = styled(Flex)`
   width: 100%;
   align-items: center;
   grid-gap: 36px;
@@ -206,11 +206,11 @@ const InviteSection: React.FC<React.PropsWithChildren> = () => {
         >
           {t('How to Invite Friends')}
         </Heading>
-        <InviteContainer>
+        <InviteContent>
           {items.map((item, index) => (
             <InviteItem key={index} item={item} />
           ))}
-        </InviteContainer>
+        </InviteContent>
       </Box>
     </Container>
   )

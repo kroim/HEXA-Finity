@@ -4,7 +4,6 @@ import { Image, Heading, Text, Button, Flex, Link, Box, useMatchBreakpoints } fr
 import Container from 'components/Layout/Container'
 
 const HeroWapper = styled(Box)`
-  margin-top: 16px;
   ${({ theme }) => theme.mediaQueries.md} {
     margin-top: 30px;
   }
