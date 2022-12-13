@@ -11,7 +11,7 @@ interface TokenPairImageProps extends Omit<UIKitTokenPairImageProps, 'primarySrc
   secondaryToken: Token
 }
 
-const getImageUrlFromToken = (token: Token) => {
+export const getImageUrlFromToken = (token: Token) => {
   const address = token?.isNative ? token.wrapped.address : token.address
   if (token.chainId !== ChainId.BSC) {
     return `/images/${token.chainId}/tokens/${address}.png`

@@ -36,7 +36,7 @@ export function Apr<T>({
   pool,
   showIcon,
   stakedBalance,
-  fontSize = "16px",
+  fontSize = "14px",
   performanceFee = 0,
   shouldShowApr,
   account,
@@ -95,17 +95,13 @@ export function Apr<T>({
                   if (!showIcon) return;
                   openRoiModal(event);
                 }}
+                color='#FFF'
                 fontSize={fontSize}
                 isDisabled={isFinished}
                 value={isFinished ? 0 : apr ?? 0}
                 decimals={2}
                 unit="%"
               />
-              {!isFinished && showIcon && (
-                <Button onClick={openRoiModal} variant="text" width="20px" height="20px" padding="0px" marginLeft="4px">
-                  <CalculateIcon color="textSubtle" width="20px" />
-                </Button>
-              )}
             </>
           ) : (
             <Text>-</Text>

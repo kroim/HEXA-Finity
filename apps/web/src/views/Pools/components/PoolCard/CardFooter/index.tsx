@@ -37,7 +37,7 @@ const ExpandedWrapper = styled(Flex)`
 `
 
 const Footer: React.FC<React.PropsWithChildren<FooterProps>> = ({ pool, account, defaultExpanded, accountHasSharesStaked, isLoading, performanceFee, children }) => {
-  const { vaultKey } = pool
+  const { vaultKey, sousId, isFinished } = pool
   const { t } = useTranslation()
   const [isExpanded, setIsExpanded] = useState(defaultExpanded || false)
 
@@ -51,6 +51,7 @@ const Footer: React.FC<React.PropsWithChildren<FooterProps>> = ({ pool, account,
               accountHasSharesStaked={accountHasSharesStaked}
               isLoading={isLoading}
               performanceFee={performanceFee}
+              isFinished={isFinished && sousId !== 0}
             />
           ) : (
             <>

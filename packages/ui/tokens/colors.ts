@@ -57,6 +57,8 @@ export const lightColors = {
   poolText: '#798DC6',
   poolButtonText: '#2F4DA0',
   poolActive: '#00A478',
+  harvestActive: '#00C400',
+  harvestDisable: '0xB3EDB3',
 }
 
 export const darkColors = {
@@ -94,4 +96,6 @@ export const darkColors = {
   poolText: '#798DC6',
   poolButtonText: '#2F4DA0',
   poolActive: '#00A478',
+  harvestActive: '#00C400',
+  harvestDisable: '0xB3EDB3',
 }

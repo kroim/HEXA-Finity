@@ -1,5 +1,4 @@
 import BigNumber from 'bignumber.js'
-
 import styled from 'styled-components'
 import { Flex, Text, Box, Pool } from '@pancakeswap/uikit'
 import { useTranslation } from '@pancakeswap/localization'
@@ -10,18 +9,15 @@ import VaultApprovalAction from './VaultApprovalAction'
 import VaultStakeActions from './VaultStakeActions'
 import { useCheckVaultApprovalStatus } from '../../../hooks/useApprove'
 
-const InlineText = styled(Text)`
-  display: inline;
-`
-
 const CakeVaultCardActions: React.FC<
   React.PropsWithChildren<{
     pool: Pool.DeserializedPool<Token>
     accountHasSharesStaked: boolean
     isLoading: boolean
     performanceFee: number
+    isFinished: boolean
   }>
-> = ({ pool, accountHasSharesStaked, isLoading, performanceFee }) => {
+> = ({ pool, accountHasSharesStaked, isLoading, performanceFee, isFinished }) => {
   const { stakingToken, userData } = pool
   const { t } = useTranslation()
   const stakingTokenBalance = userData?.stakingTokenBalance ? new BigNumber(userData.stakingTokenBalance) : BIG_ZERO
@@ -39,7 +35,7 @@ const CakeVaultCardActions: React.FC<
             performanceFee={performanceFee}
           />
         ) : (
-          <VaultApprovalAction vaultKey={pool.vaultKey} isLoading={isLoading} setLastUpdated={setLastUpdated} />
+          <VaultApprovalAction vaultKey={pool.vaultKey} isLoading={isLoading} setLastUpdated={setLastUpdated} isFinished={isFinished} />
         )}
       </Flex>
     </Flex>

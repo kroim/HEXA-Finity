@@ -4,19 +4,13 @@ import ConnectWalletButton from 'components/ConnectWalletButton'
 import { useTranslation } from '@pancakeswap/localization'
 import { useVaultPoolByKey } from 'state/pools/hooks'
 import { VaultKey, DeserializedLockedCakeVault, DeserializedCakeVault } from 'state/types'
-import styled from 'styled-components'
 import { Token } from '@pancakeswap/sdk'
-
+import styled from 'styled-components'
 import CardFooter from '../PoolCard/CardFooter'
 import { VaultPositionTagWithLabel } from '../Vault/VaultPositionTag'
 import { StakingApy } from './StakingApy'
 import VaultCardActions from './VaultCardActions'
 import LockedStakingApy from '../LockedPool/LockedStakingApy'
-
-const StyledCardBody = styled(CardBody) <{ isLoading: boolean }>`
-  min-height: ${({ isLoading }) => (isLoading ? '0' : '254px')};
-  padding: 12px;
-`
 
 interface CakeVaultProps extends CardProps {
   pool: Pool.DeserializedPool<Token>
@@ -36,6 +30,11 @@ interface CakeVaultDetailProps {
   showICake?: boolean
   performanceFeeAsDecimal: number
 }
+
+const StyledCardBody = styled(CardBody) <{ isLoading: boolean }>`
+  min-height: ${({ isLoading }) => (isLoading ? '0' : '254px')};
+  padding: 12px;
+`
 
 export const CakeVaultDetail: React.FC<React.PropsWithChildren<CakeVaultDetailProps>> = ({
   isLoading = false,
@@ -77,7 +76,7 @@ export const CakeVaultDetail: React.FC<React.PropsWithChildren<CakeVaultDetailPr
               <TokenPoolImage primarySrc='/img/launchpools/hero-back-2.png' secondarySrc='' width={92} height={92} />
               <Flex flexDirection="column">
                 <Flex>
-                  <Heading color={"body"} scale="lg" textAlign={'center'}>
+                  <Heading color={"body"} fontSize="22px" textAlign={'center'}>
                     Holder Pool
                     {tooltipVisible && tooltip}
                   </Heading>
@@ -86,7 +85,7 @@ export const CakeVaultDetail: React.FC<React.PropsWithChildren<CakeVaultDetailPr
                   </Flex>
                 </Flex>
 
-                <Text fontSize="14px" color={"poolText"} textAlign='center'>Stake HEXA - Earn HEXA</Text>
+                <Text fontSize="14px" mt="4px" color={"poolText"} textAlign='center'>Stake HEXA - Earn HEXA</Text>
               </Flex>
               <Text style={{ color: '#00A478', fontSize: 12 }}>+ {t('participate in exclusive offers')}</Text>
             </Pool.PoolCardHeader>
@@ -119,7 +118,7 @@ const CakeVaultCard: React.FC<React.PropsWithChildren<CakeVaultProps>> = ({
   }
 
   return (
-    <Pool.StyledPoolCard isActive {...props} id='vault-card'>
+    <Pool.StyledPoolCard isActive {...props}>
       <CakeVaultDetail
         isLoading={isLoading}
         account={account}

@@ -1,20 +1,20 @@
 import styled from 'styled-components'
 import { useAccount } from 'wagmi'
 import {
-  Heading, Flex, Image, Text, Link, CustomFlexLayout, PageHeader, Loading, Pool, Box,
-  CustomButtonMenu, ButtonMenuItem, NextLinkFromReactRouter
+  Flex, Image, Text, CustomFlexLayout, PageHeader, Loading, Pool, Box,
+  CustomButtonMenu, ButtonMenuItem, NextLinkFromReactRouter, TokenPoolImage
 } from '@pancakeswap/uikit'
 import { useTranslation } from '@pancakeswap/localization'
 import { usePoolsPageFetch, usePoolsWithVault } from 'state/pools/hooks'
 import Page from 'components/Layout/Page'
-import ConnectWalletButton from 'components/ConnectWalletButton'
 import { Token } from '@pancakeswap/sdk'
-import { TokenPairImage } from 'components/TokenImage'
+import { TokenPairImage, getImageUrlFromToken } from 'components/TokenImage'
 import CardActions from './components/PoolCard/CardActions'
 import AprRow from './components/PoolCard/AprRow'
 import CardFooter from './components/PoolCard/CardFooter'
 import CakeVaultCard from './components/CakeVaultCard'
 import PoolControls from './components/PoolControls'
+import { StakingApy } from './components/CakeVaultCard/StakingApy'
 import { colors } from './CustomColors'
 
 const CardLayout = styled(CustomFlexLayout)`
@@ -118,7 +118,7 @@ const Pools: React.FC<React.PropsWithChildren> = () => {
                 </Flex>
               </Flex>
               <Flex id='hero-card-image'>
-                <img src='/img/launchpools/hero-back-2.png' />
+                <img src='/img/launchpools/hero-logo.png' />
               </Flex>
             </HeroCard>
           </Flex>
@@ -159,37 +159,33 @@ const Pools: React.FC<React.PropsWithChildren> = () => {
                         cardContent={
                           account ? (
                             <CardActions pool={pool} stakedBalance={pool?.userData?.stakedBalance} />
-                          ) : (
-                            <>
-                              <Text mb="10px" textTransform="uppercase" fontSize="12px" color="textSubtle" bold>
-                                {t('Start earning')}
-                              </Text>
-                              <ConnectWalletButton />
-                            </>
-                          )
+                          ) : <></>
                         }
                         tokenPairImage={
-                          <TokenPairImage
-                            primaryToken={pool.earningToken}
-                            secondaryToken={pool.stakingToken}
-                            width={64}
-                            height={64}
+                          <TokenPoolImage
+                            primarySrc={getImageUrlFromToken(pool.earningToken)}
+                            secondarySrc={getImageUrlFromToken(pool.stakingToken)}
+                            width={92}
+                            height={92}
                           />
                         }
                         cardFooter={<CardFooter pool={pool} account={account} />}
-                        aprRow={<AprRow pool={pool} stakedBalance={pool?.userData?.stakedBalance} />}
+                        aprRow={<Flex flexDirection="row" style={{padding: '12px 0 0 12px'}}>
+                          <div style={{ flex: 1 }}><AprRow pool={pool} stakedBalance={pool?.userData?.stakedBalance} /></div>
+                          <div style={{ flex: 1 }}></div>
+                        </Flex>}
                       />
                     ),
                   )}
                 </CardLayout>
-                <Image
+                {/* <Image
                   mx="auto"
                   mt="12px"
                   src="/images/decorations/3d-syrup-bunnies.png"
                   alt="Pancake illustration"
                   width={192}
                   height={184.5}
-                />
+                /> */}
               </>
             )}
           </PoolControls>

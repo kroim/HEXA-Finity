@@ -91,15 +91,15 @@ const PoolStatsInfo: React.FC<React.PropsWithChildren<ExpandedFooterProps>> = ({
       )}
       {shouldShowBlockCountdown && (
         <Flex mb="2px" justifyContent="space-between" alignItems="center">
-          <Text small>{hasPoolStarted ? t('Ends in') : t('Starts in')}:</Text>
+          <Text small color='poolText' style={{fontSize: '12px'}}>{hasPoolStarted ? t('Ends in') : t('Starts in')}</Text>
           {blocksRemaining || blocksUntilStart ? (
             <Flex alignItems="center">
               <Link external href={getBlockExploreLink(hasPoolStarted ? endBlock : startBlock, 'countdown')}>
-                <Balance small value={blocksToDisplay} decimals={0} color="primary" />
-                <Text small ml="4px" color="primary" textTransform="lowercase">
-                  {t('Blocks')}
+                <Balance small value={blocksToDisplay} decimals={0} color="poolText" />
+                <Text small ml="4px" color="poolText" textTransform="lowercase">
+                  {t('Block')}
                 </Text>
-                <TimerIcon ml="4px" color="primary" />
+                {/* <TimerIcon ml="4px" color="primary" /> */}
               </Link>
             </Flex>
           ) : (
