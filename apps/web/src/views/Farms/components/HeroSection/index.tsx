@@ -96,7 +96,7 @@ const HeroSection = (props) => {
               </div>
             </HeroLeftArea>
             <HeroRightArea>
-              <img src="/images/farms/hero-right.png" alt="perpetual" />
+              <img src="/images/farms/banner.png" alt="perpetual" />
             </HeroRightArea>
           </HeroContainer>
         </HeroView>
@@ -127,7 +127,7 @@ const HeroSection = (props) => {
             </div>
           </HeroLeftArea>
           <HeroRightArea>
-            <img src="/images/farms/hero-right.png" alt="perpetual" />
+            <img src="/images/farms/banner.png" alt="perpetual" />
           </HeroRightArea>
         </HeroContainer>
       </HeroView>
