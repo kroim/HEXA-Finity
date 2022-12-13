@@ -39,7 +39,10 @@ const HeroLeftArea = styled.div`
     font-size: 33px;
     font-family: 'Poppins';
     font-weight: 500;
-    line-height: 64px;
+    line-height: 50px;
+    ${({ theme }) => theme.mediaQueries.md} {
+      line-height: 64px;
+    }
     color: #ffffff;
   }
   p {
@@ -81,8 +84,8 @@ const HeroSection = (props) => {
             <HeroLeftArea>
               <h2>{t('Invite your friends. Earn cryptocurrency together')}</h2>
               <p>
-                Earn up to <span style={{color: '#11A9FF'}}>20%</span> from friends’ swap commission on Hexa Finity and 5% from their earnings on Farms &
-                Launchpools
+                Earn up to <span style={{ color: '#11A9FF' }}>20%</span> from friends’ swap commission on Hexa Finity
+                and 5% from their earnings on Farms & Launchpools
               </p>
               <div style={{ marginTop: '30px' }}>
                 <Button width={199} height={54}>
@@ -107,25 +110,22 @@ const HeroSection = (props) => {
       <HeroView style={{ borderTopLeftRadius: 0, borderTopRightRadius: 0 }}>
         <HeroContainer>
           <HeroLeftArea>
-            <h2>Farms</h2>
+            <h2>Invite your friends. Earn cryptocurrency together</h2>
             <p>
-              Hexa Finity Farms offer multiple farming opportunities to you. Get double rewards by staking your LP
-              tokens in return for additional HEXA tokens and earning high income from swap transactions.{' '}
-              <Link external ellipsis href="/" style={{ display: 'inline', color: '#11A9FF' }}>
-                Learn how to start
-              </Link>
+              Earn up to <span style={{ color: '#11A9FF' }}>20%</span> from friends’ swap commission on Hexa Finity and
+              5% from their earnings on Farms & Launchpools
             </p>
             <div style={{ marginTop: '30px' }}>
               <Button width={199} height={54}>
                 <Text color="invertedContrast" bold fontSize="16px" mr="10px">
-                  {t('Add project')}
+                  {t('Invite Friends')}
                 </Text>
                 <Image src="/images/farms/add.png" alt="add" width={12} height={12} />
               </Button>
             </div>
           </HeroLeftArea>
           <HeroRightArea>
-            <img src="/images/farms/hero-right.png" alt="perpetual" />
+            <img src="/images/referral/banner.png" alt="banner" />
           </HeroRightArea>
         </HeroContainer>
       </HeroView>
