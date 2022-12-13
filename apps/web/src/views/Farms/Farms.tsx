@@ -141,10 +141,13 @@ const ViewControls = styled.div`
     padding: 8px 0px;
   }
 
+  margin-bottom: 20px;
+  ${({ theme }) => theme.mediaQueries.lg} {
+    margin-bottom: 0;
+  }
   ${({ theme }) => theme.mediaQueries.sm} {
     justify-content: flex-start;
     width: auto;
-
     > div {
       padding: 0;
     }

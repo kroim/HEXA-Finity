@@ -134,7 +134,7 @@ const Row: React.FunctionComponent<React.PropsWithChildren<RowPropsWithLoading>>
                 return (
                   <td key={key}>
                     {userDataReady ? (
-                      <CellInner style={{ width: '140px' }}>             
+                      <CellInner style={{ width: '140px', paddingLeft: '30px' }}>             
                         {props?.details?.boosted ? <BoostedTag scale="sm" /> : props[key] === 'community' ? <FarmAuctionTag scale="sm" /> : <CoreTag scale="sm" />}             
                       </CellInner>
                     ) : (
@@ -198,16 +198,7 @@ const Row: React.FunctionComponent<React.PropsWithChildren<RowPropsWithLoading>>
         <tr style={{ cursor: 'pointer' }} onClick={toggleActionPanel}>
           <FarmMobileCell colSpan={3}>
             <Flex justifyContent="space-between" alignItems="center">
-              {props.type === 'community' ? (
-                <FarmAuctionTag marginRight="16px" scale="sm" />
-              ) : (
-                <Box style={{ marginRight: '16px' }}>
-                  <CoreTag scale="sm" />
-                  {props?.details?.boosted ? (
-                    <BoostedTag style={{ verticalAlign: 'bottom' }} scale="sm" ml="4px" />
-                  ) : null}
-                </Box>
-              )}
+              {props?.details?.boosted ? <BoostedTag scale="sm" marginLeft="16px" /> : props.type === 'community' ? <FarmAuctionTag scale="sm" marginLeft="16px" /> : <CoreTag scale="sm" marginLeft="16px" />}
               <Farm {...props.farm} />
             </Flex>
           </FarmMobileCell>
