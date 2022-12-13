@@ -25,6 +25,11 @@ const Container = styled.div`
   border-radius: 16px;
   margin: 16px 0px;
   border: 1px solid ${({ theme }) => theme.colors.cardBorder};
+  overflow: hidden;
+  height: 600px;
+  ${({ theme }) => theme.mediaQueries.sm} {
+    height: 1000px;
+  }
 `
 
 const TableWrapper = styled.div`
@@ -56,6 +61,12 @@ const TableBody = styled.tbody`
 
 const TableContainer = styled.div`
   position: relative;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  padding-right: 17px;
+  padding-bottom: 17px;
+  box-sizing: content-box;
 `
 
 const FarmTable: React.FC<React.PropsWithChildren<ITableProps>> = ({ farms, cakePrice, userDataReady }) => {
@@ -112,6 +123,19 @@ const FarmTable: React.FC<React.PropsWithChildren<ITableProps>> = ({ farms, cake
     const lowercaseQuery = latinise(typeof query?.search === 'string' ? query.search.toLowerCase() : '')
     const initialActivity = latinise(lpLabel?.toLowerCase()) === lowercaseQuery
     const row: RowProps = {
+      apy: {
+        value: getDisplayApr(farm.apr, farm.lpRewardsApr),
+        pid: farm.pid,
+        multiplier: farm.multiplier,
+        lpLabel,
+        lpSymbol: farm.lpSymbol,
+        lpTokenPrice: farm.lpTokenPrice,
+        tokenAddress,
+        quoteTokenAddress,
+        cakePrice,
+        lpRewardsApy: farm.lpRewardsApr,
+        originalValue: farm.apr,
+      },
       apr: {
         value: getDisplayApr(farm.apr, farm.lpRewardsApr),
         pid: farm.pid,
@@ -169,25 +193,29 @@ const FarmTable: React.FC<React.PropsWithChildren<ITableProps>> = ({ farms, cake
   const sortedRows = rowData.map(generateSortedRow)
 
   return (
-    <Container id="farms-table">
-      <TableContainer id="table-container">
-        <TableWrapper ref={tableWrapperEl}>
-          <StyledTable>
-            <TableBody>
-              {sortedRows.map((row) => {
-                return row?.details?.boosted ? (
-                  <ProxyFarmContainer key={`table-row-${row.farm.pid}`} farm={row.details}>
-                    <Row {...row} userDataReady={userDataReady} />
-                  </ProxyFarmContainer>
-                ) : (
-                  <Row {...row} userDataReady={userDataReady} key={`table-row-${row.farm.pid}`} />
-                )
-              })}
-            </TableBody>
-          </StyledTable>
-        </TableWrapper>
-      </TableContainer>
-    </Container>
+    <>
+      {sortedRows.length > 0 && (
+        <Container id="farms-table">
+          <TableContainer id="table-container">
+            <TableWrapper ref={tableWrapperEl}>
+              <StyledTable>
+                <TableBody>
+                  {sortedRows.map((row) => {
+                    return row?.details?.boosted ? (
+                      <ProxyFarmContainer key={`table-row-${row.farm.pid}`} farm={row.details}>
+                        <Row {...row} userDataReady={userDataReady} />
+                      </ProxyFarmContainer>
+                    ) : (
+                      <Row {...row} userDataReady={userDataReady} key={`table-row-${row.farm.pid}`} />
+                    )
+                  })}
+                </TableBody>
+              </StyledTable>
+            </TableWrapper>
+          </TableContainer>
+        </Container>
+      )}
+    </>
   )
 }
 

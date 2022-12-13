@@ -21,11 +21,17 @@ import ActionPanel from './Actions/ActionPanel'
 import { DesktopColumnSchema, MobileColumnSchema, FarmWithStakedValue } from '../types'
 import BoostedApr from '../YieldBooster/components/BoostedApr'
 import BoostedTag from '../YieldBooster/components/BoostedTag'
+import CoreTag from '../YieldBooster/components/CoreTag'
+import Details from './Details'
+import CellLayout from './CellLayout'
+import Apy, { ApyProps } from './Apy'
+import Liquidity from './Liquidity'
 
-const { FarmAuctionTag, CoreTag } = FarmUI.Tags
-const { CellLayout, Details, Multiplier, Liquidity, Earned } = FarmUI.FarmTable
+const { FarmAuctionTag } = FarmUI.Tags
+const { Multiplier, Earned } = FarmUI.FarmTable
 
 export interface RowProps {
+  apy: ApyProps
   apr: AprProps
   farm: FarmTableFarmTokenInfoProps
   earned: FarmTableEarnedProps
@@ -41,6 +47,7 @@ interface RowPropsWithLoading extends RowProps {
 }
 
 const cells = {
+  apy: Apy,
   apr: Apr,
   farm: Farm,
   earned: Earned,
@@ -50,6 +57,7 @@ const cells = {
 }
 
 const CellInner = styled.div`
+  margin-left: 0;
   padding: 24px 0px;
   display: flex;
   width: 100%;
@@ -104,7 +112,7 @@ const Row: React.FunctionComponent<React.PropsWithChildren<RowPropsWithLoading>>
       hasSetInitialValue.current = true
     }
   }, [initialActivity])
-
+ 
   const { isDesktop, isMobile } = useMatchBreakpoints()
 
   const isSmallerScreen = !isDesktop
@@ -126,9 +134,8 @@ const Row: React.FunctionComponent<React.PropsWithChildren<RowPropsWithLoading>>
                 return (
                   <td key={key}>
                     {userDataReady ? (
-                      <CellInner style={{ width: '140px' }}>
-                        {props[key] === 'community' ? <FarmAuctionTag scale="sm" /> : <CoreTag scale="sm" />}
-                        {props?.details?.boosted ? <BoostedTag scale="sm" ml="16px" /> : null}
+                      <CellInner style={{ width: '140px', paddingLeft: '30px' }}>             
+                        {props?.details?.boosted ? <BoostedTag scale="sm" /> : props[key] === 'community' ? <FarmAuctionTag scale="sm" /> : <CoreTag scale="sm" />}             
                       </CellInner>
                     ) : (
                       <Skeleton width={60} height={24} />
@@ -145,6 +152,17 @@ const Row: React.FunctionComponent<React.PropsWithChildren<RowPropsWithLoading>>
                     </CellInner>
                   </td>
                 )
+              case 'apy':
+                return (
+                  <td key={key}>
+                    <CellInner>
+                      <CellLayout label={t('APY')}>
+                        <div style={{marginRight: '10px', fontSize: '12px', color: '#0EA9FF'}}>164.07%</div> 
+                        <img src='/images/farms/question.png' />                   
+                      </CellLayout>
+                    </CellInner>
+                  </td>
+                )
               case 'apr':
                 return (
                   <td key={key}>
@@ -155,20 +173,7 @@ const Row: React.FunctionComponent<React.PropsWithChildren<RowPropsWithLoading>>
                           hideButton={isSmallerScreen}
                           strikethrough={props?.details?.boosted}
                           boosted={props?.details?.boosted}
-                        />
-                        {props?.details?.boosted && userDataReady ? (
-                          <BoostedApr
-                            lpRewardsApr={props?.apr?.lpRewardsApr}
-                            apr={props?.apr?.originalValue}
-                            pid={props.farm?.pid}
-                            lpTotalSupply={props.details?.lpTotalSupply}
-                            userBalanceInFarm={
-                              stakedBalance.plus(tokenBalance).gt(0)
-                                ? stakedBalance.plus(tokenBalance)
-                                : proxy.stakedBalance.plus(proxy.tokenBalance)
-                            }
-                          />
-                        ) : null}
+                        />                
                       </CellLayout>
                     </CellInner>
                   </td>
@@ -188,35 +193,25 @@ const Row: React.FunctionComponent<React.PropsWithChildren<RowPropsWithLoading>>
         </StyledTr>
       )
     }
-
     return (
       <>
         <tr style={{ cursor: 'pointer' }} onClick={toggleActionPanel}>
           <FarmMobileCell colSpan={3}>
             <Flex justifyContent="space-between" alignItems="center">
+              {props?.details?.boosted ? <BoostedTag scale="sm" marginLeft="16px" /> : props.type === 'community' ? <FarmAuctionTag scale="sm" marginLeft="16px" /> : <CoreTag scale="sm" marginLeft="16px" />}
               <Farm {...props.farm} />
-              {props.type === 'community' ? (
-                <FarmAuctionTag marginRight="16px" scale="sm" />
-              ) : (
-                <Box style={{ marginRight: '16px' }}>
-                  <CoreTag scale="sm" />
-                  {props?.details?.boosted ? (
-                    <BoostedTag style={{ verticalAlign: 'bottom' }} scale="sm" ml="4px" />
-                  ) : null}
-                </Box>
-              )}
             </Flex>
           </FarmMobileCell>
         </tr>
         <StyledTr onClick={toggleActionPanel}>
-          <td width="33%">
+          <td width="30%">
             <EarnedMobileCell>
               <CellLayout label={t('Earned')}>
                 <Earned {...props.earned} userDataReady={userDataReady} />
               </CellLayout>
             </EarnedMobileCell>
           </td>
-          <td width="33%">
+          <td width="30%">
             <AprMobileCell>
               <CellLayout label={t('APR')}>
                 <Apr
@@ -224,25 +219,12 @@ const Row: React.FunctionComponent<React.PropsWithChildren<RowPropsWithLoading>>
                   hideButton
                   strikethrough={props?.details?.boosted}
                   boosted={props?.details?.boosted}
-                />
-                {props?.details?.boosted && userDataReady ? (
-                  <BoostedApr
-                    lpRewardsApr={props?.apr?.lpRewardsApr}
-                    apr={props?.apr?.originalValue}
-                    pid={props.farm?.pid}
-                    lpTotalSupply={props.details?.lpTotalSupply}
-                    userBalanceInFarm={
-                      stakedBalance.plus(tokenBalance).gt(0)
-                        ? stakedBalance.plus(tokenBalance)
-                        : proxy.stakedBalance.plus(proxy.tokenBalance)
-                    }
-                  />
-                ) : null}
+                />                
               </CellLayout>
             </AprMobileCell>
           </td>
-          <td width="33%">
-            <CellInner style={{ justifyContent: 'flex-end' }}>
+          <td width="30%">
+            <CellInner style={{ }}>
               <Details actionPanelToggled={actionPanelExpanded} />
             </CellInner>
           </td>

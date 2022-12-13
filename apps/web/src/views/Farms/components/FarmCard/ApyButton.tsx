@@ -9,6 +9,7 @@ import { useFarmFromPid, useFarmUser } from 'state/farms/hooks'
 import { YieldBoosterStateContext } from '../YieldBooster/components/ProxyFarmContainer'
 import useBoostMultiplier from '../YieldBooster/hooks/useBoostMultiplier'
 import { useGetBoostedMultiplier } from '../YieldBooster/hooks/useGetBoostedAPR'
+import { FarmApyButton } from './FarmApyButton'
 
 export interface ApyButtonProps {
   variant: 'text' | 'text-and-button'
@@ -129,7 +130,7 @@ const ApyButton: React.FC<React.PropsWithChildren<ApyButtonProps>> = ({
   )
 
   return (
-    <FarmUI.FarmApyButton
+    <FarmApyButton
       variant={variant}
       hideButton={hideButton}
       strikethrough={strikethrough}
@@ -145,7 +146,7 @@ const ApyButton: React.FC<React.PropsWithChildren<ApyButtonProps>> = ({
       ) : (
         <>{displayApr}%</>
       )}
-    </FarmUI.FarmApyButton>
+    </FarmApyButton>
   )
 }
 
