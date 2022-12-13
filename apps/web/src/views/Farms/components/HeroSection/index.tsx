@@ -4,8 +4,10 @@ import { Image, Heading, Text, Button, Flex, Link, Box, useMatchBreakpoints } fr
 import Container from 'components/Layout/Container'
 
 const HeroWapper = styled(Box)`
-  margin-top: 16px;
   ${({ theme }) => theme.mediaQueries.md} {
+    margin-top: 16px;
+  }
+  ${({ theme }) => theme.mediaQueries.lg} {
     margin-top: 30px;
   }
   margin-left: auto;
@@ -96,7 +98,7 @@ const HeroSection = (props) => {
               </div>
             </HeroLeftArea>
             <HeroRightArea>
-              <img src="/images/farms/hero-right.png" alt="perpetual" />
+              <img src="/images/farms/banner.png" alt="perpetual" />
             </HeroRightArea>
           </HeroContainer>
         </HeroView>
@@ -127,7 +129,7 @@ const HeroSection = (props) => {
             </div>
           </HeroLeftArea>
           <HeroRightArea>
-            <img src="/images/farms/hero-right.png" alt="perpetual" />
+            <img src="/images/farms/banner.png" alt="perpetual" />
           </HeroRightArea>
         </HeroContainer>
       </HeroView>
