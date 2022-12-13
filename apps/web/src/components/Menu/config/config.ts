@@ -51,18 +51,18 @@ const config: (
       showItemsOnMobile: false,
       items: [
         {
-          label: t('Swap'),
+          label: t('Exchange'),
           href: '/swap',
+        },
+        {
+          label: t('Liquidity'),
+          href: '/liquidity',
         },
         {
           label: t('Limit'),
           href: '/limit-orders',
           supportChainIds: SUPPORT_ONLY_BSC,
           image: '/images/decorations/3d-coin.png',
-        },
-        {
-          label: t('Liquidity'),
-          href: '/liquidity',
         },
         {
           label: t('Perpetual'),
@@ -91,9 +91,13 @@ const config: (
           href: '/farms',
         },
         {
-          label: t('Pools'),
+          label: t('Launchpools'),
           href: '/pools',
           supportChainIds: SUPPORT_ONLY_BSC,
+        },
+        {
+          label: t('Referral Program'),
+          href: '/referral',
         },
       ].map((item) => addMenuItemSupported(item, chainId)),
     },
@@ -105,26 +109,16 @@ const config: (
       supportChainIds: SUPPORT_ONLY_BSC,
       items: [
         {
-          label: t('Trading Competition'),
+          label: t('Competitions'),
           href: '/competition',
           image: '/images/decorations/tc.png',
           hideSubNav: true,
         },
         {
-          label: t('Prediction (BETA)'),
-          href: '/prediction',
-          image: '/images/decorations/prediction.png',
-        },
-        {
           label: t('Lottery'),
           href: '/lottery',
           image: '/images/decorations/lottery.png',
-        },
-        {
-          label: t('Pottery (BETA)'),
-          href: '/pottery',
-          image: '/images/decorations/lottery.png',
-        },
+        }
       ],
     },
     {
@@ -150,49 +144,27 @@ const config: (
       ],
     },
     {
-      label: '',
-      href: '/info',
+      label: 'More',
+      href: '/more',
       icon: MoreIcon,
       hideSubNav: true,
       items: [
         {
-          label: t('Info'),
-          href: '/info',
+          label: t('$10M Program'),
+          href: '/program',
         },
         {
-          label: t('IFO'),
-          href: '/ifo',
+          label: t('News'),
+          href: '/news',
           supportChainIds: SUPPORT_ONLY_BSC,
           image: '/images/ifos/ifo-bunny.png',
         },
         {
-          label: t('Voting'),
-          href: '/voting',
+          label: t('About HF'),
+          href: '/aboutHF',
           supportChainIds: SUPPORT_ONLY_BSC,
           image: '/images/voting/voting-bunny.png',
-        },
-        {
-          type: DropdownMenuItemType.DIVIDER,
-        },
-        {
-          label: t('Leaderboard'),
-          href: '/teams',
-          supportChainIds: SUPPORT_ONLY_BSC,
-          image: '/images/decorations/leaderboard.png',
-        },
-        {
-          type: DropdownMenuItemType.DIVIDER,
-        },
-        {
-          label: t('Blog'),
-          href: 'https://medium.com/pancakeswap',
-          type: DropdownMenuItemType.EXTERNAL_LINK,
-        },
-        {
-          label: t('Docs'),
-          href: 'https://docs.pancakeswap.finance',
-          type: DropdownMenuItemType.EXTERNAL_LINK,
-        },
+        }
       ].map((item) => addMenuItemSupported(item, chainId)),
     },
   ].map((item) => addMenuItemSupported(item, chainId))

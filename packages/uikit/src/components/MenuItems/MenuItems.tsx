@@ -12,6 +12,7 @@ const MenuItems: React.FC<React.PropsWithChildren<MenuItemsProps>> = ({
   activeSubItem,
   ...props
 }) => {
+  console.log("items", items);
   return (
     <Flex {...props}>
       {items.map(({ label, items: menuItems = [], href, icon, disabled }) => {
