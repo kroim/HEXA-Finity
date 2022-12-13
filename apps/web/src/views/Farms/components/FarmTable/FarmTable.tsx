@@ -26,7 +26,7 @@ const Container = styled.div`
   margin: 16px 0px;
   border: 1px solid ${({ theme }) => theme.colors.cardBorder};
   overflow: hidden;
-  height: 500px;
+  height: 600px;
   ${({ theme }) => theme.mediaQueries.sm} {
     height: 1000px;
   }

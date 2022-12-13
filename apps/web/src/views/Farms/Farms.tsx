@@ -61,6 +61,12 @@ const FarmsWrapper2 = styled.div`
   padding-top: 30px;
   padding-bottom: 30px;
 `
+const TableContainer = styled(Container)`
+${({ theme }) => theme.mediaQueries.sm} { 
+  margin-left: 0;
+  margin-right: 0;
+}
+`
 const ControlContainer = styled.div`
   display: flex;
   width: 100%;
@@ -91,9 +97,11 @@ const SearchWrapper = styled.div`
   > ${Text} {
     font-size: 12px;
   }
-  width: 160px;
+  width: 100%;
+  margin-bottom: 10px;
   ${({ theme }) => theme.mediaQueries.sm} {
     width: 220px;
+    margin-bottom: 0;
   }
 `
 const StyledSearchInput = styled(SearchInput)`
@@ -113,12 +121,11 @@ const FilterSelect = styled(Select)`
   }
 `
 const FilterContainer = styled.div`
-  display: flex;
   align-items: center;
   width: 100%;
   padding: 8px 0px;
-
   ${({ theme }) => theme.mediaQueries.sm} {
+    display: flex;
     width: auto;
     padding: 0;
   }
@@ -371,11 +378,11 @@ const Farms: React.FC<React.PropsWithChildren> = ({ children }) => {
               <ViewControls>
                 {/* <FarmUI.FarmTabButtons hasStakeInFinishedFarms={stakedInactiveFarms.length > 0} /> */}
                 <StyledButtonMenu activeIndex={farmsIndex} onItemClick={handleFarmsClick}>
-                  <ButtonMenuItem>Live</ButtonMenuItem>
-                  <ButtonMenuItem>Main</ButtonMenuItem>
-                  <ButtonMenuItem>Innovation</ButtonMenuItem>
-                  <ButtonMenuItem>GameFi</ButtonMenuItem>
-                  <ButtonMenuItem>Archive</ButtonMenuItem>
+                  <ButtonMenuItem>{t('Live')}</ButtonMenuItem>
+                  <ButtonMenuItem>{t('Main')}</ButtonMenuItem>
+                  <ButtonMenuItem>{t('Innovation')}</ButtonMenuItem>
+                  <ButtonMenuItem>{t('GameFi')}</ButtonMenuItem>
+                  <ButtonMenuItem>{t('Archive')}</ButtonMenuItem>
                 </StyledButtonMenu>
                 <ToggleWrapper>
                   <Toggle
@@ -392,43 +399,45 @@ const Farms: React.FC<React.PropsWithChildren> = ({ children }) => {
                   <StyledSearchInput
                     initialValue={normalizedUrlSearch}
                     onChange={handleChangeQuery}
-                    placeholder="Search Farms"                   
+                    placeholder="Search Farms"
                   />
                 </SearchWrapper>
-                <FilterSelect
-                  options={[
-                    {
-                      label: t('All'),
-                      value: 'all',
-                    },
-                    {
-                      label: t('Hot'),
-                      value: 'hot',
-                    },
-                    {
-                      label: t('APR'),
-                      value: 'apr',
-                    },
-                    {
-                      label: t('Multiplier'),
-                      value: 'multiplier',
-                    },
-                    {
-                      label: t('Earned'),
-                      value: 'earned',
-                    },
-                    {
-                      label: t('Liquidity'),
-                      value: 'liquidity',
-                    },
-                    {
-                      label: t('Latest'),
-                      value: 'latest',
-                    },
-                  ]}
-                  onOptionChange={handleSortOptionChange}
-                />
-                <HarvestButton>Harvest all</HarvestButton>
+                <div style={{ display: 'flex' }}>
+                  <FilterSelect
+                    options={[
+                      {
+                        label: t('All'),
+                        value: 'all',
+                      },
+                      {
+                        label: t('Hot'),
+                        value: 'hot',
+                      },
+                      {
+                        label: t('APR'),
+                        value: 'apr',
+                      },
+                      {
+                        label: t('Multiplier'),
+                        value: 'multiplier',
+                      },
+                      {
+                        label: t('Earned'),
+                        value: 'earned',
+                      },
+                      {
+                        label: t('Liquidity'),
+                        value: 'liquidity',
+                      },
+                      {
+                        label: t('Latest'),
+                        value: 'latest',
+                      },
+                    ]}
+                    onOptionChange={handleSortOptionChange}
+                  />
+                  <HarvestButton>{t('Harvest all')}</HarvestButton>
+                </div>
               </FilterContainer>
             </ControlContainer>
             {isInactive && (
@@ -454,6 +463,8 @@ const Farms: React.FC<React.PropsWithChildren> = ({ children }) => {
                 </Flex>
               </FinishedTextContainer>
             )}
+          </Container>
+          <Container>
             {viewMode === ViewMode.TABLE ? (
               <Table farms={chosenFarmsMemoized} cakePrice={cakePrice} userDataReady={userDataReady} />
             ) : (
