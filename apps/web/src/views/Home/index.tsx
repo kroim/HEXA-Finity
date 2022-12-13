@@ -115,6 +115,7 @@ const TradeRightArea = styled.div`
   flex-direction: column;
   flex: 1;
   display: none;
+  position: relative;
   ${({ theme }) => theme.mediaQueries.sm} {
     display: flex;
   }
@@ -189,7 +190,7 @@ const Home: React.FC<React.PropsWithChildren> = () => {
         )} */}
         <TradeView>
           <TradeLeftArea>
-            <img src="/images/perpetual.png" width="300" alt="perpetual" />
+            <img src="/images/home/banner.png" width="300" alt="banner" />
             <h2>
               The <span style={{ color: '#F7931A' }}>First DEX</span> on{' '}
               <span style={{ color: '#F7931A' }}>BNB Chain</span> with a Three-Type Referral System
@@ -205,7 +206,8 @@ const Home: React.FC<React.PropsWithChildren> = () => {
             </Link>
           </TradeLeftArea>
           <TradeRightArea>
-            <img src="/images/home/banner.png" alt="perpetual" />
+            <img src="/images/home/banner.png" alt="banner" style={{position: 'absolute', top: 0}} />          
+            <img src="/images/home/ellipse.png" alt="ellipse" />          
           </TradeRightArea>
         </TradeView>
         {/* <Hero /> */}
