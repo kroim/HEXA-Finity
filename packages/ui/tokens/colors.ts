@@ -54,6 +54,9 @@ export const lightColors = {
   gradientGold: 'linear-gradient(180deg, #FFD800 0%, #FDAB32 100%)',
   gradientBold: 'linear-gradient(#53DEE9, #7645D9)',
   transparent: 'transparent',
+  poolText: '#798DC6',
+  poolButtonText: '#2F4DA0',
+  poolActive: '#00A478',
 }
 
 export const darkColors = {
@@ -88,4 +91,7 @@ export const darkColors = {
   gradientGold: 'linear-gradient(180deg, #FFD800 0%, #FDAB32 100%)',
   gradientBold: 'linear-gradient(#53DEE9, #9A6AFF)',
   transparent: 'transparent',
+  poolText: '#798DC6',
+  poolButtonText: '#2F4DA0',
+  poolActive: '#00A478',
 }

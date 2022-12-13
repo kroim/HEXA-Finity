@@ -36,13 +36,13 @@ export const PerformanceFee: FC<
   return (
     <StatWrapper
       label={
-        <TooltipText ref={targetRef} small>
+        <TooltipText ref={targetRef} small color='poolText' style={{fontSize: '12px'}}>
           {t('Performance Fee')}
         </TooltipText>
       }
     >
       {tooltipVisible && tooltip}
-      <Text ml="4px" small>
+      <Text ml="4px" small color='poolText' style={{fontSize: '12px'}}>
         {isStake ? `${performanceFeeAsDecimal}%` : `0~${performanceFeeAsDecimal}%`}
       </Text>
     </StatWrapper>
@@ -51,7 +51,7 @@ export const PerformanceFee: FC<
 
 const TotalToken = ({ total, token }: { total: BigNumber; token: Token }) => {
   if (total && total.gte(0)) {
-    return <Balance small value={getBalanceNumber(total, token.decimals)} decimals={0} unit={` ${token.symbol}`} />
+    return <Balance small value={getBalanceNumber(total, token.decimals)} decimals={0} unit={` ${token.symbol}`} color='poolText' style={{fontSize: '12px'}} />
   }
   return <Skeleton width="90px" height="21px" />
 }
@@ -110,7 +110,7 @@ export const TotalStaked: FC<React.PropsWithChildren<{ totalStaked: BigNumber; s
   return (
     <StatWrapper
       label={
-        <TooltipText ref={targetRef} small>
+        <TooltipText ref={targetRef} small color='poolText' style={{fontSize: '12px'}}>
           {t('Total staked')}:
         </TooltipText>
       }

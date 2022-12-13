@@ -1,7 +1,6 @@
-import { Box, CardBody, CardProps, Flex, Text, TokenPoolImage, FlexGap, Skeleton, Pool } from '@pancakeswap/uikit'
+import { Heading, CardBody, CardProps, Flex, Text, TokenPoolImage, FlexGap, Pool, useTooltip, HelpIcon } from '@pancakeswap/uikit'
 import { useAccount } from 'wagmi'
 import ConnectWalletButton from 'components/ConnectWalletButton'
-import { vaultPoolConfig } from 'config/constants/pools'
 import { useTranslation } from '@pancakeswap/localization'
 import { useVaultPoolByKey } from 'state/pools/hooks'
 import { VaultKey, DeserializedLockedCakeVault, DeserializedCakeVault } from 'state/types'
@@ -10,8 +9,6 @@ import { Token } from '@pancakeswap/sdk'
 
 import CardFooter from '../PoolCard/CardFooter'
 import { VaultPositionTagWithLabel } from '../Vault/VaultPositionTag'
-import UnstakingFeeCountdownRow from './UnstakingFeeCountdownRow'
-import RecentCakeProfitRow from './RecentCakeProfitRow'
 import { StakingApy } from './StakingApy'
 import VaultCardActions from './VaultCardActions'
 import LockedStakingApy from '../LockedPool/LockedStakingApy'
@@ -51,7 +48,10 @@ export const CakeVaultDetail: React.FC<React.PropsWithChildren<CakeVaultDetailPr
   defaultFooterExpanded,
 }) => {
   const { t } = useTranslation()
-
+  const manualTooltipText = t('You must harvest and compound your earnings from this pool manually.')
+  const autoTooltipText = t('Rewards are distributed and included into your staking balance automatically. There’s no need to manually compound your rewards.')
+  const { vaultKey } = pool
+  const { targetRef, tooltip, tooltipVisible } = useTooltip(vaultKey ? autoTooltipText : manualTooltipText, { placement: 'bottom' })
   return (
     <>
       <StyledCardBody isLoading={isLoading}>
@@ -74,39 +74,26 @@ export const CakeVaultDetail: React.FC<React.PropsWithChildren<CakeVaultDetailPr
               <div style={{ flex: 1 }}></div>
             </Flex>
             <Pool.PoolCardHeader isStaking={accountHasSharesStaked}>
-              <TokenPoolImage primarySrc='/img/launchpools/hero-back-2.png' secondarySrc='' width={128} height={128} />
-              <Pool.PoolCardHeaderTitle
-                title={vaultPoolConfig[pool.vaultKey].name}
-                subTitle={vaultPoolConfig[pool.vaultKey].description}
-              />
-
-            </Pool.PoolCardHeader>
-            <FlexGap mt="16px" gap="24px" flexDirection={accountHasSharesStaked ? 'column-reverse' : 'column'}>
-              <Box>
-                <RecentCakeProfitRow pool={pool} />
-              </Box>
+              <TokenPoolImage primarySrc='/img/launchpools/hero-back-2.png' secondarySrc='' width={92} height={92} />
               <Flex flexDirection="column">
-                {account ? (
-                  <VaultCardActions
-                    pool={pool}
-                    accountHasSharesStaked={accountHasSharesStaked}
-                    isLoading={isLoading}
-                    performanceFee={performanceFeeAsDecimal}
-                  />
-                ) : (
-                  <>
-                    <Text mb="10px" textTransform="uppercase" fontSize="12px" color="textSubtle" bold>
-                      {t('Start earning')}
-                    </Text>
-                    <ConnectWalletButton />
-                  </>
-                )}
+                <Flex>
+                  <Heading color={"body"} scale="lg" textAlign={'center'}>
+                    Holder Pool
+                    {tooltipVisible && tooltip}
+                  </Heading>
+                  <Flex ref={targetRef}>
+                    <HelpIcon ml="4px" width="20px" height="20px" color="poolText" />
+                  </Flex>
+                </Flex>
+
+                <Text fontSize="14px" color={"poolText"} textAlign='center'>Stake HEXA - Earn HEXA</Text>
               </Flex>
-            </FlexGap>
+              <Text style={{ color: '#00A478', fontSize: 12 }}>+ {t('participate in exclusive offers')}</Text>
+            </Pool.PoolCardHeader>
           </>
         )}
       </StyledCardBody>
-      <CardFooter defaultExpanded={defaultFooterExpanded} pool={pool} account={account} />
+      <CardFooter defaultExpanded={defaultFooterExpanded} pool={pool} account={account} accountHasSharesStaked={accountHasSharesStaked} isLoading={isLoading} performanceFee={performanceFeeAsDecimal} />
     </>
   )
 }
@@ -120,43 +107,19 @@ const CakeVaultCard: React.FC<React.PropsWithChildren<CakeVaultProps>> = ({
   ...props
 }) => {
   const { address: account } = useAccount()
-
   const vaultPool = useVaultPoolByKey(pool.vaultKey)
-  const { totalStaked } = pool
-
   const {
     userData: { userShares, isLoading: isVaultUserDataLoading },
     fees: { performanceFeeAsDecimal },
   } = vaultPool
-
   const accountHasSharesStaked = userShares && userShares.gt(0)
   const isLoading = !pool.userData || isVaultUserDataLoading
-
   if (showStakedOnly && !accountHasSharesStaked) {
     return null
   }
 
   return (
     <Pool.StyledPoolCard isActive {...props} id='vault-card'>
-      {/* <Pool.PoolCardHeader isStaking={accountHasSharesStaked}>
-        {!showSkeleton || (totalStaked && totalStaked.gte(0)) ? (
-          <>
-            <Pool.PoolCardHeaderTitle
-              title={vaultPoolConfig[pool.vaultKey].name}
-              subTitle={vaultPoolConfig[pool.vaultKey].description}
-            />
-            <TokenPairImage {...vaultPoolConfig[pool.vaultKey].tokenImage} width={64} height={64} />
-          </>
-        ) : (
-          <Flex width="100%" justifyContent="space-between">
-            <Flex flexDirection="column">
-              <Skeleton width={100} height={26} mb="4px" />
-              <Skeleton width={65} height={20} />
-            </Flex>
-            <Skeleton width={58} height={58} variant="circle" />
-          </Flex>
-        )}
-      </Pool.PoolCardHeader> */}
       <CakeVaultDetail
         isLoading={isLoading}
         account={account}

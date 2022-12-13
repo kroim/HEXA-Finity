@@ -1,15 +1,13 @@
 import styled from "styled-components";
 import { space, SpaceProps } from "styled-system";
-
 export type CardFooterProps = SpaceProps;
 
 const CardFooter = styled.div<CardFooterProps>`
-  /* border-top: 1px solid ${({ theme }) => theme.colors.cardBorder}; */
   ${space}
 `;
 
 CardFooter.defaultProps = {
-  p: "24px",
+  p: "12px 12px 24px 12px",
 };
 
 export default CardFooter;
