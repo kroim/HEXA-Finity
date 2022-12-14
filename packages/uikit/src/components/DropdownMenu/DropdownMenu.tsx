@@ -1,5 +1,5 @@
 /* eslint-disable react/no-array-index-key */
-import React, { useContext, useEffect, useState, useCallback } from "react";
+import React, { useContext, useEffect, useState, useCallback,createElement } from "react";
 import { usePopper } from "react-popper";
 import { useOnClickOutside } from "../../hooks";
 import { MenuContext } from "../../widgets/Menu/context";
@@ -91,11 +91,14 @@ const DropdownMenu: React.FC<React.PropsWithChildren<DropdownMenuProps>> = ({
             .filter((item) => !item.isMobileOnly)
             .map(
               (
-                { type = DropdownMenuItemType.INTERNAL_LINK, label, href = "/", status, disabled, ...itemProps },
+                { type = DropdownMenuItemType.INTERNAL_LINK, label, image, icon, href = "/", status, disabled, ...itemProps },
                 itemItem
               ) => {
+                const Icon = icon
+                const isActive = activeItem === href;
                 const MenuItemContent = (
                   <>
+                    {(icon && createElement(Icon as any, { color: isActive ? "secondary" : "textSubtle" }))}
                     {label}
                     {status && (
                       <LinkStatus textTransform="uppercase" color={status.color} fontSize="14px">
@@ -104,7 +107,6 @@ const DropdownMenu: React.FC<React.PropsWithChildren<DropdownMenuProps>> = ({
                     )}
                   </>
                 );
-                const isActive = href === activeItem;
                 return (
                   <StyledDropdownMenuItemContainer key={itemItem}>
                     {type === DropdownMenuItemType.BUTTON && (

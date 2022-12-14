@@ -1,7 +1,7 @@
 import {
   MenuItemsType,
   DropdownMenuItemType,
-  SwapIcon,
+  ExchangeIcon,
   SwapFillIcon,
   EarnFillIcon,
   EarnIcon,
@@ -45,7 +45,7 @@ const config: (
   [
     {
       label: t('Trade'),
-      icon: SwapIcon,
+      icon: ExchangeIcon,
       fillIcon: SwapFillIcon,
       href: '/swap',
       showItemsOnMobile: false,
@@ -53,16 +53,19 @@ const config: (
         {
           label: t('Exchange'),
           href: '/swap',
+          icon: ExchangeIcon,
         },
         {
           label: t('Liquidity'),
           href: '/liquidity',
+          icon: ExchangeIcon,
         },
         {
           label: t('Limit'),
           href: '/limit-orders',
           supportChainIds: SUPPORT_ONLY_BSC,
           image: '/images/decorations/3d-coin.png',
+          icon: ExchangeIcon,
         },
         {
           label: t('Perpetual'),
@@ -71,11 +74,13 @@ const config: (
           )}`,
           supportChainIds: SUPPORT_ONLY_BSC,
           type: DropdownMenuItemType.EXTERNAL_LINK,
+          icon: ExchangeIcon,
         },
         {
           label: t('Bridge'),
           href: 'https://bridge.pancakeswap.finance/',
           type: DropdownMenuItemType.EXTERNAL_LINK,
+          icon: ExchangeIcon,
         },
       ].map((item) => addMenuItemSupported(item, chainId)),
     },
@@ -89,15 +94,18 @@ const config: (
         {
           label: t('Farms'),
           href: '/farms',
+          icon: ExchangeIcon,
         },
         {
           label: t('Launchpools'),
           href: '/pools',
           supportChainIds: SUPPORT_ONLY_BSC,
+          icon: ExchangeIcon,
         },
         {
           label: t('Referral Program'),
           href: '/referral',
+          icon: ExchangeIcon,
         },
       ].map((item) => addMenuItemSupported(item, chainId)),
     },
@@ -113,11 +121,13 @@ const config: (
           href: '/competition',
           image: '/images/decorations/tc.png',
           hideSubNav: true,
+          icon: ExchangeIcon,
         },
         {
           label: t('Lottery'),
           href: '/lottery',
           image: '/images/decorations/lottery.png',
+          icon: ExchangeIcon,
         }
       ],
     },
@@ -132,14 +142,17 @@ const config: (
         {
           label: t('Overview'),
           href: `${nftsBaseUrl}`,
+          icon: ExchangeIcon,
         },
         {
           label: t('Collections'),
           href: `${nftsBaseUrl}/collections`,
+          icon: ExchangeIcon,
         },
         {
           label: t('Activity'),
           href: `${nftsBaseUrl}/activity`,
+          icon: ExchangeIcon,
         },
       ],
     },
@@ -152,18 +165,21 @@ const config: (
         {
           label: t('$10M Program'),
           href: '/program',
+          icon: ExchangeIcon,
         },
         {
           label: t('News'),
           href: '/news',
           supportChainIds: SUPPORT_ONLY_BSC,
           image: '/images/ifos/ifo-bunny.png',
+          icon: ExchangeIcon,
         },
         {
           label: t('About HF'),
           href: '/aboutHF',
           supportChainIds: SUPPORT_ONLY_BSC,
           image: '/images/voting/voting-bunny.png',
+          icon: ExchangeIcon,
         }
       ].map((item) => addMenuItemSupported(item, chainId)),
     },
