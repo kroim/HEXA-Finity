@@ -46,4 +46,5 @@ export interface DropdownMenuItems {
   iconName?: string;
   isMobileOnly?: boolean;
   icon:ElementType<any>;
+  deactive:ElementType<any>;
 }
