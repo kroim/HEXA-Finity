@@ -16,6 +16,8 @@ import CakeVaultCard from './components/CakeVaultCard'
 import PoolControls from './components/PoolControls'
 import { StakingApy } from './components/CakeVaultCard/StakingApy'
 import { colors } from './CustomColors'
+import LaunchSection from './LaunchSection'
+import LaunchGuideSection from './LaunchGuideSection'
 
 const CardLayout = styled(CustomFlexLayout)`
   justify-content: center;
@@ -96,13 +98,13 @@ const Pools: React.FC<React.PropsWithChildren> = () => {
               <a style={{ color: colors.primary, cursor: 'target' }} href='/how-it-works'>{t('Learn how it works')}</a>
             </Text>
             <HeroButtonWrap>
-              <a>{t('Add Project')} &nbsp; +</a>
+              <a href='#launchpool-section'>{t('Add Project')} &nbsp; +</a>
             </HeroButtonWrap>
           </Flex>
           <Flex flex="1" flexDirection="column" mr={['8px', 0]} justifyContent='center'>
             <HeroCard>
               <Flex flex='1' flexDirection='column'>
-                <Text style={{ ...colors.textFamily3, color: colors.heroTitle, fontSize: 32 }}>{t('Earn Upto 20%')}</Text>
+                <Text style={{ ...colors.textFamily3, color: colors.heroTitle, fontSize: 32 }}>{t('Earn Up to 20%')}</Text>
                 <Text style={{ ...colors.textFamily1, color: colors.white, fontSize: 18 }}>{t('From invited friends')}</Text>
                 <Flex mt='12px'>
                   <img src='/img/launchpools/hero-arrow.svg' style={{ marginRight: 12 }} />
@@ -122,7 +124,7 @@ const Pools: React.FC<React.PropsWithChildren> = () => {
               </Flex>
             </HeroCard>
           </Flex>
-        </Flex> 
+        </Flex>
         <Flex flexDirection={['column', null, null, 'row']}>
           <HeroTabWrap>
             <CustomButtonMenu activeIndex={1} scale="sm" variant="subtle" backgroundColor='transparent' borderColor='transparent' borderWidth='0'>
@@ -138,7 +140,7 @@ const Pools: React.FC<React.PropsWithChildren> = () => {
         </Flex>
       </PageHero>
       <PageBody>
-        <Page>
+        <Page style={{ minHeight: 200 }}>
           <PoolControls pools={pools}>
             {({ chosenPools, viewMode, stakedOnly, normalizedUrlSearch, showFinishedPools }) => (
               <>
@@ -170,7 +172,7 @@ const Pools: React.FC<React.PropsWithChildren> = () => {
                           />
                         }
                         cardFooter={<CardFooter pool={pool} account={account} />}
-                        aprRow={<Flex flexDirection="row" style={{padding: '12px 0 0 12px'}}>
+                        aprRow={<Flex flexDirection="row" style={{ padding: '12px 0 0 12px' }}>
                           <div style={{ flex: 1 }}><AprRow pool={pool} stakedBalance={pool?.userData?.stakedBalance} /></div>
                           <div style={{ flex: 1 }}></div>
                         </Flex>}
@@ -178,17 +180,17 @@ const Pools: React.FC<React.PropsWithChildren> = () => {
                     ),
                   )}
                 </CardLayout>
-                {/* <Image
-                  mx="auto"
-                  mt="12px"
-                  src="/images/decorations/3d-syrup-bunnies.png"
-                  alt="Pancake illustration"
-                  width={192}
-                  height={184.5}
-                /> */}
               </>
             )}
           </PoolControls>
+          <div id='launchpool-section'>
+            <LaunchSection />
+          </div>
+        </Page>
+      </PageBody>
+      <PageBody style={{ background: '#DAE4FF' }}>
+        <Page>
+          <LaunchGuideSection />
         </Page>
       </PageBody>
     </>
