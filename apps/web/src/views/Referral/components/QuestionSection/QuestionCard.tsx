@@ -44,10 +44,12 @@ const QuestionText = styled(Text)`
   color: #061e63;
 `
 const ShowButton = styled.div`
+  height: 100%;
+  margin-top: 10px;
   img{
     widht: 20px;
     height: 20px;
-    float: right;
+    float: right;  
   }
   
 `
