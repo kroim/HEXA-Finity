@@ -1,7 +1,7 @@
 import { CardBody, Flex, CardRibbon, Skeleton, Pool } from "@pancakeswap/uikit";
 import { useTranslation } from "@pancakeswap/localization";
 import { ReactElement } from "react";
-import { StyledCard } from "./StyledCard";
+import { StyledPoolCard } from "./StyledPoolCard";
 import { DeserializedPool } from "./types";
 
 interface PoolCardPropsType<T> {
@@ -20,21 +20,23 @@ export function PoolCard<T>({ pool, cardContent, aprRow, isStaked, cardFooter, t
   const isCakePool = earningToken?.symbol === "CAKE" && stakingToken?.symbol === "CAKE";
 
   return (
-    <StyledCard
+    <StyledPoolCard
       isActive={isCakePool}
       isFinished={isFinished && sousId !== 0}
-      ribbon={isFinished && <CardRibbon variantColor="textDisabled" text={t("Finished")} />}
     >
+      {aprRow}
       <Pool.PoolCardHeader isStaking={isStaked} isFinished={isFinished && sousId !== 0}>
         {totalStaked && totalStaked.gte(0) ? (
           <>
-            <Pool.PoolCardHeaderTitle
-              title={isCakePool ? t("Manual") : t("Earn %asset%", { asset: earningToken?.symbol || "" })}
-              subTitle={
-                isCakePool ? t("Earn CAKE, stake CAKE") : t("Stake %symbol%", { symbol: stakingToken?.symbol || "" })
-              }
-            />
             {tokenPairImage}
+            <Pool.PoolCardHeaderTitle
+              title={isCakePool ? t("Manual") : t("Auto Compound")}
+              subTitle={
+                isCakePool ? t("Earn CAKE, stake CAKE") : t("Stake %symbol% - Earn %asset%", { symbol: stakingToken?.symbol || "", asset: earningToken?.symbol || "" })
+              }
+              tooltipText={t('Tooltip Text')}
+            />
+
           </>
         ) : (
           <Flex width="100%" justifyContent="space-between">
@@ -46,13 +48,12 @@ export function PoolCard<T>({ pool, cardContent, aprRow, isStaked, cardFooter, t
           </Flex>
         )}
       </Pool.PoolCardHeader>
-      <CardBody>
-        {aprRow}
-        <Flex mt="24px" flexDirection="column">
+      <CardBody style={{padding: '0 12px'}}>
+        <Flex flexDirection="column">
           {cardContent}
         </Flex>
       </CardBody>
       {cardFooter}
-    </StyledCard>
+    </StyledPoolCard>
   );
 }

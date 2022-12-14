@@ -37,49 +37,15 @@ const CardActions: React.FC<React.PropsWithChildren<CardActionsProps>> = ({ pool
 
   return (
     <Flex flexDirection="column">
-      <Flex flexDirection="column">
-        <>
-          <Box display="inline">
-            <InlineText color="secondary" textTransform="uppercase" bold fontSize="12px">
-              {`${earningToken.symbol} `}
-            </InlineText>
-            <InlineText color="textSubtle" textTransform="uppercase" bold fontSize="12px">
-              {t('Earned')}
-            </InlineText>
-          </Box>
-          <HarvestActions
-            earnings={earnings}
-            earningTokenSymbol={earningToken.symbol}
-            earningTokenDecimals={earningToken.decimals}
-            sousId={sousId}
-            earningTokenPrice={earningTokenPrice}
-            isBnbPool={isBnbPool}
-            isLoading={isLoading}
-          />
-        </>
-        <Box display="inline">
-          <InlineText color={isStaked ? 'secondary' : 'textSubtle'} textTransform="uppercase" bold fontSize="12px">
-            {isStaked ? stakingToken.symbol : t('Stake')}{' '}
-          </InlineText>
-          <InlineText color={isStaked ? 'textSubtle' : 'secondary'} textTransform="uppercase" bold fontSize="12px">
-            {isStaked ? t('Staked') : `${stakingToken.symbol}`}
-          </InlineText>
-        </Box>
-        {notMeetRequired || notMeetThreshold ? (
-          <ProfileRequirementWarning profileRequirement={profileRequirement} />
-        ) : needsApproval ? (
-          <ApprovalAction pool={pool} isLoading={isLoading} />
-        ) : (
-          <StakeActions
-            isLoading={isLoading}
-            pool={pool}
-            stakingTokenBalance={stakingTokenBalance}
-            stakedBalance={stakedBalance}
-            isBnbPool={isBnbPool}
-            isStaked={isStaked}
-          />
-        )}
-      </Flex>
+      <HarvestActions
+        earnings={earnings}
+        earningTokenSymbol={earningToken.symbol}
+        earningTokenDecimals={earningToken.decimals}
+        sousId={sousId}
+        earningTokenPrice={earningTokenPrice}
+        isBnbPool={isBnbPool}
+        isLoading={isLoading}
+      />
     </Flex>
   )
 }

@@ -3,19 +3,23 @@ import { Flex } from "../Box";
 import StyledToggle, { Input, Handle } from "./StyledToggle";
 import { ToggleProps, scales } from "./types";
 
-const Toggle: React.FC<React.PropsWithChildren<ToggleProps>> = ({
+interface TogglePropsExtends extends ToggleProps {
+  activeBackgroundColor: string;
+}
+const Toggle: React.FC<React.PropsWithChildren<TogglePropsExtends>> = ({
   checked,
   defaultColor = "input",
   checkedColor = "success",
   scale = scales.LG,
   startIcon,
   endIcon,
+  activeBackgroundColor = '#00C400',
   ...props
 }) => {
   const isChecked = !!checked;
 
   return (
-    <StyledToggle $checked={isChecked} $checkedColor={checkedColor} $defaultColor={defaultColor} scale={scale}>
+    <StyledToggle $checked={isChecked} $checkedColor={checkedColor} $defaultColor={defaultColor} scale={scale} {...props}>
       <Input checked={checked} scale={scale} {...props} type="checkbox" />
       {startIcon && endIcon ? (
         <>
@@ -30,7 +34,7 @@ const Toggle: React.FC<React.PropsWithChildren<ToggleProps>> = ({
           </Flex>
         </>
       ) : (
-        <Handle scale={scale} />
+        <Handle scale={scale} style={{backgroundColor: activeBackgroundColor}} />
       )}
     </StyledToggle>
   );

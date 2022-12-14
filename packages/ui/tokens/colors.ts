@@ -53,6 +53,12 @@ export const lightColors = {
   gradientVioletAlt: 'linear-gradient(180deg, #CBD7EF 0%, #9A9FD0 100%)',
   gradientGold: 'linear-gradient(180deg, #FFD800 0%, #FDAB32 100%)',
   gradientBold: 'linear-gradient(#53DEE9, #7645D9)',
+  transparent: 'transparent',
+  poolText: '#798DC6',
+  poolButtonText: '#2F4DA0',
+  poolActive: '#00A478',
+  harvestActive: '#00C400',
+  harvestDisable: '0xB3EDB3',
 }
 
 export const darkColors = {
@@ -86,4 +92,10 @@ export const darkColors = {
   gradientVioletAlt: 'linear-gradient(180deg, #434575 0%, #66578D 100%)',
   gradientGold: 'linear-gradient(180deg, #FFD800 0%, #FDAB32 100%)',
   gradientBold: 'linear-gradient(#53DEE9, #9A6AFF)',
+  transparent: 'transparent',
+  poolText: '#798DC6',
+  poolButtonText: '#2F4DA0',
+  poolActive: '#00A478',
+  harvestActive: '#00C400',
+  harvestDisable: '0xB3EDB3',
 }

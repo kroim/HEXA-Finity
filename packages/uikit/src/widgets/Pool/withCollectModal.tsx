@@ -1,4 +1,4 @@
-import { Flex, Text, Button, Heading, Skeleton, Balance, useModal } from "@pancakeswap/uikit";
+import { Flex, Text, HarvestButton, Skeleton, Balance, useModal } from "@pancakeswap/uikit";
 import BigNumber from "bignumber.js";
 import { ReactElement } from "react";
 import { useTranslation } from "@pancakeswap/localization";
@@ -32,35 +32,22 @@ const HarvestActions: React.FC<React.PropsWithChildren<HarvestActionsProps>> = (
           <Skeleton width="80px" height="48px" />
         ) : (
           <>
+            <Text fontSize="12px" color="poolText">{t('Earned')}</Text>
             {hasEarnings ? (
               <>
-                <Balance bold fontSize="20px" decimals={5} value={earningTokenBalance} />
-                {earningTokenPrice > 0 && (
-                  <Balance
-                    display="inline"
-                    fontSize="12px"
-                    color="textSubtle"
-                    decimals={2}
-                    prefix="~"
-                    value={earningTokenDollarBalance}
-                    unit=" USD"
-                  />
-                )}
+                <Balance bold fontSize="12px" decimals={5} value={earningTokenBalance} color="poolText" />
               </>
             ) : (
               <>
-                <Heading color="textDisabled">0</Heading>
-                <Text fontSize="12px" color="textDisabled">
-                  0 USD
-                </Text>
+                <Text style={{fontSize: 10, color: '#F93B5D', background: 'rgb(249 59 93 / 30%)', borderRadius: '10px', padding: '1px 6px'}}>Not Active</Text>
               </>
             )}
           </>
         )}
       </Flex>
-      <Button disabled={!hasEarnings} onClick={onPresentCollect}>
+      <HarvestButton disabled={!hasEarnings} onClick={onPresentCollect}>
         {t("Harvest")}
-      </Button>
+      </HarvestButton>
     </Flex>
   );
 };
@@ -81,46 +68,46 @@ interface WithHarvestActionsProps {
 
 export const withCollectModal =
   (CollectModalComponent: (props: CollectModalProps) => ReactElement) =>
-  ({
-    earnings,
-    earningTokenSymbol,
-    earningTokenAddress,
-    earningTokenDecimals,
-    sousId,
-    isBnbPool,
-    earningTokenPrice,
-    isLoading,
-    poolAddress,
-  }: WithHarvestActionsProps) => {
-    const earningTokenBalance: number = getBalanceNumber(earnings, earningTokenDecimals);
+    ({
+      earnings,
+      earningTokenSymbol,
+      earningTokenAddress,
+      earningTokenDecimals,
+      sousId,
+      isBnbPool,
+      earningTokenPrice,
+      isLoading,
+      poolAddress,
+    }: WithHarvestActionsProps) => {
+      const earningTokenBalance: number = getBalanceNumber(earnings, earningTokenDecimals);
 
-    const formattedBalance = formatNumber(earningTokenBalance, 5, 5);
+      const formattedBalance = formatNumber(earningTokenBalance, 5, 5);
 
-    const fullBalance = getFullDisplayBalance(earnings, earningTokenDecimals);
+      const fullBalance = getFullDisplayBalance(earnings, earningTokenDecimals);
 
-    const earningTokenDollarBalance = getBalanceNumber(earnings.multipliedBy(earningTokenPrice), earningTokenDecimals);
+      const earningTokenDollarBalance = getBalanceNumber(earnings.multipliedBy(earningTokenPrice), earningTokenDecimals);
 
-    const [onPresentCollect] = useModal(
-      <CollectModalComponent
-        formattedBalance={formattedBalance}
-        fullBalance={fullBalance}
-        earningTokenSymbol={earningTokenSymbol}
-        earningsDollarValue={earningTokenDollarBalance}
-        sousId={sousId}
-        isBnbPool={isBnbPool}
-        earningTokenAddress={earningTokenAddress}
-        poolAddress={poolAddress}
-      />
-    );
+      const [onPresentCollect] = useModal(
+        <CollectModalComponent
+          formattedBalance={formattedBalance}
+          fullBalance={fullBalance}
+          earningTokenSymbol={earningTokenSymbol}
+          earningsDollarValue={earningTokenDollarBalance}
+          sousId={sousId}
+          isBnbPool={isBnbPool}
+          earningTokenAddress={earningTokenAddress}
+          poolAddress={poolAddress}
+        />
+      );
 
-    return (
-      <HarvestActions
-        onPresentCollect={onPresentCollect}
-        earnings={earnings}
-        earningTokenPrice={earningTokenPrice}
-        earningTokenDollarBalance={earningTokenDollarBalance}
-        earningTokenBalance={earningTokenBalance}
-        isLoading={isLoading}
-      />
-    );
-  };
+      return (
+        <HarvestActions
+          onPresentCollect={onPresentCollect}
+          earnings={earnings}
+          earningTokenPrice={earningTokenPrice}
+          earningTokenDollarBalance={earningTokenDollarBalance}
+          earningTokenBalance={earningTokenBalance}
+          isLoading={isLoading}
+        />
+      );
+    };

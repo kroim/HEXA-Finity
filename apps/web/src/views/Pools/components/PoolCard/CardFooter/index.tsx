@@ -2,9 +2,11 @@ import { useState } from 'react'
 import BigNumber from 'bignumber.js'
 import styled from 'styled-components'
 import { useTranslation } from '@pancakeswap/localization'
-import { Flex, CardFooter, ExpandableLabel, HelpIcon, useTooltip, Farm as FarmUI, Pool } from '@pancakeswap/uikit'
+import { Flex, CardFooter, ExpandableLabel, Button, useTooltip, Farm as FarmUI, Pool } from '@pancakeswap/uikit'
 import { Token } from '@pancakeswap/sdk'
 import PoolStatsInfo from '../../PoolStatsInfo'
+import ConnectWalletButton from 'components/ConnectWalletButton'
+import VaultCardActions from "../../CakeVaultCard/VaultCardActions"
 
 const { CompoundingPoolTag, ManualPoolTag } = FarmUI.Tags
 
@@ -13,6 +15,10 @@ interface FooterProps {
   account: string
   totalCakeInVault?: BigNumber
   defaultExpanded?: boolean
+  accountHasSharesStaked?: boolean
+  isLoading?: boolean
+  performanceFee?: number
+
 }
 
 const ExpandableButtonWrapper = styled(Flex)`
@@ -23,39 +29,43 @@ const ExpandableButtonWrapper = styled(Flex)`
   }
 `
 const ExpandedWrapper = styled(Flex)`
+  padding-top: 12px;
   svg {
     height: 14px;
     width: 14px;
   }
 `
 
-const Footer: React.FC<React.PropsWithChildren<FooterProps>> = ({ pool, account, defaultExpanded, children }) => {
-  const { vaultKey } = pool
+const Footer: React.FC<React.PropsWithChildren<FooterProps>> = ({ pool, account, defaultExpanded, accountHasSharesStaked, isLoading, performanceFee, children }) => {
+  const { vaultKey, sousId, isFinished } = pool
   const { t } = useTranslation()
   const [isExpanded, setIsExpanded] = useState(defaultExpanded || false)
-
-  const manualTooltipText = t('You must harvest and compound your earnings from this pool manually.')
-  const autoTooltipText = t(
-    'Rewards are distributed and included into your staking balance automatically. There’s no need to manually compound your rewards.',
-  )
-
-  const { targetRef, tooltip, tooltipVisible } = useTooltip(vaultKey ? autoTooltipText : manualTooltipText, {
-    placement: 'bottom',
-  })
 
   return (
     <CardFooter>
       <ExpandableButtonWrapper>
-        <Flex alignItems="center">
-          {vaultKey ? <CompoundingPoolTag /> : <ManualPoolTag />}
-          {tooltipVisible && tooltip}
-          <Flex ref={targetRef}>
-            <HelpIcon ml="4px" width="20px" height="20px" color="textSubtle" />
-          </Flex>
-        </Flex>
-        <ExpandableLabel expanded={isExpanded} onClick={() => setIsExpanded(!isExpanded)}>
-          {isExpanded ? t('Hide') : t('Details')}
-        </ExpandableLabel>
+        <div style={{ flex: 1, paddingRight: 3 }}>
+          {account ? (
+            <VaultCardActions
+              pool={pool}
+              accountHasSharesStaked={accountHasSharesStaked}
+              isLoading={isLoading}
+              performanceFee={performanceFee}
+              isFinished={isFinished && sousId !== 0}
+            />
+          ) : (
+            <>
+              <ConnectWalletButton />
+            </>
+          )}
+        </div>
+        <div style={{ flex: 1, paddingLeft: 3 }}>
+          <Button width="100%">
+            <ExpandableLabel expanded={isExpanded} onClick={() => setIsExpanded(!isExpanded)} iconColor="poolButtonText">
+              <span style={{color: 'var(--colors-poolButtonText)'}}>{isExpanded ? t('Hide') : t('Details')}</span>
+            </ExpandableLabel>
+          </Button>
+        </div>
       </ExpandableButtonWrapper>
       {isExpanded && (
         <ExpandedWrapper flexDirection="column">

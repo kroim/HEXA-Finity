@@ -7,11 +7,13 @@ interface ApprovalActionProps {
   vaultKey: VaultKey
   setLastUpdated: () => void
   isLoading?: boolean
+  isFinished?: boolean
 }
 
 const VaultApprovalAction: React.FC<React.PropsWithChildren<ApprovalActionProps>> = ({
   vaultKey,
   isLoading = false,
+  isFinished,
   setLastUpdated,
 }) => {
   const { t } = useTranslation()
@@ -23,15 +25,25 @@ const VaultApprovalAction: React.FC<React.PropsWithChildren<ApprovalActionProps>
       {isLoading ? (
         <Skeleton width="100%" height="52px" />
       ) : (
-        <Button
-          isLoading={pendingTx}
-          endIcon={pendingTx ? <AutoRenewIcon spin color="currentColor" /> : null}
-          disabled={pendingTx}
-          onClick={handleApprove}
-          width="100%"
-        >
-          {t('Enable')}
-        </Button>
+        isFinished ?
+          <Button
+            isLoading={pendingTx}
+            endIcon={pendingTx ? <AutoRenewIcon spin color="currentColor" /> : null}
+            disabled={pendingTx}
+            onClick={() => {}}
+            width="100%"
+            style={{opacity: 0.3, cursor: 'not-allowed'}}
+          >
+            {t('Enable')}
+          </Button> : <Button
+            isLoading={pendingTx}
+            endIcon={pendingTx ? <AutoRenewIcon spin color="currentColor" /> : null}
+            disabled={pendingTx}
+            onClick={handleApprove}
+            width="100%"
+          >
+            {t('Enable')}
+          </Button>
       )}
     </>
   )

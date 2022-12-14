@@ -12,7 +12,7 @@ import { useConnect } from 'wagmi'
 import Trans from './Trans'
 import Image from 'next/image'
 
-const ConnectWalletButton = ({ children, ...props }: ButtonProps) => {
+const ConnectWalletButton = ({ children, startIcon, ...props }: ButtonProps) => {
   const handleActive = useActiveHandle()
   const { login } = useAuth()
   const {
@@ -41,8 +41,8 @@ const ConnectWalletButton = ({ children, ...props }: ButtonProps) => {
         {/* {children || <Trans>Connect Wallet</Trans>} */}
         {children || (
           <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-            <Image src="/images/walletButton.png" alt="wallet Image" width={20} height={18} />
-            <Text color="invertedContrast" bold fontSize="16px" ml="10px">
+            {startIcon && <Image src="/images/walletButton.png" alt="wallet Image" width={20} height={18} style={{marginRight: 10}} />}
+            <Text color="invertedContrast" bold fontSize="16px">
               <Trans>Connect Wallet</Trans>
             </Text>
           </div>
