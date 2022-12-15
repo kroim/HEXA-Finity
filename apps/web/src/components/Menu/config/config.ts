@@ -23,6 +23,12 @@ import {
   DeactiveNewsIcon,
   AboutIcon,
   DeactiveAboutIcon,
+  OverviewIcon,
+  DeactiveOverviewIcon,
+  CollectionIcon,
+  DeactiveCollectionIcon,
+  ActiveIcon,
+  DeactiveActiveIcon,
   SwapFillIcon,
   EarnFillIcon,
   EarnIcon,
@@ -148,18 +154,30 @@ const config: (
     },
     {
       label: t('NFT'),
-      href: `/nft`,
+      href: `${nftsBaseUrl}`,
       icon: NftIcon,
       fillIcon: NftFillIcon,
       supportChainIds: SUPPORT_ONLY_BSC,
       image: '/images/decorations/nft.png',
       items: [
-        // {
-        //   label: t('Overview'),
-        //   href: `${nftsBaseUrl}`,
-        //   icon: ExchangeIcon,
-        //   deactive: DeactiveExchangeIcon,
-        // }
+        {
+          label: t('Overview'),
+          href: `${nftsBaseUrl}`,
+          icon: OverviewIcon,
+          deactive: DeactiveOverviewIcon,
+        },
+        {
+          label: t('Collections'),
+          href: `${nftsBaseUrl}/collections`,
+          icon: CollectionIcon,
+          deactive: DeactiveCollectionIcon,
+        },
+        {
+          label: t('Activity'),
+          href: `${nftsBaseUrl}/activity`,
+          icon: ActiveIcon,
+          deactive: DeactiveActiveIcon,
+        },
       ],
     },
     {
