@@ -18,6 +18,21 @@ const InviteContent = styled(Flex)`
     grid-template-columns: repeat(3, 31%);
   }
 `
+const DescriptionContent = styled(Flex)`
+  width: 100%;
+  align-items: center;
+  grid-gap: 36px;
+  display: grid;
+  grid-template-columns: repeat(1, 100%);
+
+  ${({ theme }) => theme.mediaQueries.sm} {
+    grid-template-columns: repeat(2, 47.2%);
+  }
+
+  ${({ theme }) => theme.mediaQueries.md} {
+    grid-template-columns: repeat(3, 31%);
+  }
+`
 const CardContainer = styled.div`
   justify-content: center;
   align-items: center;
@@ -129,8 +144,6 @@ type InviteType = {
   description: string
   order: string
   image: string
-  detail_header: string
-  detail_description: string
 }
 const InviteItem: React.FC<React.PropsWithChildren<{ item: InviteType }>> = ({ item }) => {
   const { t } = useTranslation()
@@ -145,7 +158,18 @@ const InviteItem: React.FC<React.PropsWithChildren<{ item: InviteType }>> = ({ i
           </div>
           <Text className="item-description">{item.description}</Text>
         </ItemCardBody>
-      </StyledItemCard>
+      </StyledItemCard> 
+    </CardContainer>
+  )
+}
+type DescriptionType = {
+  detail_header: string
+  detail_description: string
+}
+const DescriptionItem: React.FC<React.PropsWithChildren<{ item: DescriptionType }>> = ({ item }) => {
+  const { t } = useTranslation()
+  return (
+    <CardContainer> 
       <CardDetails>
         <div>
           <Heading className="detail-header">{item.detail_header}</Heading>
@@ -175,23 +199,32 @@ const InviteSection: React.FC<React.PropsWithChildren> = () => {
       order: 'images/referral/invite-1.png',
       image: 'images/referral/invite-1-pic.png',
       detail_header: 'Farms Referral Rewards',
-      detail_description:
-        'Gain 5% from your friends earnings on Farms! Your rewards will be displayed on the referral balance at the moment your invited friends withdraw their earned HEXA tokens.',
     },
     {
       title: 'Invite Friends',
       description: t('Invite your friends to register via your referral link'),
       order: 'images/referral/invite-2.png',
       image: 'images/referral/invite-2-pic.png',
-      detail_header: 'Launchpools Referral Rewards',
-      detail_description:
-        'Get 5% of from friends’ profit obtained in Launchpools! The reward is only valid for the pool in which HexaFinity is staked in return for more HexaFinity.',
     },
     {
       title: 'Earn Crypto',
       description: t('Receive referral rewards in HEXA tokens from your friends’ earnings & swaps'),
       order: 'images/referral/invite-3.png',
       image: 'images/referral/invite-3-pic.png',
+    },
+  ]
+  const Desitems: InviteType[] = [
+    {
+      detail_header: 'Farms Referral Rewards',
+      detail_description:
+        'Gain 5% from your friends earnings on Farms! Your rewards will be displayed on the referral balance at the moment your invited friends withdraw their earned HEXA tokens.',
+    },
+    {
+      detail_header: 'Launchpools Referral Rewards',
+      detail_description:
+        'Get 5% of from friends’ profit obtained in Launchpools! The reward is only valid for the pool in which HexaFinity is staked in return for more HexaFinity.',
+    },
+    {
       detail_header: 'Farms Referral Rewards',
       detail_description:
         'Get up to 20% from friends’ swap commission each time your friend makes a swap! Receive your reward immediately after the swap is made. Swaps referral program will be active for certain pairs only.',
@@ -211,6 +244,11 @@ const InviteSection: React.FC<React.PropsWithChildren> = () => {
             <InviteItem key={index} item={item} />
           ))}
         </InviteContent>
+        <DescriptionContent>
+          {Desitems.map((item, index) => (
+            <DescriptionItem key={index} item={item} />
+          ))}
+        </DescriptionContent>
       </Box>
     </Container>
   )

@@ -57,7 +57,7 @@ const QuestinSection: React.FC<React.PropsWithChildren> = () => {
             <LeftContent>
               {questions_l.map((item, index) => {
                 return (
-                  <QuestionCard title={item.question}>
+                  <QuestionCard key={index} title={item.question}>
                     <AnswerText>{item.answer}</AnswerText>
                   </QuestionCard>
                 )
@@ -66,7 +66,7 @@ const QuestinSection: React.FC<React.PropsWithChildren> = () => {
             <RightContent>
               {questions_r.map((item, index) => {
                 return (
-                  <QuestionCard title={item.question}>
+                  <QuestionCard key={index} title={item.question}>
                     <AnswerText>{item.answer}</AnswerText>
                   </QuestionCard>
                 )
