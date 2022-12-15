@@ -66,7 +66,7 @@ const Hero = () => {
             </Link>
           </Box>
           <HeroImgWrap style={{ flex: 2 }}>
-            <img src="/img/about_hf/hero-logo-1.png" alt='hero-logo' />
+            <img src="/img/about_hf/hero-logo.png" alt='hero-logo' />
           </HeroImgWrap>
         </Flex>
       </Container>

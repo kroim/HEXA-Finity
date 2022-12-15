@@ -61,6 +61,7 @@ export const lightColors = {
   harvestDisable: '#B3EDB3',
   heroBackground: '#041647',
   heroRedButton: '#F93B5D',
+  aboutText: '#061E63',
 }
 
 export const darkColors = {
@@ -102,4 +103,5 @@ export const darkColors = {
   harvestDisable: '#B3EDB3',
   heroBackground: '#041647',
   heroRedButton: '#F93B5D',
+  aboutText: '#061E63',
 }
