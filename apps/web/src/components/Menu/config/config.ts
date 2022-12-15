@@ -141,7 +141,7 @@ const config: (
     },
     {
       label: t('Win'),
-      href: '/prediction',
+      href: '/competition',
       icon: TrophyIcon,
       fillIcon: TrophyFillIcon,
       supportChainIds: SUPPORT_ONLY_BSC,
@@ -165,7 +165,7 @@ const config: (
     },
     {
       label: t('NFT'),
-      href: `${nftsBaseUrl}`,
+      href: `/nft`,
       icon: NftIcon,
       fillIcon: NftFillIcon,
       supportChainIds: SUPPORT_ONLY_BSC,
@@ -193,7 +193,7 @@ const config: (
     },
     {
       label: 'More',
-      href: '/more',
+      href: '/program',
       icon: MoreIcon,
       hideSubNav: true,
       items: [
