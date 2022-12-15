@@ -1,8 +1,11 @@
 import { Box } from '@pancakeswap/uikit'
 import { PageMeta } from 'components/Layout/Page'
 import styled from 'styled-components'
+import ActivitySection from './components/ActivitySection'
+import ArticleSection from './components/ArticleSection'
 import HeroSection from './components/HeroSection'
 import InviteSection from './components/InviteSection'
+import SelectItemSection from './components/SelectItemSection'
 
 const NewsPage = styled.div`
   min-height: calc(100vh-64px);
@@ -22,11 +25,18 @@ const MainContent = styled(Box)`
 `
 const ContentWrapper = styled.div`
   width: 100%;
-  background: #ecf1ff;
-  padding-top: 49px;
-  padding-bottom: 129px;
+  background: #ffffff;
+  padding-top: 20px;
+  padding-bottom: 100px;
+  ${({ theme }) => theme.mediaQueries.md} {
+    padding-top: 30px;
+    padding-bottom: 110px;
+  }
+  ${({ theme }) => theme.mediaQueries.lg} {
+    padding-top: 49px;
+    padding-bottom: 129px;
+  }
 `
-
 const News = () => {
   return (
     <>
@@ -34,8 +44,10 @@ const News = () => {
       <NewsPage>
         <HeroSection />
         <MainContent>
-          <ContentWrapper>
-            <InviteSection />    
+          <ContentWrapper> 
+            <SelectItemSection></SelectItemSection>
+            <ArticleSection></ArticleSection>
+            <ActivitySection></ActivitySection>
           </ContentWrapper>
         </MainContent>
       </NewsPage>
