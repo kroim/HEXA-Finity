@@ -197,8 +197,7 @@ const InviteSection: React.FC<React.PropsWithChildren> = () => {
       title: 'Get a Referral Link',
       description: t('Prices are set when the round starts, equal to $1 in HEXA per ticket'),
       order: 'images/referral/invite-1.png',
-      image: 'images/referral/invite-1-pic.png',
-      detail_header: 'Farms Referral Rewards',
+      image: 'images/referral/invite-1-pic.png',  
     },
     {
       title: 'Invite Friends',
@@ -213,7 +212,7 @@ const InviteSection: React.FC<React.PropsWithChildren> = () => {
       image: 'images/referral/invite-3-pic.png',
     },
   ]
-  const Desitems: InviteType[] = [
+  const Desitems: DescriptionType[] = [
     {
       detail_header: 'Farms Referral Rewards',
       detail_description:
