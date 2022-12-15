@@ -68,6 +68,7 @@ const StepCardBody = styled.div`
     font-size: 14px;
     line-height: 21px;
     color: #FFFFFF;
+    opacity: 0.7;
   }
 `
 const StepCardImage = styled.img`
