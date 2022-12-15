@@ -66,6 +66,9 @@ import { formatAmount } from '../../utils/formatInfoNumbers'
 import { useCurrencySelectRoute } from './useCurrencySelectRoute'
 import { CommonBasesType } from '../../components/SearchModal/types'
 
+import { StyledHeaderTitle, TooltipSection } from './styles'
+import SwapTab from 'components/SwapTab'
+
 enum Steps {
   Choose,
   Add,
@@ -578,7 +581,16 @@ export default function AddLiquidity({ currencyA, currencyB }) {
 
   return (
     <Page>
+      <StyledHeaderTitle>
+        <h1>Become a Liquidity Provider</h1>
+        <p>
+          Earn high yeilds from transaction fees.
+          <br />
+          <span style={{ color: '#11A9FF' }}>Learn how to add liquidity</span>
+        </p>
+      </StyledHeaderTitle>
       <AppBody>
+        <SwapTab />
         {!showAddLiquidity && (
           <ChoosePair
             error={error}
