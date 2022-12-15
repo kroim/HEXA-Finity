@@ -92,23 +92,6 @@ const config: (
           icon: LimitIcon,
           deactive: DeactiveLimitIcon,
         },
-        // {
-        //   label: t('Perpetual'),
-        //   href: `https://perp.pancakeswap.finance/${perpLangMap(languageCode)}/futures/BTCUSDT?theme=${perpTheme(
-        //     isDark,
-        //   )}`,
-        //   supportChainIds: SUPPORT_ONLY_BSC,
-        //   type: DropdownMenuItemType.EXTERNAL_LINK,
-        //   icon: ExchangeIcon,
-        //   deactive: DeactiveExchangeIcon,
-        // },
-        // {
-        //   label: t('Bridge'),
-        //   href: 'https://bridge.pancakeswap.finance/',
-        //   type: DropdownMenuItemType.EXTERNAL_LINK,
-        //   icon: ExchangeIcon,
-        //   deactive: DeactiveExchangeIcon,
-        // },
       ].map((item) => addMenuItemSupported(item, chainId)),
     },
     {
@@ -176,19 +159,7 @@ const config: (
         //   href: `${nftsBaseUrl}`,
         //   icon: ExchangeIcon,
         //   deactive: DeactiveExchangeIcon,
-        // },
-        // {
-        //   label: t('Collections'),
-        //   href: `${nftsBaseUrl}/collections`,
-        //   icon: ExchangeIcon,
-        //   deactive: DeactiveExchangeIcon,
-        // },
-        // {
-        //   label: t('Activity'),
-        //   href: `${nftsBaseUrl}/activity`,
-        //   icon: ExchangeIcon,
-        //   deactive: DeactiveExchangeIcon,
-        // },
+        // }
       ],
     },
     {
