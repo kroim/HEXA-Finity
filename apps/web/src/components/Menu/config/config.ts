@@ -172,6 +172,12 @@ const config: (
           image: '/images/voting/voting-bunny.png',
         },
         {
+          label: t('About HF'),
+          href: '/about_hf',
+          supportChainIds: SUPPORT_ONLY_BSC,
+          image: '/images/voting/voting-bunny.png',
+        },
+        {
           type: DropdownMenuItemType.DIVIDER,
         },
         {
