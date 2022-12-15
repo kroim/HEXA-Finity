@@ -213,7 +213,7 @@ const config: (
         },
         {
           label: t('About HF'),
-          href: '/aboutHF',
+          href: '/about_hf',
           supportChainIds: SUPPORT_ONLY_BSC,
           image: '/images/voting/voting-bunny.png',
           icon: AboutIcon,
