@@ -94,7 +94,7 @@ export const FotterLeft = styled.div`
     font-size: 12px;
     font-weight: 500;
   }
-  @media (max-width: 490px) {
+  @media (max-width: 770px) {
     flex-direction: column;
     margin-bottom: 20px;
     width:100%

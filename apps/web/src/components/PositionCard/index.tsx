@@ -201,7 +201,7 @@ function MinimalPositionCardView({
                 </RowFixed>
               </FixedHeightRow>
               <AutoColumn gap="4px">
-                {poolData && (
+                {/* {poolData && (
                   <FixedHeightRow>
                     <TooltipText ref={targetRef} color="textSubtle" small>
                       {t('LP reward APR')}:
@@ -209,7 +209,7 @@ function MinimalPositionCardView({
                     {tooltipVisible && tooltip}
                     <Text>{formatAmount(poolData.lpApr7d)}%</Text>
                   </FixedHeightRow>
-                )}
+                )} */}
                 <FixedHeightRow>
                   <Text color="textSubtle" small>
                     {t('Share of Pool')}:
@@ -250,14 +250,14 @@ function MinimalPositionCardView({
         </Card>
       ) : (
         <LightCard>
-          <Text fontSize="14px" style={{ textAlign: 'center' }}>
+          {/* <Text fontSize="14px" style={{ textAlign: 'center' }}>
             <span role="img" aria-label="pancake-icon">
               🥞
             </span>{' '}
             {t(
               "By adding liquidity you'll earn 0.17% of all trades on this pair proportional to your share of the pool. Fees are added to the pool, accrue in real time and can be claimed by withdrawing your liquidity.",
             )}
-          </Text>
+          </Text> */}
         </LightCard>
       )}
     </>
@@ -353,7 +353,7 @@ function FullPositionCard({
               )}
             </FixedHeightRow>
           )}
-          {poolData && (
+          {/* {poolData && (
             <FixedHeightRow>
               <RowFixed>
                 <TooltipText ref={targetRef} color="textSubtle">
@@ -363,7 +363,7 @@ function FullPositionCard({
               </RowFixed>
               <Text>{formatAmount(poolData.lpApr7d)}%</Text>
             </FixedHeightRow>
-          )}
+          )} */}
 
           <FixedHeightRow>
             <Text color="textSubtle">{t('Share of Pool')}</Text>

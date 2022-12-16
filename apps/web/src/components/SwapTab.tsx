@@ -51,7 +51,7 @@ const DeActivedTabItem = styled.div`
 export default function SwapTab() {
   const router = useRouter()
 
-  const [tapIndex, setTapIndex] = useState(0)
+  const [tapIndex, setTapIndex] = useState(10)
 
   useEffect(() => {
     console.log(router.pathname)
@@ -66,8 +66,7 @@ export default function SwapTab() {
 
   const handleClick = (href) => {
     let url = href.toLowerCase()
-    console.log('url', url)
-    router.push('/swap')
+    router.push(`/${url}`)
   }
 
   return (

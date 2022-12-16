@@ -266,7 +266,7 @@ export default function CurrencyInputPanel({
               </Flex>
             ) : null}
           </Flex>
-          {account && (
+          {/* {account && (
             <Text
               onClick={!disabled && onMax}
               color="textSubtle"
@@ -277,7 +277,7 @@ export default function CurrencyInputPanel({
                 ? t('Balance: %balance%', { balance: selectedCurrencyBalance?.toSignificant(6) ?? t('Loading') })
                 : ' -'}
             </Text>
-          )}
+          )} */}
         </Flex>
       </div>
     </Box>

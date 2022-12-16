@@ -60,7 +60,7 @@ export function ChoosePair({
               showCommonBases
               commonBasesType={CommonBasesType.LIQUIDITY}
             />
-            <AddIcon color="textSubtle" />
+            <AddIcon color="textSubtle" mb="20px" mt="20px" />
             <CurrencySelect
               id="add-liquidity-select-tokenb"
               selectedCurrency={currencyB}
@@ -69,7 +69,7 @@ export function ChoosePair({
               commonBasesType={CommonBasesType.LIQUIDITY}
             />
           </Flex>
-          {pair && poolData && (
+          {/* {pair && poolData && (
             <RowBetween mt="24px">
               <TooltipText ref={targetRef} bold fontSize="12px" color="secondary">
                 {t('LP reward APR')}
@@ -79,7 +79,7 @@ export function ChoosePair({
                 {formatAmount(poolData.lpApr7d)}%
               </Text>
             </RowBetween>
-          )}
+          )} */}
         </Box>
       </CardBody>
       <CardFooter>

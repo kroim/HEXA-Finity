@@ -810,16 +810,16 @@ export default function AddLiquidity({ currencyA, currencyB }) {
                   </>
                 )}
 
-                <RowBetween>
+                {/* <RowBetween>
                   <Text bold fontSize="12px" color="secondary">
                     {t('Slippage Tolerance')}
                   </Text>
                   <Text bold color="primary">
                     {allowedSlippage / 100}%
                   </Text>
-                </RowBetween>
+                </RowBetween> */}
 
-                {pair && poolData && (
+                {/* {pair && poolData && (
                   <RowBetween>
                     <TooltipText ref={targetRef} bold fontSize="12px" color="secondary">
                       {t('LP reward APR')}
@@ -829,7 +829,7 @@ export default function AddLiquidity({ currencyA, currencyB }) {
                       {formatAmount(poolData.lpApr7d)}%
                     </Text>
                   </RowBetween>
-                )}
+                )} */}
 
                 {addIsUnsupported || addIsWarning ? (
                   <Button disabled mb="4px">
