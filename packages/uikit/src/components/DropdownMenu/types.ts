@@ -1,4 +1,4 @@
-import React from "react";
+import React,{ ElementType, SVGAttributes } from "react";
 import { Colors } from "../../theme";
 import { BoxProps } from "../Box";
 
@@ -45,4 +45,6 @@ export interface DropdownMenuItems {
   disabled?: boolean;
   iconName?: string;
   isMobileOnly?: boolean;
+  icon:ElementType<any>;
+  deactive:ElementType<any>;
 }
