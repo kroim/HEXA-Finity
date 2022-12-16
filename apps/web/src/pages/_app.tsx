@@ -66,13 +66,13 @@ function MyApp(props: AppProps<{ initialReduxState: any }>) {
         />
         <meta
           name="description"
-          content="Cheaper and faster than Uniswap? Discover HexaFinity, the leading DEX on BNB Smart Chain (BSC) with the best farms in DeFi and a lottery for CAKE."
+          content="Cheaper and faster than Uniswap? Discover HexaFinity, the leading DEX on BNB Smart Chain (BSC) with the best farms in DeFi and a lottery for HEXA."
         />
         <meta name="theme-color" content="#1FC7D4" />
-        <meta name="twitter:image" content="https://pancakeswap.finance/images/hero.png" />
+        <meta name="twitter:image" content="https://defi.greatswap.app/hero.png" />
         <meta
           name="twitter:description"
-          content="The most popular AMM on BSC! Earn CAKE through yield farming or win it in the Lottery, then stake it in Syrup Pools to earn more tokens! Initial Farm Offerings (new token launch model pioneered by PancakeSwap), NFTs, and more, on a platform you can trust."
+          content="We are the only DEX that offers variable fees as low as 0%, along with trading rewards. We combine Dex services with DeFi to offer Lending & Borrowing functions, Time Deposit Staking, and Yield farming"
         />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="🥞 HexaFinity - A next evolution DeFi exchange on BNB Smart Chain (BSC)" />
