@@ -18,6 +18,7 @@ const StyledHero = styled(Box)`
 const MetricsCard = styled(Box)`
   flex: 1;
   background: #FFF;
+  box-shadow: 2px 14px 68px rgba(26, 35, 74, 0.11);
   border-radius: 20px;
   padding: 36px 24px;
   .hf-header {
@@ -58,7 +59,7 @@ const ExternalLinkIcon = styled(LinkExternal)`
 `
 
 const ChartCard = styled(Box)`
-  flex: 2;
+  flex: 1;
   background: linear-gradient(270deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 82.34%);
   filter: drop-shadow(2px 14px 68px rgba(26, 35, 74, 0.11));
   border-radius: 20px;
@@ -108,7 +109,6 @@ const Metrics = () => {
     window.open("https://bscscan.com/address/0xe2d3a739effcd3a99387d015e260eefac72ebea1", "_blank");
   }
   let chartSeries = [80.07, 4.3, 9, 1, 5]
-
   let chartOptions = {
     labels: ["Farms/Launchpools", "Referral Program", "Team", "SAFU", "Investment Fund"],
     legend: { show: false },
