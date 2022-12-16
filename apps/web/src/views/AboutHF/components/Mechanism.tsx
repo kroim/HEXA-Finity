@@ -93,6 +93,7 @@ const BurnStyledCard = styled(Box)`
   align-items: center;
   justify-content: center;
 `
+
 type Step = { title: string; subtitle: string; label: string, image: string }
 const Mechanism = () => {
   const { t } = useTranslation()

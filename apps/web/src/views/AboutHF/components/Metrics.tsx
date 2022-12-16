@@ -1,5 +1,7 @@
+import { useEffect, useState } from 'react';
 import { Box, Button, Flex, Heading, Text, LinkExternal, ArrowForwardIcon } from '@pancakeswap/uikit'
-import { ResponsiveContainer, XAxis, YAxis, Tooltip, RadialBarChart, RadialBar, Legend } from 'recharts'
+import dynamic from 'next/dynamic'
+const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 import styled from 'styled-components'
 import { useTranslation } from '@pancakeswap/localization'
 import Container from 'components/Layout/Container'
@@ -60,7 +62,7 @@ const ChartCard = styled(Box)`
   background: linear-gradient(270deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 82.34%);
   filter: drop-shadow(2px 14px 68px rgba(26, 35, 74, 0.11));
   border-radius: 20px;
-  padding: 36px;
+  padding: 24px 8px;
   margin-top: 12px;
   margin-bottom: 12px;
   .recharts-wrapper {
@@ -71,17 +73,32 @@ const ChartCard = styled(Box)`
     margin-bottom: 0;
   }
   ${({ theme }) => theme.mediaQueries.sm} {
+    padding: 36px;
     .recharts-wrapper {
       transform: scale(1);
     }
   }
 `
 const ChartContainer = styled(Flex)`
-
+  align-items: center;
 `
 const ChartLegend = styled.div`
-
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `
+const StyledLegend = styled.div`
+  padding: 6px 0;
+`
+type Item = {title: string, subtitle: string, color: string, subcolor: string}
+const LegendItem: React.FC<React.PropsWithChildren<{ item: Item }>> = ({ item }) => {
+  return (
+    <StyledLegend>
+      <Heading color={item.color} style={{fontSize: '24px', fontWeight: 'bold'}}>{item.title}</Heading>
+      <Text color={item.subcolor} style={{fontSize: '12px'}}>{item.subtitle}</Text>
+    </StyledLegend>
+  )
+}
 const Metrics = () => {
   const { t } = useTranslation()
   const ellipsisAddress = (_address: string) => {
@@ -90,48 +107,67 @@ const Metrics = () => {
   const onExternal = () => {
     window.open("https://bscscan.com/address/0xe2d3a739effcd3a99387d015e260eefac72ebea1", "_blank");
   }
-  const data = [
-    {
-      name: "Investment Fund",
-      uv: 5,
-      pv: 9800,
-      fill: "#72B88D"
+  let chartSeries = [80.07, 4.3, 9, 1, 5]
+
+  let chartOptions = {
+    labels: ["Farms/Launchpools", "Referral Program", "Team", "SAFU", "Investment Fund"],
+    legend: { show: false },
+    fill: {
+      type: 'solid',
+      colors: ['#041647', '#8950CF', '#D42F68', '#E6C665', '#72B88D']
     },
-    {
-      name: "SAFU",
-      uv: 1,
-      pv: 9800,
-      fill: "#E6C665"
-    },
-    {
-      name: "Team",
-      uv: 9,
-      pv: 1398,
-      fill: "#D42F68"
-    },
-    {
-      name: "Referral Program",
-      uv: 4.3,
-      pv: 4567,
-      fill: "#8950CF"
-    },
-    {
-      name: "Farms/Launchpools",
-      uv: 80.07,
-      pv: 2400,
-      fill: "#041647"
-    },
-    // {
-    //   name: "Unknown",
-    //   uv: 100,
-    //   pv: 2400,
-    //   fill: "transparent"
-    // },
-  ];
-  const style = {
-    left: 350,
-    lineHeight: "24px"
-  };
+    plotOptions: {
+      radialBar: {
+        size: undefined,
+        inverseOrder: false,
+        startAngle: 0,
+        endAngle: 360,
+        offsetX: 0,
+        offsetY: 0,
+        hollow: {
+          margin: 5,
+          size: "40%",
+          background: "transparent",
+        },
+        dataLabels: {
+          show: true,
+          name: {
+            fontSize: '24px',
+            fontWeight: 'bold'
+          },
+          value: {
+            color: '#2F4DA0',
+            offsetY: 5
+          },
+          total: {
+            show: true,
+            label: "6T",
+            fontSize: '20px',
+            color: '#061E63',
+            fontWeight: 600,
+            formatter: function () { return ("Distribution of"); }
+          }
+        }
+      }
+    }
+  }
+  const [legends, setLegends] = useState<Item[]>([]);
+  useEffect(() => {
+    let subtitles = chartOptions.labels;
+    let titles = chartSeries;
+    let colors = chartOptions.fill.colors;
+    let subcolors = ['#2F4DA0', '#2F4DA0', '#2F4DA0', '#2F4DA0', '#2F4DA0']
+    let newLegends = [];
+    for (let i = 0; i < titles.length; i++) {
+      newLegends.push({
+        title: titles[i] + "%",
+        subtitle: subtitles[i],
+        color: colors[i],
+        subcolor: subcolors[i]
+      })
+    }
+    setLegends(newLegends);
+  }, [])
   return (
     <StyledHero>
       <Container>
@@ -173,32 +209,22 @@ const Metrics = () => {
           </MetricsCard>
           <ChartCard>
             {/* <img src='/img/about_hf/metrics-chart.svg' alt='metrics' /> */}
-            <ChartContainer>
-              <RadialBarChart
-                width={320}
+            <ChartContainer justifyContent="space-around" flexDirection={['column', 'column', 'column', 'row']}>
+              <Chart
+                series={chartSeries}
+                // width={320}
                 height={320}
-                cx={150}
-                cy={150}
-                innerRadius={80}
-                outerRadius={160}
-                barSize={12}
-                data={data}
-                startAngle={90}
-                endAngle={-270}
-                
-              >
-                <RadialBar
-                  background
-                  dataKey="uv"
-                  
-                />
-              </RadialBarChart>
+                options={chartOptions}
+                type="radialBar"
+              />
               <ChartLegend>
-
+              {legends.map((legend) => (
+                  <LegendItem key={legend.title} item={legend} />
+                ))}
               </ChartLegend>
             </ChartContainer>
 
-            <Text color='poolButtonText' style={{ fontSize: 12, textAlign: 'right' }}>{t('Hexa Finity will also allocate 100 million Hexa Finity tokens for Transaction Fee Mining.')}</Text>
+            <Text color='poolButtonText' style={{ fontSize: 12, textAlign: 'center' }}>{t('Hexa Finity will also allocate 100 million Hexa Finity tokens for Transaction Fee Mining.')}</Text>
           </ChartCard>
         </Flex>
       </Container>
