@@ -5,7 +5,8 @@ import Hero from './components/Hero'
 import Opportunities from './components/Opportunities'
 import FooterHero from './components/FooterHero'
 import Footer from './components/Footer'
-// import { Proposals } from './components/Proposals'
+import Metrics from './components/Metrics'
+import Mechanism from './components/Mechanism'
 
 const Chrome = styled.div`
   flex: none;
@@ -25,7 +26,8 @@ const AboutHF = () => {
                     <Hero />
                 </Chrome>
                 <Content>
-                    {/* <Proposals /> */}
+                    <Metrics />
+                    <Mechanism />
                 </Content>
                 <Chrome>
                     <Opportunities />
