@@ -16,7 +16,7 @@ import { map } from 'lodash'
 const bannerImageList = [
   { id: 1, imageUrl: 'images/banners/doubleEternal.png' },
   { id: 2, imageUrl: 'images/banners/farmPairs.png' },
-  { id: 3, imageUrl: 'images/banners/market.png' },
+  { id: 3, imageUrl: 'images/banners/market1.png' },
   { id: 4, imageUrl: 'images/banners/gameFi.jpg' },
   { id: 5, imageUrl: 'images/banners/nftEarn.jpg' },
   { id: 6, imageUrl: 'images/banners/binanceLabs.jpg' },

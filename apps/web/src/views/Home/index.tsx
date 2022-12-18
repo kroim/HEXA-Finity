@@ -192,8 +192,7 @@ const Home: React.FC<React.PropsWithChildren> = () => {
           <TradeLeftArea>
             <img src="/images/home/banner.png" width="300" alt="banner" />
             <h2>
-              The <span style={{ color: '#F7931A' }}>First DEX</span> on{' '}
-              <span style={{ color: '#F7931A' }}>BNB Chain</span> with a Three-Type Referral System
+              The <span style={{ color: '#F7931A' }}>First DEX on BSC</span> variable fees as low as 0%, along with trading rewards.
             </h2>
             <p>Enjoy profitable yield farming and exchanging with the lowest fees in DeFi space!</p>
             <Link href={perpetualUrl} external>
