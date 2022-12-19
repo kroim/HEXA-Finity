@@ -11,15 +11,15 @@ import { RowBetween, AutoRow } from '../Layout/Row'
 
 const DropDownHeader = styled.div`
   width: 100%;
-  height: 40px;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0px 16px;
+  padding: 0px 12px;
   box-shadow: ${({ theme }) => theme.shadows.inset};
+  border-radius: 12px;
   border: 1px solid ${({ theme }) => theme.colors.inputSecondary};
-  border-radius: 16px;
-  background: ${({ theme }) => theme.colors.input};
+  background: ${({ theme }) => theme.colors.white};
   transition: border-radius 0.15s;
 `
 
@@ -27,9 +27,9 @@ const DropDownContainer = styled(Button)`
   cursor: pointer;
   width: 100%;
   position: relative;
-  background: ${({ theme }) => theme.colors.input};
-  border-radius: 16px;
-  height: 40px;
+  background: ${({ theme }) => theme.colors.white};
+  border-radius: 12px;
+  height: 60px;
   min-width: 136px;
   user-select: none;
   z-index: 20;
@@ -84,6 +84,7 @@ export const CurrencySelect = ({
   return (
     <Box width="100%" {...props}>
       <DropDownContainer p={0} onClick={onPresentCurrencyModal}>
+        <ArrowDropDownIcon color="text" className="down-icon" />
         <DropDownHeader>
           <Text id="pair" color={!selectedCurrency ? 'text' : undefined}>
             {!selectedCurrency ? (
@@ -103,7 +104,6 @@ export const CurrencySelect = ({
             )}
           </Text>
         </DropDownHeader>
-        <ArrowDropDownIcon color="text" className="down-icon" />
       </DropDownContainer>
       {account && !!selectedCurrency && !hideBalance && (
         <Box>

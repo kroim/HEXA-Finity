@@ -1,6 +1,6 @@
 import { useTranslation } from '@pancakeswap/localization'
 import { Currency } from '@pancakeswap/sdk'
-import { AddIcon, Box, CardBody, CardFooter, Text, TooltipText, useTooltip, FlexGap } from '@pancakeswap/uikit'
+import { AddIcon, Box, CardBody, CardFooter, Text, TooltipText, useTooltip, FlexGap, Flex } from '@pancakeswap/uikit'
 import { CommitButton } from 'components/CommitButton'
 import ConnectWalletButton from 'components/ConnectWalletButton'
 import { CurrencySelect } from 'components/CurrencySelect'
@@ -42,17 +42,17 @@ export function ChoosePair({
       <AppHeader
         title={t('Add Liquidity')}
         subtitle={t('Receive LP tokens and earn 0.17% trading fees')}
-        helper={t(
-          'Liquidity providers earn a 0.17% trading fee on all trades made for that token pair, proportional to their share of the liquidity pool.',
-        )}
+        // helper={t(
+        //   'Liquidity providers earn a 0.17% trading fee on all trades made for that token pair, proportional to their share of the liquidity pool.',
+        // )}
         backTo="/liquidity"
       />
       <CardBody>
         <Box>
-          <Text textTransform="uppercase" color="secondary" bold small pb="24px">
+          {/* <Text textTransform="uppercase" color="secondary" bold small pb="24px">
             {t('Choose a valid pair')}
-          </Text>
-          <FlexGap gap="4px">
+          </Text> */}
+          <Flex display={'flex'} flexDirection={'column'} alignItems="center" >
             <CurrencySelect
               id="add-liquidity-select-tokena"
               selectedCurrency={currencyA}
@@ -60,7 +60,7 @@ export function ChoosePair({
               showCommonBases
               commonBasesType={CommonBasesType.LIQUIDITY}
             />
-            <AddIcon color="textSubtle" />
+            <AddIcon color="textSubtle" mb="20px" mt="20px" />
             <CurrencySelect
               id="add-liquidity-select-tokenb"
               selectedCurrency={currencyB}
@@ -68,8 +68,8 @@ export function ChoosePair({
               showCommonBases
               commonBasesType={CommonBasesType.LIQUIDITY}
             />
-          </FlexGap>
-          {pair && poolData && (
+          </Flex>
+          {/* {pair && poolData && (
             <RowBetween mt="24px">
               <TooltipText ref={targetRef} bold fontSize="12px" color="secondary">
                 {t('LP reward APR')}
@@ -79,7 +79,7 @@ export function ChoosePair({
                 {formatAmount(poolData.lpApr7d)}%
               </Text>
             </RowBetween>
-          )}
+          )} */}
         </Box>
       </CardBody>
       <CardFooter>

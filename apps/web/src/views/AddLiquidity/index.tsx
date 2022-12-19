@@ -66,6 +66,9 @@ import { formatAmount } from '../../utils/formatInfoNumbers'
 import { useCurrencySelectRoute } from './useCurrencySelectRoute'
 import { CommonBasesType } from '../../components/SearchModal/types'
 
+import { StyledHeaderTitle, TooltipSection } from './styles'
+import SwapTab from 'components/SwapTab'
+
 enum Steps {
   Choose,
   Add,
@@ -578,7 +581,16 @@ export default function AddLiquidity({ currencyA, currencyB }) {
 
   return (
     <Page>
+      <StyledHeaderTitle>
+        <h1>Become a Liquidity Provider</h1>
+        <p>
+          Earn high yeilds from transaction fees.
+          <br />
+          <span style={{ color: '#11A9FF' }}>Learn how to add liquidity</span>
+        </p>
+      </StyledHeaderTitle>
       <AppBody>
+        <SwapTab />
         {!showAddLiquidity && (
           <ChoosePair
             error={error}
@@ -798,16 +810,16 @@ export default function AddLiquidity({ currencyA, currencyB }) {
                   </>
                 )}
 
-                <RowBetween>
+                {/* <RowBetween>
                   <Text bold fontSize="12px" color="secondary">
                     {t('Slippage Tolerance')}
                   </Text>
                   <Text bold color="primary">
                     {allowedSlippage / 100}%
                   </Text>
-                </RowBetween>
+                </RowBetween> */}
 
-                {pair && poolData && (
+                {/* {pair && poolData && (
                   <RowBetween>
                     <TooltipText ref={targetRef} bold fontSize="12px" color="secondary">
                       {t('LP reward APR')}
@@ -817,14 +829,14 @@ export default function AddLiquidity({ currencyA, currencyB }) {
                       {formatAmount(poolData.lpApr7d)}%
                     </Text>
                   </RowBetween>
-                )}
+                )} */}
 
                 {addIsUnsupported || addIsWarning ? (
                   <Button disabled mb="4px">
                     {t('Unsupported Asset')}
                   </Button>
                 ) : !account ? (
-                  <ConnectWalletButton />
+                  <ConnectWalletButton startIcon={true} />
                 ) : isWrongNetwork ? (
                   <CommitButton />
                 ) : (
@@ -894,7 +906,7 @@ export default function AddLiquidity({ currencyA, currencyB }) {
           </>
         )}
       </AppBody>
-      {!(addIsUnsupported || addIsWarning) ? (
+      {/* {!(addIsUnsupported || addIsWarning) ? (
         pair && !noLiquidity && pairState !== PairState.INVALID ? (
           <AutoColumn style={{ minWidth: '20rem', width: '100%', maxWidth: '400px', marginTop: '1rem' }}>
             <MinimalPositionCard showUnwrapped={oneCurrencyIsWNATIVE} pair={pair} />
@@ -902,7 +914,7 @@ export default function AddLiquidity({ currencyA, currencyB }) {
         ) : null
       ) : (
         <UnsupportedCurrencyFooter currencies={[currencies.CURRENCY_A, currencies.CURRENCY_B]} />
-      )}
+      )} */}
     </Page>
   )
 }

@@ -50,13 +50,13 @@ const MenuItem: React.FC<React.PropsWithChildren<FooterProps>> = ({
         </StyledIconMobileContainer> */}
         <Flex
           order={[2, null, 1]}
-          flexDirection={["column", null, "row"]}
+          flexDirection={["column", "column", "row"]}
           justifyContent="space-between"
           alignItems="flex-start"
           mb={["42px", null, "36px"]}
         >
           <FotterLeft>
-            <Flex display="flex" flexDirection="column">
+            <Flex display="flex" flexDirection="column"  mr={["0", null, "50px"]}>
               <Flex display="flex" alignItems="center" flexDirection="row" mb={["20px", null, "60px"]}>
                 <img src="/images/footerLogo.png" alt="footerLogo" />
                 <Flex ml="20px" flexDirection="column">
@@ -69,7 +69,7 @@ const MenuItem: React.FC<React.PropsWithChildren<FooterProps>> = ({
                 <BuyBtn>Buy HEXA</BuyBtn>
               </Flex>
             </Flex>
-            <Flex display="flex" flexDirection="column" ml={["0", null, "50px"]}>
+            <Flex display="flex" flexDirection="column">
               <Flex display="flex" alignItems="center" mt="10px" flexDirection="row" justifyContent="space-between" width={["100%", null, "200px"]}>
                 <h2 className="tokePrice1">Max supply:</h2>
                 <p className="tokenValue2">700 000 000</p>

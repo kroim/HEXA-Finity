@@ -315,14 +315,14 @@ export default function AddStableLiquidity({ currencyA, currencyB }) {
                 </>
               )}
 
-              <RowBetween>
+              {/* <RowBetween>
                 <Text bold fontSize="12px" color="secondary">
                   {t('Slippage Tolerance')}
                 </Text>
                 <Text bold color="primary">
                   {allowedSlippage / 100}%
                 </Text>
-              </RowBetween>
+              </RowBetween> */}
 
               {!account ? (
                 <ConnectWalletButton />

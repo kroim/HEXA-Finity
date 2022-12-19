@@ -49,33 +49,31 @@ const DeActivedTabItem = styled.div`
 `
 
 export default function SwapTab() {
-
-  
   const router = useRouter()
-  
-  const [tapIndex, setTapIndex] = useState(0)
+
+  const [tapIndex, setTapIndex] = useState(10)
 
   useEffect(() => {
     console.log(router.pathname)
-    if(router.pathname == "/swap"){
+    if (router.pathname == '/swap') {
       setTapIndex(0)
-    } else if(router.pathname == "/liquidity"){
+    } else if (router.pathname == '/liquidity' || router.pathname == '/add/[[...currency]]') {
       setTapIndex(1)
-    } else if(router.pathname == "/transactions"){
+    } else if (router.pathname == '/transactions') {
       setTapIndex(2)
     }
   }, [])
 
   const handleClick = (href) => {
     let url = href.toLowerCase()
-    router.push(url)
+    router.push(`/${url}`)
   }
 
   return (
     <TabContainer>
       {['Swap', 'Liquidity', 'Transactions'].map((item, index) => {
         return (
-          <div onClick={()=>handleClick(item)}>
+          <div onClick={() => handleClick(item)}>
             {tapIndex == index ? (
               <TabItem onClick={() => setTapIndex(index)} key={item}>
                 {item}

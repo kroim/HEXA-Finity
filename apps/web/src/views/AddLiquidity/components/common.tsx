@@ -189,13 +189,13 @@ export const AddLiquidityModalHeader = ({
           </Text>
         </RowBetween>
       </AutoColumn>
-      {!noLiquidity && (
+      {/* {!noLiquidity && (
         <RowBetween>
           <Subtitle>{t('Slippage Tolerance')}</Subtitle>
           <TooltipText ref={targetRef}>{allowedSlippage / 100}%</TooltipText>
           {tooltipVisible && tooltip}
         </RowBetween>
-      )}
+      )} */}
     </AutoColumn>
   )
 }
