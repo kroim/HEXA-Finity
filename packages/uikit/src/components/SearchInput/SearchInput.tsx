@@ -8,7 +8,7 @@ const StyledInput = styled(Input)`
   border-radius: 16px;
   border:1px solid #2F4DA0;
   margin-left: auto;
-  color: #FFFFFF;
+  color: #2F4DA0;
 `;
 
 const InputWrapper = styled.div`

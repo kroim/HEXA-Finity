@@ -18,14 +18,25 @@ const InactiveButton: PolymorphicComponent<InactiveButtonProps, "button"> = styl
   font-weight: 500;
   font-size: 14px;
   line-height: 21px;
-  color: #000;
-  border-radius: 8px;
+  color: #061E63;
+  border-radius: 0px;
   &:hover:not(:disabled):not(:active) {
     background-color: transparent;
     color: #000;
   }
+  padding: 9px;
+  padding-left: 11px;
+  padding-right: 11px;
+  margin-left: 0px;
   ${({ theme }) => theme.mediaQueries.sm} {
+    padding: 11px;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  ${({ theme }) => theme.mediaQueries.md} {
     padding: 12px;
+    padding-left: 14px;
+    padding-right: 14px;
   }
 `;
 
@@ -42,12 +53,23 @@ const ActiveButton: PolymorphicComponent<ActiveButtonProps, "button"> = styled(B
   font-size: 14px;
   line-height: 21px;
   color: #FFFFFF;
-  border-radius: 8px;
+  border-radius: 0px;
   &:hover:not(:disabled):not(:active) {
     color: #DDDDDD;
   }
+  padding: 9px;
+  padding-left: 11px;
+  padding-right: 11px;
+  margin-left: 0;
   ${({ theme }) => theme.mediaQueries.sm} {
+    padding: 11px;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  ${({ theme }) => theme.mediaQueries.md} {
     padding: 12px;
+    padding-left: 14px;
+    padding-right: 14px;
   }
 `;
 

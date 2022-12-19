@@ -13,7 +13,7 @@ const Toggle: React.FC<React.PropsWithChildren<TogglePropsExtends>> = ({
   scale = scales.LG,
   startIcon,
   endIcon,
-  activeBackgroundColor = '#00C400',
+  activeBackgroundColor = '#041647',
   ...props
 }) => {
   const isChecked = !!checked;

@@ -196,6 +196,8 @@ const FinishedTextLink = styled(Link)`
 const StyledButtonMenu = styled(ButtonMenu)`
   display: flex;
   flex-wrap: wrap;
+  border-radius: 12px; 
+  border: 0px;
 `
 const NUMBER_OF_FARMS_VISIBLE = 12
 
@@ -389,11 +391,11 @@ const Farms: React.FC<React.PropsWithChildren> = ({ children }) => {
               <ViewControls>
                 {/* <FarmUI.FarmTabButtons hasStakeInFinishedFarms={stakedInactiveFarms.length > 0} /> */}
                 <StyledButtonMenu activeIndex={farmsIndex} onItemClick={handleFarmsClick}>
-                  <ButtonMenuItem>{t('Live')}</ButtonMenuItem>
-                  <ButtonMenuItem>{t('Main')}</ButtonMenuItem>
-                  <ButtonMenuItem>{t('Innovation')}</ButtonMenuItem>
-                  <ButtonMenuItem>{t('GameFi')}</ButtonMenuItem>
-                  <ButtonMenuItem>{t('Archive')}</ButtonMenuItem>
+                  <ButtonMenuItem style={{borderTopLeftRadius: "12px", borderBottomLeftRadius: '12px', marginLeft: '0px'}}>{t('Live')}</ButtonMenuItem>
+                  <ButtonMenuItem style={{marginLeft: '0px'}}>{t('Main')}</ButtonMenuItem>
+                  <ButtonMenuItem style={{marginLeft: '0px'}}>{t('Innovation')}</ButtonMenuItem>
+                  <ButtonMenuItem style={{marginLeft: '0px'}}>{t('GameFi')}</ButtonMenuItem>
+                  <ButtonMenuItem style={{borderTopRightRadius: "12px", borderBottomRightRadius: '12px', marginLeft: '0px'}}>{t('Archive')}</ButtonMenuItem>
                 </StyledButtonMenu>
                 <ToggleWrapper>
                   <Toggle
