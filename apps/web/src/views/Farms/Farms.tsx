@@ -196,6 +196,8 @@ const FinishedTextLink = styled(Link)`
 const StyledButtonMenu = styled(ButtonMenu)`
   display: flex;
   flex-wrap: wrap;
+  border-radius: 12px; 
+  border: 0px;
 `
 const NUMBER_OF_FARMS_VISIBLE = 12
 
