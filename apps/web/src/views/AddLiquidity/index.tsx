@@ -836,7 +836,7 @@ export default function AddLiquidity({ currencyA, currencyB }) {
                     {t('Unsupported Asset')}
                   </Button>
                 ) : !account ? (
-                  <ConnectWalletButton />
+                  <ConnectWalletButton startIcon={true} />
                 ) : isWrongNetwork ? (
                   <CommitButton />
                 ) : (
@@ -906,7 +906,7 @@ export default function AddLiquidity({ currencyA, currencyB }) {
           </>
         )}
       </AppBody>
-      {!(addIsUnsupported || addIsWarning) ? (
+      {/* {!(addIsUnsupported || addIsWarning) ? (
         pair && !noLiquidity && pairState !== PairState.INVALID ? (
           <AutoColumn style={{ minWidth: '20rem', width: '100%', maxWidth: '400px', marginTop: '1rem' }}>
             <MinimalPositionCard showUnwrapped={oneCurrencyIsWNATIVE} pair={pair} />
@@ -914,7 +914,7 @@ export default function AddLiquidity({ currencyA, currencyB }) {
         ) : null
       ) : (
         <UnsupportedCurrencyFooter currencies={[currencies.CURRENCY_A, currencies.CURRENCY_B]} />
-      )}
+      )} */}
     </Page>
   )
 }

@@ -41,8 +41,9 @@ const ConnectWalletButton = ({ children, startIcon, ...props }: ButtonProps) => 
         {/* {children || <Trans>Connect Wallet</Trans>} */}
         {children || (
           <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-            {startIcon && <Image src="/images/walletButton.png" alt="wallet Image" width={20} height={18} style={{marginRight: 10}} />}
-            <Text color="invertedContrast" bold fontSize="16px">
+            {/* {startIcon && <Image src="/images/walletButton.png" alt="wallet Image" width={20} height={18} style={{marginRight: 10}} />} */}
+            <Image src="/images/walletButton.png" alt="wallet Image" width={20} height={18} />
+            <Text color="invertedContrast" bold fontSize="16px" ml="10px">
               <Trans>Connect Wallet</Trans>
             </Text>
           </div>
