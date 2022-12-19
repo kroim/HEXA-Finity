@@ -33,11 +33,13 @@ const MetaphoneImg = styled.img`
 const RotateText = styled.div`
     position: absolute;
     right: 0;
-    top: 0;
-    transform: rotate(-147.24deg) scale(0.6);
+    top: 50%;
+    // transform: rotate(-147.24deg) scale(0.6);
+    transform: scale(0.6) translate(0%, -80%);;
     z-index: 2;
     ${({ theme }) => theme.mediaQueries.sm} {
-      transform: rotate(-147.24deg) scale(0.8);
+      // transform: rotate(-147.24deg) scale(0.8);
+      transform: scale(0.8) translate(0%, -60%);;
     }
 `
 const TextStyle = {
