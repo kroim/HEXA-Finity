@@ -18,7 +18,7 @@ const InactiveButton: PolymorphicComponent<InactiveButtonProps, "button"> = styl
   font-weight: 500;
   font-size: 14px;
   line-height: 21px;
-  color: #000;
+  color: #061E63;
   border-radius: 0px;
   &:hover:not(:disabled):not(:active) {
     background-color: transparent;
@@ -27,6 +27,7 @@ const InactiveButton: PolymorphicComponent<InactiveButtonProps, "button"> = styl
   padding: 9px;
   padding-left: 11px;
   padding-right: 11px;
+  margin-left: 0px;
   ${({ theme }) => theme.mediaQueries.sm} {
     padding: 11px;
     padding-left: 12px;
@@ -59,6 +60,7 @@ const ActiveButton: PolymorphicComponent<ActiveButtonProps, "button"> = styled(B
   padding: 9px;
   padding-left: 11px;
   padding-right: 11px;
+  margin-left: 0;
   ${({ theme }) => theme.mediaQueries.sm} {
     padding: 11px;
     padding-left: 12px;

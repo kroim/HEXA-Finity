@@ -389,11 +389,11 @@ const Farms: React.FC<React.PropsWithChildren> = ({ children }) => {
               <ViewControls>
                 {/* <FarmUI.FarmTabButtons hasStakeInFinishedFarms={stakedInactiveFarms.length > 0} /> */}
                 <StyledButtonMenu activeIndex={farmsIndex} onItemClick={handleFarmsClick}>
-                  <ButtonMenuItem style={{borderTopLeftRadius: "8px", borderBottomLeftRadius: '8px'}}>{t('Live')}</ButtonMenuItem>
-                  <ButtonMenuItem>{t('Main')}</ButtonMenuItem>
-                  <ButtonMenuItem>{t('Innovation')}</ButtonMenuItem>
-                  <ButtonMenuItem>{t('GameFi')}</ButtonMenuItem>
-                  <ButtonMenuItem style={{borderTopRightRadius: "8px", borderBottomRightRadius: '8px'}}>{t('Archive')}</ButtonMenuItem>
+                  <ButtonMenuItem style={{borderTopLeftRadius: "8px", borderBottomLeftRadius: '8px', marginLeft: '0px'}}>{t('Live')}</ButtonMenuItem>
+                  <ButtonMenuItem style={{marginLeft: '0px'}}>{t('Main')}</ButtonMenuItem>
+                  <ButtonMenuItem style={{marginLeft: '0px'}}>{t('Innovation')}</ButtonMenuItem>
+                  <ButtonMenuItem style={{marginLeft: '0px'}}>{t('GameFi')}</ButtonMenuItem>
+                  <ButtonMenuItem style={{borderTopRightRadius: "8px", borderBottomRightRadius: '8px', marginLeft: '0px'}}>{t('Archive')}</ButtonMenuItem>
                 </StyledButtonMenu>
                 <ToggleWrapper>
                   <Toggle
